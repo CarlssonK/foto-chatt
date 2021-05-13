@@ -21,7 +21,7 @@ function Home() {
 
     return (
         <>
-            <h1>Home Page</h1>
+            <h2>Home Page</h2>
             <form onSubmit={handleSubmit}>
                 <input type="text" />
             </form>
