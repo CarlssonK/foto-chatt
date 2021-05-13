@@ -1,4 +1,7 @@
 import React from "react";
+// ###########################################################
+// Temporär page. Funktionaliteten här kommer vara i Chat.jsx
+// ###########################################################
 
 function Home() {
     const handleSubmit = async (e) => {
