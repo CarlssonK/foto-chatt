@@ -1,14 +1,20 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useStates } from "react-easier";
 // ###########################################################
 // Temporär page. Funktionaliteten här kommer vara i Chat.jsx
 // ###########################################################
 
 function Home() {
-    const input = useRef(null);
+    const inputRef = useRef(null);
+
+    const [messageList, setMessageList] = useState([]);
 
     const s = useStates({
         input: "",
+        messageList: [
+            { user: "John Smith", msg: "Hello World!", time: "13:33" },
+            { user: "Lester Crest", msg: "Hahaha LOL!", time: "13:36" },
+        ],
     });
 
     useEffect(() => {
@@ -31,6 +37,15 @@ function Home() {
         sse.addEventListener("new-message", (message) => {
             let data = JSON.parse(message.data);
             console.log("[new-message]", data);
+            console.log(messageList);
+            setMessageList((messageList) => [
+                ...messageList,
+                { user: "Guest_123", msg: data.msg, time: data.timestamp },
+            ]);
+            // s.messageList = [
+            //     ...s.messageList,
+            //     { user: "Guest_123", msg: data.msg, time: data.timestamp },
+            // ];
         });
     };
 
@@ -39,7 +54,7 @@ function Home() {
         if (s.input === "") return;
         const message = s.input;
         s.input = "";
-        input.current.value = "";
+        inputRef.current.value = "";
 
         await fetch("http://localhost:3000/api/global", {
             method: "POST",
@@ -60,14 +75,20 @@ function Home() {
             <div>Home Page</div>
             <div className="main">
                 <ul>
-                    <li>msg: hasdhashd</li>
-                    <li>msg: hasdhashd2</li>
-                    <li>msg: hasdhashd123123</li>
+                    {messageList.map((msg, idx) => {
+                        return (
+                            <li key={idx}>
+                                <div>{msg.time}</div>
+                                <div>{msg.user}</div>
+                                <div>{msg.msg}</div>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
             <div className="bottom">
                 <form onSubmit={handleSubmit}>
-                    <input type="text" ref={input} onChange={handleInput} />
+                    <input type="text" ref={inputRef} onChange={handleInput} />
                 </form>
             </div>
         </div>
