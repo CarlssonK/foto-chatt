@@ -39,8 +39,8 @@ function Home() {
             console.log("[new-message]", data);
             console.log(messageList);
             setMessageList((messageList) => [
-                ...messageList,
                 { user: "Guest_123", msg: data.msg, time: data.timestamp },
+                ...messageList,
             ]);
             // s.messageList = [
             //     ...s.messageList,

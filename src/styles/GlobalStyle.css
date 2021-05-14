@@ -28,12 +28,13 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     overflow: auto;
+    background-color: darkgray;
 }
-/* .main ul {
+.main ul {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-} */
+    flex-direction: column-reverse;
+    overflow: auto;
+}
 
 .bottom {
     margin-top: auto;
