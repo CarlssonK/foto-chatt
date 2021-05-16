@@ -1,5 +1,8 @@
+
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom"
+
 
 export default function Signup() {
   const emailRef = useRef();
@@ -9,6 +12,7 @@ export default function Signup() {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
+  const history = useHistory();
 
   
   async function handleSubmit(e) {
@@ -20,6 +24,7 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      history.push("/")
     } catch {
       setError("404");
     }
@@ -33,9 +38,13 @@ export default function Signup() {
       <form onSubmit = {handleSubmit}>
           {error && <h1>{error}</h1>}
       <input type="email" name="" id="" ref={emailRef} required />
-      <input type="password" name="" id="" ref={passwordRef} required />
-      <input type="password" name="" id="" ref={passwordConfirmRef} required />
+      <input type="text"/* type="password" */ name="" id="" ref={passwordRef} required />
+      <input type="text" /* type="password" */ name="" id="" ref={passwordConfirmRef} required />
       <button disabled = {loading}>Sign up</button>
+      <div>
+          Have an account<Link to="/login"> Log In </Link>
+      
+      </div>
       </form>
     </div>
   );
