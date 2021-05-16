@@ -1,13 +1,13 @@
 import firebase from "firebase/app"
 import "firebase/auth"
 
-const app = firebase.initializeApp = ({
-    apiKey: process.env.REACT_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_FIREBASE_AUTH_DOMAIN ,
-    projectId: process.env.REACT_FIREBASE_PROJECT_ID ,
-    storageBucket: process.env.REACT_FIREBASE_STORAGE_BUCKET ,
-    messagingSenderId: process.env.REACT_FIREBASE_MESSAGING_SENDER_ID ,
-    appId: process.env.REACT_FIREBASE_APP_ID
+const app = firebase.initializeApp({
+    apiKey: "AIzaSyDX-53BG5evNPJlBzl0mMJo8XuZ1bSxEcg",
+    authDomain:"foto-chatt.firebaseapp.com",
+    projectId: "foto-chatt",
+    storageBucket: "foto-chatt.appspot.com" ,
+    messagingSenderId: "664715198061" ,
+    appId: "1:664715198061:web:200f82eff3cfba41d74964"
   });
 
   export const auth = app.auth();

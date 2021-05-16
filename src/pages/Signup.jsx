@@ -1,13 +1,28 @@
-import React from "react";
+import React, {useRef} from "react";
+import {useAuth} from "../contexts/AuthContext"
 
-function Signup() {
+export default function Signup() {
+const emailRef = useRef();
+const passwordRef = useRef();
+const passwordConfirmRef = useRef();
+//const {Signup} = useAuth();
+
+
+
+
     return (
         <div>
+           
+
             Signup
-            <input type="text" name="" id="" />
-            <button>Submit</button>
+            <input type="text" name="" id="" ref={emailRef} />
+            <input type="text" name="" id="" ref={passwordRef}/>
+            <input type="text" name="" id="" ref={passwordConfirmRef}/>
+            <button>Sign up</button>
+            
+           
         </div>
     );
 }
 
-export default Signup;
+
