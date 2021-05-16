@@ -12,7 +12,7 @@ const {currentUser} = useAuth
     {...rest }
     render = {props => {
       return currentUser ? <componet {...props} /> :
-         <Redirect to ="/login"/>
+         <Redirect to ="/signup"/>
     }}
 
         ></Route>
