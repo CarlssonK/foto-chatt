@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import ChatList from "./pages/ChatList";
 import Chat from "./pages/Chat";
 // Imports
+import Topbar from "./components/Topbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 
@@ -25,6 +26,7 @@ function App() {
       </AuthProvider>
     </Router>
   );
+
 }
 
 export default App;
