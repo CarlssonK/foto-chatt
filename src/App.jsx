@@ -10,6 +10,7 @@ import Chat from "./pages/Chat";
 import Topbar from "./components/Topbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import PrivateRoute from "./pages/PrivateRoute";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route exact path="/"  component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/profile" component={Profile} />
+          <PrivateRoute path="/profile" /* component={Profile} */ />
           <Route path="/c/:id" component={Chat} />
           <Route path="/c" component={ChatList} />
         </Switch>
