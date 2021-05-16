@@ -8,10 +8,12 @@ import ChatList from "./pages/ChatList";
 import Chat from "./pages/Chat";
 // Imports
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Topbar from "./components/Topbar";
 
 function App() {
     return (
         <Router>
+            <Topbar />
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/login" component={Login} />

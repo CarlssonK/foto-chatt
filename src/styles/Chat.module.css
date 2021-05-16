@@ -1,0 +1,61 @@
+.messageContainer{
+    height: 84vh;
+    top:8vh;
+    background: #5d5d5d;
+    width: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.myMessageField{
+    max-width: 90%;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    padding-right: 10px;
+}
+
+.otherMessageField{
+    max-width: 90%;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.myMessage{
+    border-radius: 30px;
+    background: #333333;
+    height: fit-content;
+    width: fit-content;
+    padding: 12px;
+}
+
+.otherMessage{
+    border-radius: 30px;
+    background: #5d5d5d;
+    height: fit-content;
+    width: fit-content;
+    padding: 12px;
+    border: 1px solid whitesmoke;
+}
+
+.content{
+    font-size: 2vh;
+    color: whitesmoke;
+}
+
+.otherName{
+    padding-left: 10px;
+    color: whitesmoke;
+}
+
+.myName{
+    padding-right: 10px;
+    align-self: flex-end;
+    color: whitesmoke;
+}
+
+
+
