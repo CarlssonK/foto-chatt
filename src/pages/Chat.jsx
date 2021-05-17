@@ -1,10 +1,12 @@
 import React from "react";
 import Messageinput from "../components/Messageinput";
+import Topbar from "../components/Topbar";
 import styles from '../styles/Chat.module.css'
 
 function Chat() {
     return (
         <div>
+            <Topbar />
             <div className={styles.messageContainer}>
                 <div className={styles.myMessageField}>
                     <div className={styles.myMessage}>
