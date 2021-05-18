@@ -31,13 +31,6 @@ app.get("/api/sse", (req, res) => {
         "Cache-Control": "no-cache",
     });
 
-    // message all connected clients that this
-    // client connected
-    broadcast("connect", {
-        message: "clients connected: " + connections.length,
-        userId,
-    });
-
     // Send userId to client
     res.write(
         "event:" + "user-id" + "\ndata:" + JSON.stringify({ userId }) + "\n\n"
@@ -55,6 +48,18 @@ app.get("/api/joinchat", (req, res) => {
         }
         return openRes;
     });
+
+    const usersInRoomLength = connections.filter(
+        (con) => con.roomId === roomId
+    ).length;
+    broadcast(
+        "connect",
+        {
+            message: "clients connected: " + usersInRoomLength,
+            user: userId,
+        },
+        roomId
+    );
 
     res.send("ok");
 });
