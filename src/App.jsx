@@ -13,21 +13,20 @@ import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./pages/PrivateRoute";
 
 function App() {
-  return (
-    <Router>
-      <AuthProvider>
-        <Switch>
-          <Route exact path="/"  component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <PrivateRoute path="/profile" /* component={Profile} */ />
-          <Route path="/c/:id" component={Chat} />
-          <Route path="/c" component={ChatList} />
-        </Switch>
-      </AuthProvider>
-    </Router>
-  );
-
+    return (
+        <Router>
+            <AuthProvider>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/signup" component={Signup} />
+                    <PrivateRoute path="/profile" component={Profile} />
+                    <Route path="/c/:id" component={Chat} />
+                    <Route path="/c" component={ChatList} />
+                </Switch>
+            </AuthProvider>
+        </Router>
+    );
 }
 
 export default App;

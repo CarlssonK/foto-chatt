@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useStates } from "react-easier";
 import Messageinput from "../components/Messageinput";
+import Topbar from "../components/Topbar";
 import styles from "../styles/Chat.module.css";
 
 function Chat() {
@@ -59,6 +60,7 @@ function Chat() {
 
     return (
         <div className={styles.chatContainer}>
+            <Topbar />
             <div className={styles.messageContainer}>
                 {/* <div className={styles.otherMessageField}>
                     <div className={styles.otherMessage}>
