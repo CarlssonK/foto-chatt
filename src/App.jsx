@@ -7,17 +7,42 @@ import Profile from "./pages/Profile";
 import ChatList from "./pages/ChatList";
 import Chat from "./pages/Chat";
 // Imports
-import Topbar from "./components/Topbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./pages/PrivateRoute";
+import { withContext } from "react-easier";
+
+export default withContext(
+    "global",
+    {
+        chatList: [
+            { name: "All" },
+            { name: "Computers" },
+            { name: "Funny" },
+            { name: "Politics" },
+            { name: "Investing" },
+            { name: "Science" },
+            { name: "Memes" },
+            { name: "Bitcoin" },
+            { name: "Animals" },
+            { name: "Sports" },
+            { name: "Cars" },
+            { name: "Games" },
+            { name: "Boxing" },
+            { name: "Ufc" },
+            { name: "LifeHack" },
+            { name: "Other" },
+        ],
+    },
+    App
+);
 
 function App() {
     return (
         <Router>
             <AuthProvider>
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={ChatList} />
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={Signup} />
                     <PrivateRoute path="/profile" component={Profile} />
@@ -28,5 +53,3 @@ function App() {
         </Router>
     );
 }
-
-export default App;
