@@ -4,7 +4,7 @@ import Messageinput from "../components/Messageinput";
 import Topbar from "../components/Topbar";
 import styles from "../styles/Chat.module.css";
 
-function Chat() {
+function Chat({ match }) {
     const [messageList, setMessageList] = useState([]);
 
     const s = useStates({
@@ -60,7 +60,7 @@ function Chat() {
 
     return (
         <div className={styles.chatContainer}>
-            <Topbar />
+            <Topbar chatName={match.params.id} />
             <div className={styles.messageContainer}>
                 {/* <div className={styles.otherMessageField}>
                     <div className={styles.otherMessage}>
