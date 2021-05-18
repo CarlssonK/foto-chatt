@@ -1,3 +1,4 @@
+
 import React from 'react'
 import styles from '../styles/Topbar.module.css'
 import { useLocation, useHistory } from 'react-router-dom'
@@ -18,4 +19,4 @@ function Topbar() {
     )
 }
 
-export default Topbar
+export default Topbar;

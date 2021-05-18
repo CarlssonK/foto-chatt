@@ -1,0 +1,39 @@
+.chatlist-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatlist-box {
+    overflow: auto;
+    height: 100%;
+    display: flex;
+}
+
+.chatlist {
+    overflow: auto;
+    width: 100%;
+}
+
+.chatlist-input {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.chatlist__item {
+    height: 50px;
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgb(30, 32, 39);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.chatlist__item:nth-child(even) {
+    background-color: rgb(38, 40, 48);
+}
+
+.chatlist__item:hover {
+    background-color: rgb(52, 55, 65);
+}
