@@ -1,24 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useStates } from "react-easier";
 import Messageinput from "../components/Messageinput";
+import MyMessageField from "../components/MyMessageField";
+import OtherMessageField from "../components/OtherMessageField";
 import Topbar from "../components/Topbar";
 import styles from "../styles/Chat.module.css";
 
 function Chat({ match }) {
     const [messageList, setMessageList] = useState([]);
-    const [userId, setUserId] = useState("");
-    const [roomId, setRoomId] = useState("");
+    const [userJoin, setUserJoin] = useState([]);
+    const [userLeave, setUserLeave] = useState([]);
 
     const s = useStates({
         input: "",
+        userId: "",
+        roomId: "",
     });
 
     useEffect(() => {
-        setRoomId((roomId) => match.params.id);
+        s.roomId = match.params.id;
 
-        if (roomId.length > 0 && userId.length > 0) {
+        if (s.roomId.length > 0 && s.userId.length > 0) {
             fetch(
-                `http://localhost:3000/api/joinchat?roomId=${roomId}&userId=${userId}`,
+                `http://localhost:3000/api/joinchat?roomId=${s.roomId}&userId=${s.userId}`,
                 {
                     method: "GET",
                     headers: {
@@ -28,7 +32,7 @@ function Chat({ match }) {
                 }
             );
         }
-    }, [match.params.id, userId]);
+    }, [match.params.id, s.userId]);
 
     useEffect(() => {
         startSSE();
@@ -40,17 +44,19 @@ function Chat({ match }) {
         // Retrieve your unique userId from the server
         sse.addEventListener("user-id", (message) => {
             let data = JSON.parse(message.data);
-            setUserId((userId) => data.userId);
+            s.userId = data.userId;
         });
 
         sse.addEventListener("connect", (message) => {
             let data = JSON.parse(message.data);
             console.log("[connect]", data);
+            setUserJoin((userJoin) => [data.user, ...userJoin]);
         });
 
         sse.addEventListener("disconnect", (message) => {
             let data = JSON.parse(message.data);
             console.log("[disconnect]", data);
+            // setUserLeave((userLeave) => data.user);
         });
 
         sse.addEventListener("new-message", (message) => {
@@ -73,15 +79,15 @@ function Chat({ match }) {
         const message = s.input;
         s.input = "";
 
-        await fetch(`http://localhost:3000/api/${roomId}`, {
+        await fetch(`http://localhost:3000/api/${s.roomId}`, {
             method: "POST",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userId,
-                roomId,
+                userId: s.userId,
+                roomId: s.roomId,
                 msg: message,
             }),
         });
@@ -97,34 +103,21 @@ function Chat({ match }) {
             <div className={styles.messageContainer}>
                 <ul>
                     {messageList.map((msg, idx) => {
-                        return msg.user === userId ? (
-                            <li className={styles.myMessageField}>
-                                <div className={styles.myMessage}>
-                                    <p className={styles.content}>{msg.msg}</p>
-                                </div>
-                                <p className={styles.myName}>
-                                    {msg.user.slice(0, 5)}
-                                    <span className={styles.otherName}>
-                                        {new Date(msg.time)
-                                            .toLocaleString()
-                                            .slice(11, 100)}
-                                    </span>
-                                </p>
-                            </li>
+                        return msg.user === s.userId ? (
+                            <MyMessageField
+                                key={idx}
+                                message={msg.msg}
+                                user={msg.user}
+                                time={msg.time}
+                            />
                         ) : (
-                            <li className={styles.otherMessageField} key={idx}>
-                                <div className={styles.otherMessage}>
-                                    <p className={styles.content}>{msg.msg}</p>
-                                </div>
-                                <p className={styles.otherName}>
-                                    {msg.user.slice(0, 5)}
-                                    <span className={styles.otherName}>
-                                        {new Date(msg.time)
-                                            .toLocaleString()
-                                            .slice(11, 100)}
-                                    </span>
-                                </p>
-                            </li>
+                            <OtherMessageField
+                                key={idx}
+                                message={msg.msg}
+                                user={msg.user}
+                                time={msg.time}
+                                userList={userList}
+                            />
                         );
                     })}
                 </ul>
