@@ -8,8 +8,8 @@ import styles from "../styles/Chat.module.css";
 
 function Chat({ match }) {
     const [messageList, setMessageList] = useState([]);
-    const [userJoin, setUserJoin] = useState([]);
-    const [userLeave, setUserLeave] = useState([]);
+    // const [userJoin, setUserJoin] = useState([]);
+    // const [userLeave, setUserLeave] = useState([]);
 
     const s = useStates({
         input: "",
@@ -50,7 +50,7 @@ function Chat({ match }) {
         sse.addEventListener("connect", (message) => {
             let data = JSON.parse(message.data);
             console.log("[connect]", data);
-            setUserJoin((userJoin) => [data.user, ...userJoin]);
+            // setUserJoin((userJoin) => [data.user, ...userJoin]);
         });
 
         sse.addEventListener("disconnect", (message) => {
@@ -116,7 +116,6 @@ function Chat({ match }) {
                                 message={msg.msg}
                                 user={msg.user}
                                 time={msg.time}
-                                userList={userList}
                             />
                         );
                     })}

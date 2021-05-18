@@ -45,6 +45,7 @@
     flex-direction: column;
     align-self: flex-end;
     padding-right: 10px;
+    word-break: break-all;
 }
 
 .otherMessageField {
