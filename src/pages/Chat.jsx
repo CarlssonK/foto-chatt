@@ -4,12 +4,31 @@ import Messageinput from "../components/Messageinput";
 import Topbar from "../components/Topbar";
 import styles from "../styles/Chat.module.css";
 
-function Chat() {
+function Chat({ match }) {
     const [messageList, setMessageList] = useState([]);
+    const [userId, setUserId] = useState("");
+    const [roomId, setRoomId] = useState("");
 
     const s = useStates({
         input: "",
     });
+
+    useEffect(() => {
+        setRoomId((roomId) => match.params.id);
+
+        if (roomId.length > 0 && userId.length > 0) {
+            fetch(
+                `http://localhost:3000/api/joinchat?roomId=${roomId}&userId=${userId}`,
+                {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+        }
+    }, [match.params.id, userId]);
 
     useEffect(() => {
         startSSE();
@@ -17,6 +36,12 @@ function Chat() {
 
     const startSSE = () => {
         let sse = new EventSource("/api/sse");
+
+        // Retrieve your unique userId from the server
+        sse.addEventListener("user-id", (message) => {
+            let data = JSON.parse(message.data);
+            setUserId((userId) => data.userId);
+        });
 
         sse.addEventListener("connect", (message) => {
             let data = JSON.parse(message.data);
@@ -33,7 +58,11 @@ function Chat() {
             console.log("[new-message]", data);
 
             setMessageList((messageList) => [
-                { user: "Guest_123", msg: data.msg, time: data.timestamp },
+                {
+                    user: data.userId,
+                    msg: data.msg,
+                    time: data.timestamp,
+                },
                 ...messageList,
             ]);
         });
@@ -44,13 +73,17 @@ function Chat() {
         const message = s.input;
         s.input = "";
 
-        await fetch("http://localhost:3000/api/global", {
+        await fetch(`http://localhost:3000/api/${roomId}`, {
             method: "POST",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ msg: message }),
+            body: JSON.stringify({
+                userId,
+                roomId,
+                msg: message,
+            }),
         });
     };
 
@@ -60,45 +93,17 @@ function Chat() {
 
     return (
         <div className={styles.chatContainer}>
-            <Topbar />
+            <Topbar chatName={match.params.id} />
             <div className={styles.messageContainer}>
-                {/* <div className={styles.otherMessageField}>
-                    <div className={styles.otherMessage}>
-                        <p className={styles.content}>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Assumenda commodi, reprehenderit.
-                        </p>
-                    </div>
-                    <p className={styles.otherName}>John Doe</p>
-                </div>
-                <div className={styles.otherMessageField}>
-                    <div className={styles.otherMessage}>
-                        <p className={styles.content}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Voluptatem, dolorum. Voluptates dignissimos
-                            laborum animi, quaerat recusandae illo deleniti
-                            nobis commodi!
-                        </p>
-                    </div>
-                    <p className={styles.otherName}>John Doe</p>
-                </div> */}
                 <ul>
-                    <li className={styles.myMessageField}>
-                        <div className={styles.myMessage}>
-                            <p className={styles.content}>
-                                Lorem ipsum dolor sit
-                            </p>
-                        </div>
-                        <p className={styles.myName}>Jane Doe</p>
-                    </li>
                     {messageList.map((msg, idx) => {
-                        return (
-                            <li className={styles.otherMessageField} key={idx}>
-                                <div className={styles.otherMessage}>
+                        return msg.user === userId ? (
+                            <li className={styles.myMessageField}>
+                                <div className={styles.myMessage}>
                                     <p className={styles.content}>{msg.msg}</p>
                                 </div>
-                                <p className={styles.otherName}>
-                                    {msg.user}
+                                <p className={styles.myName}>
+                                    {msg.user.slice(0, 5)}
                                     <span className={styles.otherName}>
                                         {new Date(msg.time)
                                             .toLocaleString()
@@ -106,11 +111,20 @@ function Chat() {
                                     </span>
                                 </p>
                             </li>
-                            // <li key={idx}>
-                            //     <div>{msg.time}</div>
-                            //     <div>{msg.user}</div>
-                            //     <div>{msg.msg}</div>
-                            // </li>
+                        ) : (
+                            <li className={styles.otherMessageField} key={idx}>
+                                <div className={styles.otherMessage}>
+                                    <p className={styles.content}>{msg.msg}</p>
+                                </div>
+                                <p className={styles.otherName}>
+                                    {msg.user.slice(0, 5)}
+                                    <span className={styles.otherName}>
+                                        {new Date(msg.time)
+                                            .toLocaleString()
+                                            .slice(11, 100)}
+                                    </span>
+                                </p>
+                            </li>
                         );
                     })}
                 </ul>

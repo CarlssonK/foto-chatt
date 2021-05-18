@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Topbar from "../components/Topbar";
 import { useNamedContext } from "react-easier";
 // Styles
@@ -6,7 +7,6 @@ import "../styles/chatlist.css";
 
 function ChatList() {
     let g = useNamedContext("global");
-
     const [query, setQuery] = useState("");
 
     const handleInput = (e) => {
@@ -34,9 +34,13 @@ function ChatList() {
                                 .includes(`${query.toLowerCase()}`)
                         ) {
                             return (
-                                <li key={idx} className="chatlist__item">
-                                    {chat.name}
-                                </li>
+                                <Link
+                                    key={idx}
+                                    to={`/c/${chat.name.toLowerCase()}`}
+                                    className="chatlist__item"
+                                >
+                                    <li>{chat.name}</li>
+                                </Link>
                             );
                         }
                     })}
@@ -47,3 +51,5 @@ function ChatList() {
 }
 
 export default ChatList;
+
+// <Link to={`/item-page/${post['_id']}`} ><button className="btn btn-outline-dark m-2">Se mer</button></Link>
