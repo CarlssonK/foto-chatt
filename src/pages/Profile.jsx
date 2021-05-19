@@ -8,7 +8,7 @@ function Profile() {
     const { currentUser} = useAuth();
     return (
         <div className={styles.profileContainer}>
-            <Topbar />
+            <Topbar chatName={"Profile"} />
             
             <input className={styles.loginDetails} 
                 placeholder="Username"
@@ -21,14 +21,6 @@ function Profile() {
             />
 
             <div className={styles.bottomContainer}>
-
-                
-                {/* {<Switch checked={state.gilad} onChange={handleChange} name="notification" />}
-
-                <label className="switch">
-                <input type="checkbox">
-                <span className="slider round"></span>
-                </label> */}
             
 
                 <div className={styles.settings}>NOTIFIKATIONER</div>
