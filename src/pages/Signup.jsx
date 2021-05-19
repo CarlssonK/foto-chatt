@@ -26,7 +26,7 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/")
+      history.push("/username")
     } catch {
       setError("something went wrong");
     }
@@ -39,9 +39,9 @@ export default function Signup() {
       
       <form onSubmit = {handleSubmit}>
       {error && <div className={styles.error}><p>{error}</p></div>}
-      <div className ={styles.loginDetails}><input type="email" name="" id="" ref={emailRef} required /></div>
-      <div className ={styles.loginDetails}><input type="text"/* type="password" */ name="" id="" ref={passwordRef} required /></div>
-      <div className ={styles.loginDetails}><input type="text" /* type="password" */ name="" id="" ref={passwordConfirmRef} required /></div>
+      <div className ={styles.loginDetails}><input type="email" name="" id="" ref={emailRef} placeholder="Email" required /></div>
+      <div className ={styles.loginDetails}><input type="text"/* type="password" */ name="" id="" ref={passwordRef} placeholder="Password"  required /></div>
+      <div className ={styles.loginDetails}><input type="text" /* type="password" */ name="" id="" ref={passwordConfirmRef} placeholder="Re-enter Password" required /></div>
       <button className ={styles.loginDetails} disabled = {loading}>Sign up</button>
       <div className ={styles.loginDetails}> <Link to="/login"> Have an account Log In </Link></div>
       </form>
