@@ -4,6 +4,7 @@ import { Link, useHistory} from "react-router-dom"
 import { database } from "../pages/firebase"
 import { useAuth } from "../contexts/AuthContext"
 
+
 export default function Username() {
 const[user, setUser] = useState("")
 const history = useHistory();
@@ -19,15 +20,15 @@ history.push("/")
 }
 
     return (
-        <div className ={styles.container}> 
+        <div className ={styles.Container}> 
 
-            <h1>Choose Username</h1>
+            <h2>Username</h2>
             <form onSubmit = {handleSubmit} > 
-                <input type="text" required 
+              <div className ={styles.loginDetails}> <input type="text" 
                 value={user}
                 onChange = { e => setUser(e.target.value)}
-                />
-            <button> Create </button>
+                required /></div> 
+            <button className ={styles.loginDetails}> Create </button>
             </form>
             
         </div>

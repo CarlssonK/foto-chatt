@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../styles/Topbar.module.css";
 import { useLocation, useHistory } from "react-router-dom";
 
+
 function Topbar({ chatName }) {
     const loc = useLocation();
     const history = useHistory();
