@@ -45,6 +45,7 @@
     flex-direction: column;
     align-self: flex-end;
     padding-right: 10px;
+    word-break: break-all;
 }
 
 .otherMessageField {
@@ -58,7 +59,7 @@
 
 .myMessage {
     border-radius: 30px;
-    background: #333333;
+    background: #1d223b;
     height: fit-content;
     width: fit-content;
     padding: 12px;
@@ -66,8 +67,7 @@
 
 .otherMessage {
     border-radius: 30px;
-    background: #5d5d5d;
-    background: #1d223b;
+    background: #333333;
     height: fit-content;
     width: fit-content;
     padding: 12px;

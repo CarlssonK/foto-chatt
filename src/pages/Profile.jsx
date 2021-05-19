@@ -1,9 +1,11 @@
 import React from "react";
 import Topbar from "../components/Topbar"
 import styles from "../styles/Profile.module.css"
+import { useAuth } from "../contexts/AuthContext";
 
 
 function Profile() {
+    const { currentUser} = useAuth();
     return (
         <div className={styles.profileContainer}>
             <Topbar />
@@ -34,6 +36,7 @@ function Profile() {
                 <div className={styles.settings}>ANNAT</div>
 
             </div>
+
         </div>
     );
 }
