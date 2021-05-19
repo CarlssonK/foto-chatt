@@ -4,8 +4,11 @@ import styles from "../styles/Profile.module.css"
 import { useAuth } from "../contexts/AuthContext";
 
 
+
+
 function Profile() {
-    const { currentUser} = useAuth();
+    
+    
     
     return (
         <div className={styles.profileContainer}>
