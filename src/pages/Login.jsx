@@ -35,8 +35,8 @@ export default function login() {
       
       <form  onSubmit = {handleSubmit}>
           {error && <div className={styles.error}><p>{error}</p></div>}
-     <div className ={styles.loginDetails}><input className ={styles.text} type="email" name="" id="" ref={emailRef} required /></div>
-     <div className ={styles.loginDetails}><input type="text" name="" id="" ref={passwordRef} required /></div>
+     <div className ={styles.loginDetails}><input className ={styles.text} type="email" name="" placeholder="Email" id="" ref={emailRef} required /></div>
+     <div className ={styles.loginDetails}><input type="text" name="" id="" placeholder="Password" ref={passwordRef} required /></div>
       <button className={styles.loginDetails} disabled = {loading}>Log In</button>
       <div className ={styles.loginDetails}><Link to="/Signup">Creat a new account Sign Up </Link></div>         
      
