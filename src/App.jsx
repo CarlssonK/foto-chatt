@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import ChatList from "./pages/ChatList";
 import Chat from "./pages/Chat";
+import Camera from "./pages/Camera"
 // Imports
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -50,7 +51,11 @@ function App() {
                     <PrivateRoute path="/profile" component={Profile} />
                     <Route path="/c/:id" component={Chat} />
                     <Route path="/c" component={ChatList} />
-                   <Route path="/username" component={Username} /> 
+                    <Route path="/username" component={Username} /> 
+                    <Route path="/camera" component={Camera} />
+
+                   
+
                 </Switch>
             </AuthProvider>
         </Router>
