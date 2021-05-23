@@ -1,16 +1,33 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "../styles/Chat.module.css";
 
-function MyMessageField({ message, user, time }) {
+function MyMessageField({images, message, username, sent }) {
+
+
+
+    const formatDate = (sent) => {
+        const date = new Date(sent)
+        const hours = date.getHours()
+        const minutes = date.getMinutes()
+        return `${hours}:${minutes}`
+    }
+
+
+
     return (
         <li className={styles.myMessageField}>
             <div className={styles.myMessage}>
-                <p className={styles.content}>{message}</p>
+                <p className={styles.content}>{message && message}</p>
+                {
+                    images && images.map(e => {
+                        return <img key={e._id} src={e.url.replace("/upload", "/upload/w_200")} width="200" />
+                    })
+                }
             </div>
             <p className={styles.myName}>
-                {user.slice(0, 5)}
+                {username}
                 <span className={styles.otherName}>
-                    {new Date(time).toLocaleString().slice(11, 100)}
+                    {formatDate(sent)}
                 </span>
             </p>
         </li>

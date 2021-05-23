@@ -1,49 +1,69 @@
 
-import React, { useRef, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom"
 import styles from "../styles/Login.module.css"
 
+import { useNamedContext } from "react-easier";
 
 
 export default function Signup() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState("");
   const history = useHistory();
+  let g = useNamedContext("global");
 
-  
-  async function handleSubmit(e) {
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [passwordConfirm, setPasswordConfirm] = useState();
+
+  const handleRegister = async (e) => {
     e.preventDefault();
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords dosen't match");
-    }
-    try {
-      setError("");
-      setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/username")
-    } catch {
-      setError("something went wrong");
-    }
-    setLoading(false);
+
+    if(password !== passwordConfirm) return console.error("Password must match!")
+
+    const res = await fetch("http://localhost:3000/api/register", {
+      method: "POST",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+          username,
+          email,
+          password
+      }),
+    })
+    const data = await res.json();
+    // Save username & email to context
+    g.username = data.username
+    g.email = data.email
+    // Redirect to home page
+    history.push('/');
+  }
+
+  const handleUsername = (e) => {
+    setUsername(e.target.value)
+  }
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handlePassword = (e) => {
+    setPassword(e.target.value)
+  }
+  const handlePasswordConfirm = (e) => {
+    setPasswordConfirm(e.target.value)
   }
 
   return (
-    <div className ={styles.Container}>
+    <div className={styles.Container}>
       <h1>Signup</h1>
-      
-      <form onSubmit = {handleSubmit}>
-      {error && <div className={styles.error}><p>{error}</p></div>}
-      <div className ={styles.loginDetails}><input type="email" name="" id="" ref={emailRef} placeholder="Email" required /></div>
-      <div className ={styles.loginDetails}><input type="text"/* type="password" */ name="" id="" ref={passwordRef} placeholder="Password"  required /></div>
-      <div className ={styles.loginDetails}><input type="text" /* type="password" */ name="" id="" ref={passwordConfirmRef} placeholder="Re-enter Password" required /></div>
-      <button className ={styles.loginDetails} disabled = {loading}>Sign up</button>
-      <div className ={styles.loginDetails}> <Link to="/login"> Have an account Log In </Link></div>
+      <form onSubmit={handleRegister}>
+        <div className={styles.loginDetails}><input onChange={handleUsername} type="text" name="username" placeholder="Username" autoFocus required /></div>
+        <div className={styles.loginDetails}><input onChange={handleEmail} type="email" name="email" placeholder="Email" required /></div>
+        <div className={styles.loginDetails}><input onChange={handlePassword} type="password" name="password" placeholder="Password" required /></div>
+        <div className={styles.loginDetails}><input onChange={handlePasswordConfirm} type="password" name="password" placeholder="Re-enter Password" required /></div>
+        <button className={styles.loginDetails}>Sign up</button>
+        <Link to="/login"><div className={styles.loginDetails}> Have an account Log In</div></Link>
       </form>
     </div>
   );

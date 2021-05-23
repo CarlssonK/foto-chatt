@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from "../styles/Login.module.css"
-import { Link, useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { database } from "../pages/firebase"
 import { useAuth } from "../contexts/AuthContext"
 
