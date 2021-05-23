@@ -1,6 +1,5 @@
 import React from "react";
 // Pages/Components
-import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
@@ -12,6 +11,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./pages/PrivateRoute";
 import { withContext } from "react-easier";
+import Username from "./pages/Username";
 
 export default withContext(
     "global",
@@ -37,6 +37,8 @@ export default withContext(
     },
     App
 );
+ 
+
 
 function App() {
     return (
@@ -49,9 +51,14 @@ function App() {
                     <PrivateRoute path="/profile" component={Profile} />
                     <Route path="/c/:id" component={Chat} />
                     <Route path="/c" component={ChatList} />
+                    <Route path="/username" component={Username} /> 
                     <Route path="/camera" component={Camera} />
+
+                   
+
                 </Switch>
             </AuthProvider>
         </Router>
     );
 }
+/* remove username path after debuggig */

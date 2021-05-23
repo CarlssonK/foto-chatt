@@ -21,3 +21,9 @@ h4{
     color: whitesmoke;
 }
 
+a:link{
+    color: whitesmoke;
+}
+a:visited {
+    color: whitesmoke;
+  }

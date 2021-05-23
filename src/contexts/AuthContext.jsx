@@ -1,7 +1,25 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../pages/firebase";
+import {createContext} from "react"
+
+
 
 const AuthContext = React.createContext();
+
+
+auth.onAuthStateChanged(user => { 
+  if (user) {
+    console.log("user logged in", user.email);}
+
+    else {
+      console.log("user logged out")
+    }
+   
+   return user  
+  }
+)
+
+
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -31,7 +49,7 @@ return auth.signInWithEmailAndPassword(email, password)
     signup,
     login
   };
-
+  
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

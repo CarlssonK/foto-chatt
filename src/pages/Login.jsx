@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory} from "react-router-dom"
+import styles from "../styles/Login.module.css"
 
 
 export default function login() {
@@ -23,25 +24,24 @@ export default function login() {
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/")
     } catch {
-      setError("wrong password");
+      setError("Incorrect password");
     }
     setLoading(false);
   }
 
   return (
-    <div>
-      Log In 
+    <div className ={styles.Container}>
+      <h1>Log In </h1>
       
-      <form onSubmit = {handleSubmit}>
-          {error && <h1>{error}</h1>}
-      <input type="email" name="" id="" ref={emailRef} required />
-      <input type="text" name="" id="" ref={passwordRef} required />
-      <button disabled = {loading}>Log In</button>
-      <div>
-          Creat a new account<Link to="/Signup"> Sign Up </Link>
-      
-      </div>
+      <form  onSubmit = {handleSubmit}>
+          {error && <div className={styles.error}><p>{error}</p></div>}
+     <div className ={styles.loginDetails}><input className ={styles.text} type="email" name="" placeholder="Email" id="" ref={emailRef} required /></div>
+     <div className ={styles.loginDetails}><input type="text" name="" id="" placeholder="Password" ref={passwordRef} required /></div>
+      <button className={styles.loginDetails} disabled = {loading}>Log In</button>
+      <div className ={styles.loginDetails}><Link to="/Signup">Creat a new account Sign Up </Link></div>         
+     
       </form>
     </div>
   );
 }
+
