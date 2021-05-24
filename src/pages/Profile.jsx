@@ -3,12 +3,14 @@ import Topbar from "../components/Topbar"
 import styles from "../styles/Profile.module.css"
 import { useNamedContext } from "react-easier";
 import { useHistory } from "react-router-dom"
+import GeoLocation from "../components/GeoLocation";
 
 
 
 function Profile() {
     let g = useNamedContext("global");
     const history = useHistory();
+    const plats = GeoLocation();
 
 
     useEffect(() => {
@@ -43,6 +45,11 @@ function Profile() {
                 {g.email}
             </div>
 
+            <div className={styles.loginDetails}>
+                {
+                    plats.loaded ? JSON.stringify(plats) : "not ready yet."
+                }
+            </div>
 
             <div className={styles.bottomContainer}>
                 <div className={styles.settings}>Notifikationer</div>
