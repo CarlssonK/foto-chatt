@@ -6,7 +6,13 @@ const upload = multer({ storage })
 
 const messages = require("../controllers/messages")
 
-router.post("/", upload.array("images"), messages.createMessage);
-router.post("/", messages.createMessage);
+router.post("/messages", upload.array("images"), messages.createMessage);
+router.post("/messages", messages.createMessage);
+
+router.route("/show").get(messages.showMessage)
+
+router.post("/comments", messages.createComment)
+
+
 
 module.exports = router;

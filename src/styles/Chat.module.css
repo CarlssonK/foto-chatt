@@ -68,6 +68,15 @@
     flex-direction: column;
 }
 
+.myImageBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.myImageLink {
+    cursor: pointer;
+}
+
 .otherMessage {
     border-radius: 30px;
     background: #333333;

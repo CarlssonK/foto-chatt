@@ -30,10 +30,6 @@ function Topbar({ chatName }) {
                 </button>
 
                 <h4>{chatName}</h4>
-                <If c={!g.userId}>
-                    <button onClick={() => history.push("/login")}>Login</button>
-                    <button onClick={() => history.push("/signup")}>Sign Up</button>
-                </If>
                 {
                     history.location.pathname !== "/profile" ? (
                         <button className={styles.btn}>

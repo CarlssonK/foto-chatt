@@ -41,6 +41,7 @@ function App() {
     // Checks if you're already logged in. If so, get your user data
     const handleLoginCheck = async () => {
         const data = await loginCheck();
+        console.log("LOGGED IN")
         g.username = data.username
         g.email = data.email
         g.userId = data.userId

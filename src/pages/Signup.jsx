@@ -21,6 +21,7 @@ export default function Signup() {
 
     if(password !== passwordConfirm) return console.error("Password must match!")
 
+    
     const res = await fetch("http://localhost:3000/api/register", {
       method: "POST",
       headers: {
@@ -33,6 +34,7 @@ export default function Signup() {
           password
       }),
     })
+    console.log("asdasd")
     const data = await res.json();
     // Save username & email to context
     g.username = data.username
