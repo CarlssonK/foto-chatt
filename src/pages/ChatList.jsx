@@ -1,17 +1,29 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import Topbar from "../components/Topbar";
-import { useNamedContext } from "react-easier";
 // Styles
 import "../styles/chatlist.css";
 
 function ChatList() {
-    let g = useNamedContext("global");
+    const history = useHistory()
     const [query, setQuery] = useState("");
+    const [rooms, setRooms] = useState([])
 
     const handleInput = (e) => {
         setQuery(e.target.value);
     };
+
+    useEffect(() => {
+        fetchRooms();
+    }, [])
+
+    const fetchRooms = async () => {
+        const res = await fetch("http://localhost:3000/api/rooms");
+        const data = await res.json();
+        if(data.redirect === "login") return history.push("/login")
+
+        setRooms(data.rooms)
+    }
 
     return (
         <div className="chatlist-container">
@@ -27,20 +39,23 @@ function ChatList() {
             </div>
             <div className="chatlist-box">
                 <ul className="chatlist">
-                    {g.chatList.map((chat, idx) => {
+                    {rooms.map((room) => {
                         if (
-                            chat.name
+                            room.title
                                 .toLowerCase()
                                 .includes(`${query.toLowerCase()}`)
                         ) {
                             return (
+
                                 <Link
-                                    key={idx}
-                                    to={`/c/${chat.name.toLowerCase()}`}
+                                    key={room._id}
+                                    to={{pathname: `/c/${room.title.toLowerCase()}`, state: {roomid: room._id, name: room.title}}}
                                     className="chatlist__item"
                                 >
-                                    <li>{chat.name}</li>
+                                    <li>{room.title}</li>
                                 </Link>
+
+
                             );
                         }
                     })}

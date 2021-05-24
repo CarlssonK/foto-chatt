@@ -63,6 +63,9 @@
     height: fit-content;
     width: fit-content;
     padding: 12px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .otherMessage {
@@ -72,6 +75,9 @@
     width: fit-content;
     padding: 12px;
     border: 1px solid whitesmoke;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {

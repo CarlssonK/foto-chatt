@@ -2,7 +2,7 @@
     display: flex;
     text-align: center;
     align-self: center;
-    background-color: #2B2B2B;
+    background-color: #2b2b2b;
     margin-top: 25px;
     border-radius: 30px;
     width: 300px;
@@ -11,29 +11,26 @@
     font-size: 20px;
     justify-content: center;
     align-items: center;
-    
+    overflow: hidden;
 }
 
 .Container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-h1,h2{
-    color:white;
+h1,
+h2 {
+    color: white;
     padding-bottom: 25px;
-    
-    
 }
 
-input{
+input {
     width: 80%;
-
 }
 
-.error{
+.error {
     display: flex;
     text-align: center;
     align-self: center;
@@ -46,9 +43,8 @@ input{
     justify-content: center;
     align-items: center;
     padding-top: -98px;
-
 }
-
+/* 
 form{
     padding-top: 50px;
-}
+} */
