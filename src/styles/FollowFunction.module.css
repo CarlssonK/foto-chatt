@@ -1,0 +1,15 @@
+.starNotFollow {
+    flex-grow: 0.2;
+    background: none;
+    border: none;
+    width: 4vh;
+    color: whitesmoke;
+}
+
+.starFollow {
+    flex-grow: 0.2;
+    background: none;
+    border: none;
+    width: 4vh;
+    color: rgb(255, 201, 83);
+}

@@ -26,7 +26,8 @@ export default withContext(
         userId: null,
         connectSSE: false,
         messages: [],
-        usersOnline
+        usersOnline,
+        followedRooms: [],
     },
     App
 );
@@ -45,6 +46,7 @@ function App() {
         g.username = data.username
         g.email = data.email
         g.userId = data.userId
+        g.followedRooms = data.followedRooms
         startSSE();
     }
 
