@@ -7,6 +7,8 @@ import Topbar from "../components/Topbar";
 import styles from "../styles/Chat.module.css";
 import { useNamedContext } from "react-easier";
 import { useLocation } from "react-router-dom";
+import ImageComments from "../components/ImageComments";
+
 
 function Chat({match, handleSetMessages}) {
 
@@ -14,6 +16,9 @@ function Chat({match, handleSetMessages}) {
     const location = useLocation();
 
     const [imageList, setImageList] = useState();
+    // IG stands for ImageComments
+    const [toggleImageComments, setToggleImageComments] = useState(false);
+    const [imageCommentsId, setImageCommentsId] = useState("")
 
     const s = useStates({
         input: "",
@@ -43,6 +48,7 @@ function Chat({match, handleSetMessages}) {
             return {id: e._id.toString(), message: e.text, images: e.images, sent: e.sent, author: {id: e.author._id.toString(), username: e.author.username}}
         }).reverse();
 
+        console.log(messages[0].id)
         handleSetMessages(messages)
     }
 
@@ -85,35 +91,51 @@ function Chat({match, handleSetMessages}) {
         setImageList([...e.target.files])
     }
 
+
+    const handleToggleImageComments = (bool, imageId) => {
+        setToggleImageComments(bool) // Show imageComments Component
+        if(!imageId) return; // return here because we are closing the comop
+        setImageCommentsId(imageId) // Set id so we know what data we should populate the component with
+
+    }
+
+
+
+
     return (
         <div className={styles.chatContainer}>
-            <Topbar chatName={location.state.name} />
+            <Topbar chatName={location.pathname.substring(3)} />
             <div>
                 <p>users online </p>
                 {g.usersOnline.map((e, idx) => {
                     return <span key={idx} style={{color: "white"}}>{e.username}</span>
                 })}
             </div>
+            <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
             <div className={styles.messageContainer}>
                 <ul>
                     {g.messages.map((e) => {
                         return e.author.id === g.userId ? (
                             <MyMessageField
                                 key={e.id}
+                                postId={e.id}
                                 images={e.images}
                                 message={e.message}
                                 username={e.author.username}
                                 userid={e.author.id}
                                 sent={e.sent}
+                                openImageComments={handleToggleImageComments}
                             />
                         ) : (
                             <OtherMessageField
                                 key={e.id}
+                                postId={e.id}
                                 images={e.images}
                                 message={e.message}
                                 username={e.author.username}
                                 userid={e.author.id}
                                 sent={e.sent}
+                                openImageComments={handleToggleImageComments}
                             />
                         );
                     })}

@@ -40,3 +40,10 @@ body {
 .bottom {
     margin-top: auto;
 }
+
+
+
+.images-wrap {
+    align-items: center;
+    background-color: black;
+}

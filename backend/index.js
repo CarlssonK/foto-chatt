@@ -47,7 +47,7 @@ db.once("open", () => {
 const app = express();
 
 app.use(express.json());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // app.engine("ejs", ejsMate);
 // app.set("view engine", "ejs");
@@ -104,7 +104,7 @@ passport.deserializeUser(User.deserializeUser());
 // Routes
 app.use("/api", userRoutes);
 app.use("/api/rooms", roomRoutes);
-app.use("/api/rooms/:id/messages", messageRoutes);
+app.use("/api/rooms/:id", messageRoutes);
 // Other routes
 
 // app.use("/profile", (req,res) => {

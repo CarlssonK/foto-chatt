@@ -4,11 +4,13 @@ const User = require("../models/user");
 
 module.exports.getUser = (req,res) => {
   if(!req.user) return
+  console.log("logged in!")
   res.json({email: req.user.email, username: req.user.username, userId: req.user._id})
 }
 
 
 module.exports.register = async(req, res) => {
+  
   try {
     const { email, username, password } = req.body
     const user = new User({ email, username })
@@ -24,6 +26,7 @@ module.exports.register = async(req, res) => {
 }
   
 module.exports.login = (req, res) => {
+  console.log("LOGIN")
   const { username, email, _id } = req.user
   delete req.session.returnTo;
   res.json({username, email, _id})
