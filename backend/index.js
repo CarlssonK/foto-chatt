@@ -105,6 +105,9 @@ passport.deserializeUser(User.deserializeUser());
 app.use("/api", userRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/rooms/:id", messageRoutes);
+
+
+
 // Other routes
 
 // app.use("/profile", (req,res) => {
