@@ -5,6 +5,22 @@ const sseHandler = require("../SSE-handler")
 
 
 
+
+module.exports.getAllPhotos = async (req, res) => {
+
+  const message = await Message.find({}).populate({
+    path: "comments",
+    populate: {
+      path: "author"
+    }
+  }).populate("author");
+
+  const filterByPhoto = message.filter(msg => msg.images.length > 0)
+
+  res.json({filterByPhoto})
+}
+
+
 module.exports.showMessage = async (req, res) => {
   console.log(req.params.id)
   const message = await Message.findById(req.params.id).populate({
