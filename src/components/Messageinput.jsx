@@ -11,6 +11,8 @@ function Messageinput({addFile, handleSubmit, handleInput }) {
     const submit = (e) => {
         e.preventDefault(); // Prevent reload
         inputRef.current.value = ""; // Clear input field
+
+        console.log(e)
         handleSubmit(e);
         // fileRef.current.files
     };
