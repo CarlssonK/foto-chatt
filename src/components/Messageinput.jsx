@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useStates } from "react-easier";
 import styles from "../styles/Messageinput.module.css";
+import canvas from "../pages/Camera"
 
 function Messageinput({addFile, handleSubmit, handleInput }) {
     const inputRef = useRef(null);
@@ -20,9 +21,8 @@ function Messageinput({addFile, handleSubmit, handleInput }) {
     return (
         <div className={styles.messageBar}>
             <button className={styles.btn}>
-                <i className="material-icons">camera_alt</i>
+            <i><a href="/Camera" className="material-icons">camera_alt</a></i>
             </button>
-
             <button className={styles.btn} onClick={fileClick}>
                 <i className="material-icons">photo_size_select_actual</i>
             </button>
@@ -45,6 +45,7 @@ function Messageinput({addFile, handleSubmit, handleInput }) {
                         multiple
                         style={{display: "none"}}
                     />
+                    <canvas />
                 </form>
             </div>
             <button className={styles.btn}>

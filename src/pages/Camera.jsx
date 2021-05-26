@@ -38,6 +38,7 @@ const Camera = () => {
     }, 200);
   };
 
+
   const takePhoto = () => {
     let photo = photoRef.current;
     let strip = stripRef.current;
@@ -45,27 +46,44 @@ const Camera = () => {
     const data = photo.toDataURL("image/jpeg");
 
     const link = document.createElement("a");
+
     link.href = data;
     link.setAttribute("download", "myWebcam");
     link.innerHTML = `<img src='${data}' alt='thumbnail'/>`;
     strip.insertBefore(link, strip.firstChild);
-  };
+
+    // link.innerHTML = `<div>
+    // <button onClick="${deletePhoto()}">radio_button_checked</button>
+    // </div>`;
+    console.log()
+  }
 
   return (
+    
     <div className="container">
-        <button onClick={() => takePhoto()}>Take a photo</button>
         <video
           onCanPlay={() => paintToCanvas()}
           ref={videoRef}
           className="player"
         />
-        <canvas ref={photoRef} className="photo" />
+        <canvas
+        ref={photoRef}
+        className="photo"
+         />
         <div className="photo-booth">
-          <div ref={stripRef} className="strip" />
+          <div 
+          ref={stripRef} 
+          className="strip" />
         </div>
+        <div className="center">
+        <button className="material-icons">
+          <a onClick={() => takePhoto()}>radio_button_unchecked</a>
+          </button>
+          </div>
       </div>
 
   );
+  
 };
 
 export default Camera;
