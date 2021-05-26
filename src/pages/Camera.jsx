@@ -55,7 +55,7 @@ const Camera = () => {
   return (
 
     
-    <div className={styles.container}>
+    <div className={styles.container}> 
 
     <div className="container">
         <button onClick={() => takePhoto()}>Take a photo</button>
@@ -84,7 +84,9 @@ const Camera = () => {
           </div>
 
       </div>
+
       </div>
+
 
   );
 };
