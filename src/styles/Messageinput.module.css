@@ -36,6 +36,13 @@
     border: none;
     width: 4vh;
     color: whitesmoke;
+    display: grid;
+    place-items: center;
+}
+
+.cameraBtn {
+    display: grid;
+    place-items: center;
 }
 
 .capture {

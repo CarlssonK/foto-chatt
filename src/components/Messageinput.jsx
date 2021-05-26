@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useStates } from "react-easier";
 import styles from "../styles/Messageinput.module.css";
+import { Link, useHistory } from "react-router-dom";
+import { Divider } from "@material-ui/core";
 
 function Messageinput({addFile, handleSubmit, handleInput }) {
     const inputRef = useRef(null);
@@ -19,9 +21,14 @@ function Messageinput({addFile, handleSubmit, handleInput }) {
 
     return (
         <div className={styles.messageBar}>
-            <button className={styles.btn}>
-                <i className="material-icons">camera_alt</i>
-            </button>
+            <Link
+            className={styles.btn}
+            to={{pathname: `/camera`, state: {test: "hahah lool"}}}
+            >
+                <div className={styles.cameraBtn} >
+                    <i className="material-icons">camera_alt</i>
+                </div>
+            </Link>
 
             <button className={styles.btn} onClick={fileClick}>
                 <i className="material-icons">photo_size_select_actual</i>

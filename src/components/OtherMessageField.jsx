@@ -12,8 +12,8 @@ function otherMessageField({images, postId, message, username, sent, openImageCo
 
 
     return (
-            <li onClick={images.length > 0 ? () => openImageComments(true, postId) : null} className={styles.otherMessageField}>
-            <div className={styles.otherMessage}>
+            <li className={styles.otherMessageField}>
+            <div onClick={images.length > 0 ? () => openImageComments(true, postId) : null} className={styles.otherMessage}>
                 <p className={styles.content}>{message && message}</p>
                 
                     <div className={styles.myImageBox}>
