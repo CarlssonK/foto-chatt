@@ -151,18 +151,18 @@ function ChatList() {
                         ) {
                             return (
 
-                                <div key={room._id} className="chatlist__item">
-                                    <div>
+                                <>
                                         <Link
+                                            className="chatlist__item"
+                                            key={room._id}
                                             to={{pathname: `/c/${room.title.toLowerCase()}`, state: {roomid: room._id, name: room.title}}}
                                         >
                                             <li>{room.title}</li>
 
                                         </Link>
-                                    </div>
 
                                     <FollowFunction handleFollow={handleFollow} isFollowing={false} id={room._id} />
-                                </div>
+                                </>
 
 
                             );

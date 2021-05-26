@@ -112,7 +112,7 @@ function Chat({match, handleSetMessages}) {
                 })}
             </div>
             <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
-            <ImageComments imageId={imageCommentsId} />
+            {/* <ImageComments imageId={imageCommentsId} /> */}
             <div className={styles.messageContainer}>
                 <ul>
                     {g.messages.map((e) => {

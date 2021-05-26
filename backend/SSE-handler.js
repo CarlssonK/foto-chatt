@@ -66,6 +66,7 @@ module.exports = app => {
       return e;
     });
     notifyJoinLeave(roomId)
+    console.log("JOIN ROOM")
   }
 
   module.exports.sendMessage = (message, roomId) => {
@@ -91,6 +92,7 @@ module.exports = app => {
           "event:" + "join-leave" + "\ndata:" + JSON.stringify(clientsData) + "\n\n"
       );
     }
+
   }
 
   // Send a message via SSE

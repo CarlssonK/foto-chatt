@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "../styles/Camera.module.css";
+import styles from "../styles/Camera.module.css";
 
 const Camera = () => {
   const videoRef = useRef(null);
@@ -52,16 +52,16 @@ const Camera = () => {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
         <button onClick={() => takePhoto()}>Take a photo</button>
         <video
           onCanPlay={() => paintToCanvas()}
           ref={videoRef}
-          className="player"
+          className={styles.player}
         />
-        <canvas ref={photoRef} className="photo" />
-        <div className="photo-booth">
-          <div ref={stripRef} className="strip" />
+        <canvas ref={photoRef} className={styles.photo} />
+        <div className={styles.photoBooth}>
+          <div ref={stripRef} className={styles.strip} />
         </div>
       </div>
 
