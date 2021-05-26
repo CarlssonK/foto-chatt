@@ -1,5 +1,5 @@
 import Topbar from "../components/Topbar";
-import styles from "../styles/Topbar.module.css";
+import styles from "../styles/PhotoFeed.module.css"
 import MyMessageField from "../components/MyMessageField";
 import OtherMessageField from "../components/OtherMessageField";
 import React, { useEffect } from "react";
@@ -41,12 +41,21 @@ function PhotoFeed({images, postId, message, username, sent, openImageComments})
     return (
          <div>
              <Topbar/>
+
     <input
         className="chatlist-input"
         type="text"
         placeholder="Search..."
       />
+      <div className={styles.PhotoContainer}> 
+      
+     <h1 > hello </h1>
+        <h2> world</h2>
+     </div>
      
+  
+
+    
         
         </div>
     );
