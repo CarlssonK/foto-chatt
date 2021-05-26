@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 function GeoLocation() {
     const [plats, setPlats] = useState ({
-        loaded: false, 
+        loaded: true, 
         lat: "", lng: ""});
 
 
@@ -18,7 +18,7 @@ function GeoLocation() {
     }
     const onError = error => {
         setPlats({
-            loaded: true,
+            loaded: false,
             error, 
         });
     }
@@ -29,13 +29,13 @@ function GeoLocation() {
         if(!("Geolocation" in navigator)){
             onError({
                 code:0,
-                message: "Something went wrong"
+                message: "Geolocation off"
             })
         }
       navigator.geolocation.getCurrentPosition(onSucces, onError);
     },[]);
 
-   
+  
 
     return plats; 
        
