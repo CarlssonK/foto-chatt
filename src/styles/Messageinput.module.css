@@ -39,17 +39,7 @@
     border: none;
     min-width: 1.6vw;
     color: whitesmoke;
-<<<<<<< HEAD
-    display: grid;
-    place-items: center;
-}
-
-.cameraBtn {
-    display: grid;
-    place-items: center;
-=======
     flex-grow: 1;
->>>>>>> da86ffe5211a1ed31175016a4ae0b9f92e0854f1
 }
 
 .sendBtn{
