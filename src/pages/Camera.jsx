@@ -90,7 +90,10 @@ const Camera = () => {
           </div>
 
       </div>
-</div>
+
+      </div>
+
+
   );
 };
 
