@@ -20,6 +20,7 @@ const MessageSchema = new Schema({
   text: String,
   sent: Date,
   images: [ImageSchema],
+  tags: Array,
   author: {
     type: Schema.Types.ObjectId,
     ref: "User"
