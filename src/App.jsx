@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import ChatList from "./pages/ChatList";
 import Chat from "./pages/Chat";
 import Camera from "./pages/Camera"
+
 // Imports
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -82,8 +83,8 @@ function App() {
         messages = g.messages = [...data]
     }
 
-
     return (
+        
         <Router>
             <AuthProvider>
                 <Switch>
@@ -95,6 +96,7 @@ function App() {
                     <Route path="/c" component={ChatList} />
                     <Route path="/username" component={Username} /> 
                     <Route path="/camera" component={Camera} />
+
 
                    
 
