@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useStates } from "react-easier";
 import Messageinput from "../components/Messageinput";
 import MyMessageField from "../components/MyMessageField";
@@ -8,12 +8,16 @@ import styles from "../styles/Chat.module.css";
 import { useNamedContext } from "react-easier";
 import { useLocation } from "react-router-dom";
 import ImageComments from "../components/ImageComments";
+import UploadPhoto from "../components/UploadPhoto"
 
 
 function Chat({match, handleSetMessages}) {
 
     let g = useNamedContext("global");
     const location = useLocation();
+
+    const previewImage = useRef();
+    const [previewImages, setPreviewImages] = useState([])
 
     const [imageList, setImageList] = useState();
     // IG stands for ImageComments
@@ -88,8 +92,18 @@ function Chat({match, handleSetMessages}) {
     };
 
     const addFile = (e) => {
+        if (e.target.files[0].type.indexOf("image/") > -1) {
+
+            const filesArr = [...e.target.files]
+
+            const filesUrl = filesArr.map(file => {
+                return window.URL.createObjectURL(file);
+            })
+            setPreviewImages(filesUrl)
+        }
+
         setImageList([...e.target.files])
-    }
+    };
 
 
     const handleToggleImageComments = (bool, imageId) => {
@@ -98,10 +112,7 @@ function Chat({match, handleSetMessages}) {
         setImageCommentsId(imageId) // Set id so we know what data we should populate the component with
 
     }
-
-
-
-
+    
     return (
         <div className={styles.chatContainer}>
             <Topbar chatName={location.pathname.substring(3)} />
@@ -112,6 +123,7 @@ function Chat({match, handleSetMessages}) {
                 })}
             </div>
             <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
+            <UploadPhoto handleSubmit={handleSubmit} images={previewImages} />
             <div className={styles.messageContainer}>
                 <ul>
                     {g.messages.map((e) => {
