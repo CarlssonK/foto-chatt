@@ -1,7 +1,11 @@
+import { StylesProvider } from "@material-ui/styles";
 import React, { useEffect, useRef } from "react";
 import styles from "../styles/Camera.module.css";
 
+import { useNamedContext } from "react-easier";
+
 const Camera = () => {
+  let g = useNamedContext("global");
   const videoRef = useRef(null);
   const photoRef = useRef(null);
   const stripRef = useRef(null);
@@ -39,10 +43,13 @@ const Camera = () => {
   };
 
   const takePhoto = () => {
+    console.log("TAKE PHOTO")
     let photo = photoRef.current;
     let strip = stripRef.current;
 
     const data = photo.toDataURL("image/jpeg");
+
+    console.log(data)
 
     const link = document.createElement("a");
     link.href = data;
@@ -52,17 +59,36 @@ const Camera = () => {
   };
 
   return (
-    <div className={styles.container}>
+
+    
+    // <div className={styles.container}>
+
+    <div className="container">
         <button onClick={() => takePhoto()}>Take a photo</button>
+
         <video
           onCanPlay={() => paintToCanvas()}
           ref={videoRef}
           className={styles.player}
         />
-        <canvas ref={photoRef} className={styles.photo} />
-        <div className={styles.photoBooth}>
-          <div ref={stripRef} className={styles.strip} />
+
+        <canvas
+        ref={photoRef}
+        className={styles.photo}
+         />
+
+        <canvas ref={photoRef} className="photo" />
+
+        <div className="photo-booth">
+          <div ref={stripRef} className="strip" />
         </div>
+
+        <div className={styles.center}>
+        <button className="material-icons">
+          <a onClick={() => takePhoto()}>radio_button_unchecked</a>
+          </button>
+          </div>
+
       </div>
 
   );

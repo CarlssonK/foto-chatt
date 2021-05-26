@@ -87,8 +87,24 @@ function Chat({match, handleSetMessages}) {
         s.input = e.target.value; // Update state when input field changes
     };
 
-    const addFile = (e) => {
-        setImageList([...e.target.files])
+    const addFile = (e, action) => {
+        let fileUrls = []
+
+        // If we add files from library
+        if(action === "library") {
+            for(let file of e.target.files) { fileUrls.push(window.URL.createObjectURL(file)) }
+        }
+
+        // If we add photo from camera
+        if(action === "camera") {
+            fileUrls.push(e) // e in this case will just be a url blob
+        }
+
+
+        setImageList(imageList => [
+            ...imageList,
+            ...fileUrls,
+        ])
     }
 
 
