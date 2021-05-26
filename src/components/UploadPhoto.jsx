@@ -11,7 +11,6 @@ function UploadPhoto({images}) {
 
 
     return (
-        <Zoom>
         <div>
             {
                 images && images.map(url =>  {
@@ -19,7 +18,6 @@ function UploadPhoto({images}) {
                 })
             }
         </div>
-        </Zoom>
     )
 }
 
