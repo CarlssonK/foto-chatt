@@ -2,20 +2,29 @@ import React, { useEffect, useRef, useState } from "react";
 import { useStates } from "react-easier";
 import styles from "../styles/Messageinput.module.css";
 
-function Messageinput({addFile, handleSubmit, handleInput }) {
+function Messageinput({addFile, handleSubmit, handleInput, showComponentBool }) {
     const inputRef = useRef(null);
     const fileRef = useRef(null)
+    const formRef = useRef(null)
 
     const submit = (e) => {
         e.preventDefault(); // Prevent reload
         inputRef.current.value = ""; // Clear input field
         handleSubmit(e);
+
         // fileRef.current.files
     };
 
     const fileClick = (e) => {
         fileRef.current.click()
     }
+
+
+    useEffect(() => {
+        if(!showComponentBool) {
+            formRef.current.reset();
+        } 
+    }, [showComponentBool])
 
     return (
         <div className={styles.messageBar}>
@@ -29,7 +38,7 @@ function Messageinput({addFile, handleSubmit, handleInput }) {
 
 
             <div className={styles.inputMessage}>
-                <form onSubmit={submit} className={styles.form}>
+                <form onSubmit={submit} className={styles.form} ref={formRef}>
                     <input
                         className={styles.input}
                         type="text"
