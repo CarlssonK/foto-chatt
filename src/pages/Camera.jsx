@@ -1,18 +1,28 @@
-import { StylesProvider } from "@material-ui/styles";
-import React, { useEffect, useRef } from "react";
-import styles from "../styles/Camera.module.css";
+import React, { useEffect, useRef, useState } from "react";
+import styles from  "../styles/Camera.module.css";
+import { Link, useHistory } from "react-router-dom";
 
 import { useNamedContext } from "react-easier";
 
-const Camera = () => {
+const Camera = ({match}) => {
   let g = useNamedContext("global");
   const videoRef = useRef(null);
   const photoRef = useRef(null);
   const stripRef = useRef(null);
+  // const canvasRef = useRef(null);
+
+  const [photoHasBeenTaken, setPhotoHasBeenTaken] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState("");
+
 
   useEffect(() => {
     getVideo();
   }, [videoRef]);
+
+  useEffect(() => {
+    console.log(location)
+    console.log(match)
+  }, [])
 
   const getVideo = () => {
     navigator.mediaDevices
@@ -43,28 +53,39 @@ const Camera = () => {
   };
 
   const takePhoto = () => {
-    console.log("TAKE PHOTO")
+
+    setPhotoHasBeenTaken(true);
+
+    
+    // button.style.display = 'none';
+
     let photo = photoRef.current;
     let strip = stripRef.current;
 
     const data = photo.toDataURL("image/jpeg");
 
-    console.log(data)
+    setPhotoUrl(data)
 
-    const link = document.createElement("a");
-    link.href = data;
-    link.setAttribute("download", "myWebcam");
-    link.innerHTML = `<img src='${data}' alt='thumbnail'/>`;
-    strip.insertBefore(link, strip.firstChild);
+
+    // const link = document.createElement("a");
+    // link.href = data;
+    // link.setAttribute("download", "myWebcam");
+    // link.innerHTML = `<img src='${data}' alt='thumbnail'/>`;
+    // strip.insertBefore(link, strip.firstChild);
+
   };
+
+
+  const handleTakePhotoAgain = () => {
+    paintToCanvas();
+    setPhotoHasBeenTaken(false);
+  }
+
+
 
   return (
 
-    
-    <div className={styles.container}> 
-
-    <div className="container">
-        <button onClick={() => takePhoto()}>Take a photo</button>
+    <div className={styles.container}>
 
         <video
           onCanPlay={() => paintToCanvas()}
@@ -72,24 +93,40 @@ const Camera = () => {
           className={styles.player}
         />
 
-        <canvas
-        ref={photoRef}
-        className={styles.photo}
-         />
+        <canvas ref={photoRef} className={styles.photo} />
 
-        <canvas ref={photoRef} className="photo" />
-
-        <div className="photo-booth">
-          <div ref={stripRef} className="strip" />
+        <div className={styles.photoBooth}>
+          <div ref={stripRef} className={styles.cameraImage} />
+          {
+            photoHasBeenTaken ? <img className={styles.cameraImage} src={photoUrl} alt='thumbnail'/> : null
+          }
+          
         </div>
 
         <div className={styles.center}>
-        <button className="material-icons">
-          <a onClick={() => takePhoto()}>radio_button_unchecked</a>
-          </button>
-          </div>
 
-      </div>
+
+          {
+            photoHasBeenTaken ? (
+              <>
+              <button onClick={() => handleTakePhotoAgain()}>
+                Ta om bild
+              </button>
+              <Link>
+                Använd bild
+              </Link>
+             </>
+            ) : (
+              <button className="material-icons">
+                <a onClick={() => takePhoto()}>radio_button_unchecked</a>
+              </button>
+            )
+
+          }
+
+
+        
+        </div>
 
       </div>
 
@@ -98,3 +135,4 @@ const Camera = () => {
 };
 
 export default Camera;
+
