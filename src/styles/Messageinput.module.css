@@ -1,6 +1,6 @@
 .messageBar {
     bottom: 0;
-    position: fixed;
+    padding-bottom: 13px;
     width: 100vw;
     background: #4b4b4b;
     display: flex;
