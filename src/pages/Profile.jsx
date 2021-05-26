@@ -5,6 +5,8 @@ import { useNamedContext } from "react-easier";
 import { useHistory } from "react-router-dom"
 import GeoLocation from "../components/GeoLocation";
 
+import loginCheck from "../utils/LoginCheck"
+
 
 
 function Profile() {
@@ -14,11 +16,12 @@ function Profile() {
 
 
     useEffect(() => {
-        loginCheck();
+        handleLoginCheck();
     }, [])
 
-    const loginCheck = async () => {
-        const res = await fetch("http://localhost:3000/api/rooms");
+    const handleLoginCheck = async () => {
+        const res = await loginCheck();
+        // const res = await fetch("http://localhost:3000/api/rooms");
         const data = await res.json();
         if(data.redirect === "login") return history.push("/login")
     }

@@ -4,10 +4,9 @@ const User = require("../models/user");
 
 module.exports.getUser = async (req,res) => {
   if(!req.user) return
-  console.log("logged in!")
   const followedRoomsFixed = req.user.followedRooms.map(e =>  {return e._id })
 
-  res.json({email: req.user.email, username: req.user.username, userId: req.user._id, followedRooms: req.user.followedRooms})
+  res.json({email: req.user.email, username: req.user.username, userId: req.user._id, followedRooms: followedRoomsFixed})
 }
 
 // module.exports.getFollowedRooms = async (req,res) => {
@@ -18,10 +17,10 @@ module.exports.getUser = async (req,res) => {
 
 module.exports.handleFollowRoom = async (req,res) => {
   const user = await User.findById(req.user.id);
-  console.log("followedRooms")
   console.log(req.body.followedRooms.length);
   user.followedRooms = [...req.body.followedRooms];
   await user.save();
+  res.send("ok")
 }
 
 

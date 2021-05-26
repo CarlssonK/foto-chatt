@@ -23,8 +23,10 @@ function ChatList() {
     }, [])
 
     const fetchRooms = async () => {
+        console.log("FETCH ROOMS")
         const res = await fetch("http://localhost:3000/api/rooms");
         const data = await res.json();
+        console.log("DONE")
         if(data.redirect === "login") return history.push("/login")
 
 
@@ -149,18 +151,18 @@ function ChatList() {
                         ) {
                             return (
 
-                                <div key={room._id} className="chatlist__item">
-                                    <div>
+                                <>
                                         <Link
+                                            className="chatlist__item"
+                                            key={room._id}
                                             to={{pathname: `/c/${room.title.toLowerCase()}`, state: {roomid: room._id, name: room.title}}}
                                         >
                                             <li>{room.title}</li>
 
                                         </Link>
-                                    </div>
 
                                     <FollowFunction handleFollow={handleFollow} isFollowing={false} id={room._id} />
-                                </div>
+                                </>
 
 
                             );

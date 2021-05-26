@@ -29,6 +29,7 @@ export default withContext(
         messages: [],
         usersOnline,
         followedRooms: [],
+        cameraPhotoUrl: "",
     },
     App
 );

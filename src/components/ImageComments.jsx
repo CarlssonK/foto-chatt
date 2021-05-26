@@ -7,7 +7,7 @@ import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons'
 
 import { Fade, Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-
+import { useNamedContext } from "react-easier";
 
 
 // import Switch from '@material-ui/core/Switch';
@@ -17,6 +17,7 @@ import SlideTransition from '@material-ui/core/Slide';
 import Zoom from '@material-ui/core/Zoom';
 
 function ImageComments({handleToggleImageComments, showComponentBool, imageId}) {
+  let g = useNamedContext("global");
 
   const inputRef = useRef();
   const slideRef = useRef();
@@ -25,6 +26,7 @@ function ImageComments({handleToggleImageComments, showComponentBool, imageId}) 
 
   const [images, setImages] = useState([])
   const [comments, setComments] = useState([])
+  const [toggleTextZoom, setToggleTextZoom] = useState(true)
   const [user, setUser] = useState("")
 
 
@@ -54,6 +56,7 @@ function ImageComments({handleToggleImageComments, showComponentBool, imageId}) 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (input === "") return;
+    handleSubmitUI();
     const comment = input;
     setInput(""), inputRef.current.value = "";
 
@@ -77,6 +80,17 @@ function ImageComments({handleToggleImageComments, showComponentBool, imageId}) 
     //     body: formData,
     // });
   };
+
+
+  const handleSubmitUI = () => {
+    console.log(input)
+    console.log(comments)
+    setToggleTextZoom(true)
+    setComments(comments => [
+      {_id: Math.random(1* 1000), text: input, sent: new Date(), author: {username: g.username}},
+      ...comments
+    ])
+  }
 
   const handleInput = (e) => {
     setInput(e.target.value)
@@ -128,7 +142,7 @@ function ImageComments({handleToggleImageComments, showComponentBool, imageId}) 
               }
               <div className="ig-controllers-box">
                 <FontAwesomeIcon className="ig-controller-icon" icon={faHeart} />
-                <FontAwesomeIcon className="ig-controller-icon" icon={faComment} />
+                <FontAwesomeIcon className="ig-controller-icon" icon={faComment} onClick={() => inputRef.current.focus()} />
                 </div>
           </div>
           <div className="ig-ul-box">
@@ -139,11 +153,13 @@ function ImageComments({handleToggleImageComments, showComponentBool, imageId}) 
                 :
                 comments.map(e => {
                   return (
-                      <li key={e._id} style={{padding: "8px 12px"}}>
+                    <Zoom key={e._id} in={toggleTextZoom}>
+                      <li  style={{padding: "8px 12px"}}>
                           <strong>{e.author.username} </strong> 
                           {e.text} 
                           <div style={{color: "gray"}}>{formatDate(e.sent)}</div> 
                       </li>
+                    </Zoom>
                   )
                   
                 })
