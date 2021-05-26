@@ -1,43 +1,27 @@
 .messageBar {
-    /* bottom: 0;
+    bottom: 0;
     position: fixed;
-    height: 8vh;
-    width: 100%; */
+    width: 100vw;
     background: #4b4b4b;
     display: flex;
-    height: 72px;
+    height: 8vh;
     padding-top: 10px;
     padding-left: 5px;
 }
 
 .messageBar form{
    width: 100%;
-   padding-right: 8px;
-   padding-left: 5px;
+   padding-right: 10px;
 }
 
 .inputMessage {
-    /* background: #2b2b2b;
-    border-radius: 30px;
-    padding: 3vw;
-    max-height: 6vh;
-    flex-grow: 10;
-    padding: 5px;
-    margin-top: 10px;
-    overflow: hidden; */
-   
     position: relative;
     display: flex;
     background: #2b2b2b;
     border-radius: 30px;
     height: 40px;
-    /* margin: 0 10px 10px 10px; */
     overflow: hidden;
-    /* width: 80vw; */
-   
 }
-
-
 
 .inputMessage input{
     width: 100% !important;
@@ -46,12 +30,16 @@
     color: whitesmoke;
 }
 
-.btn {
-    flex-shrink: 1;
+.btns {
+    display: flex;
+    padding-left: 10px;
+    margin-top: 1vh;
+    height: 3vh;
     background: none;
     border: none;
-    width: 4vh;
+    min-width: 1.6vw;
     color: whitesmoke;
+    flex-grow: 1;
 }
 
 .sendBtn{

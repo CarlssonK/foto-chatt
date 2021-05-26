@@ -29,11 +29,11 @@ function Messageinput({addFile, handleSubmit, handleInput, showComponentBool }) 
 
     return (
         <div className={styles.messageBar}>
-            <Link className={styles.btn} to={{pathname: "/camera", state: {path: location.pathname}}} >
+            <Link className={styles.btns} to={{pathname: "/camera", state: {path: location.pathname}}} >
                 <div className="material-icons">camera_alt</div>
             </Link>
 
-            <button className={styles.btn} onClick={fileClick}>
+            <button className={styles.btns} onClick={fileClick}>
                 <i className="material-icons">photo_size_select_actual</i>
             </button>
                 <form onSubmit={submit} className={styles.form} ref={formRef}>
