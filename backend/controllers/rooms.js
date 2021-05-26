@@ -8,6 +8,7 @@ module.exports.index = async (req, res) => {
 
 
 module.exports.showRoom = async (req, res) => {
+  console.log("ROOM")
   const room = await Room.findById(req.params.id).populate({
     path: "messages",
     populate: {
@@ -19,6 +20,8 @@ module.exports.showRoom = async (req, res) => {
     return res.redirect("/")
   }
 
+  console.log("SEND")
     sseHandler.userJoinRoom(req.user, req.params.id)
     res.json({room})
+    res.send("ok")
 }

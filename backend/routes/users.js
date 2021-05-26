@@ -4,6 +4,8 @@ const passport = require('passport');
 const users = require("../controllers/users")
 
 
+router.route("/handlefollow").post(users.handleFollowRoom)
+
 router.route("/user").get(users.getUser)
 
 router.route("/register").post(users.register)

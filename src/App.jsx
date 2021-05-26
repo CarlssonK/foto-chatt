@@ -15,6 +15,7 @@ import Username from "./pages/Username";
 import { useNamedContext } from "react-easier";
 
 import loginCheck from "./utils/LoginCheck"
+import PhotoFeed from "./pages/PhotoFeed";
 
 let messages = [], usersOnline = [];
 
@@ -26,7 +27,8 @@ export default withContext(
         userId: null,
         connectSSE: false,
         messages: [],
-        usersOnline
+        usersOnline,
+        followedRooms: [],
     },
     App
 );
@@ -45,6 +47,7 @@ function App() {
         g.username = data.username
         g.email = data.email
         g.userId = data.userId
+        g.followedRooms = data.followedRooms
         startSSE();
     }
 
@@ -95,6 +98,7 @@ function App() {
                     <Route path="/c" component={ChatList} />
                     <Route path="/username" component={Username} /> 
                     <Route path="/camera" component={Camera} />
+                    <Route path="/photo" component={PhotoFeed}/>
 
                    
 

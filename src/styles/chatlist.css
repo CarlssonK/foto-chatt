@@ -28,6 +28,7 @@
     padding: 12px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .chatlist__item:nth-child(even) {
