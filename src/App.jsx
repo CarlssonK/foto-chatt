@@ -15,6 +15,7 @@ import Username from "./pages/Username";
 import { useNamedContext } from "react-easier";
 
 import loginCheck from "./utils/LoginCheck"
+import PhotoFeed from "./pages/PhotoFeed";
 
 let messages = [], usersOnline = [];
 
@@ -97,6 +98,7 @@ function App() {
                     <Route path="/c" component={ChatList} />
                     <Route path="/username" component={Username} /> 
                     <Route path="/camera" component={Camera} />
+                    <Route path="/photo" component={PhotoFeed}/>
 
                    
 
