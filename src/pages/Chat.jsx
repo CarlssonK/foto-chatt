@@ -22,6 +22,7 @@ function Chat({match, handleSetMessages}) {
     const [imageList, setImageList] = useState();
     // IG stands for ImageComments
     const [toggleImageComments, setToggleImageComments] = useState(false);
+    const [togglePhotoUpload, setTogglePhotoUpload] = useState(false);
     const [imageCommentsId, setImageCommentsId] = useState("")
 
     const s = useStates({
@@ -64,8 +65,9 @@ function Chat({match, handleSetMessages}) {
         s.roomId = room[0]._id;
     }
 
-    const handleSubmit = (e) => {
-        if (s.input === "") return;
+    const handleSubmit = async (e) => {
+        console.log()
+        if (s.input === "" && imageList.length === 0) return;
         const message = s.input;
         s.input = "";
 
@@ -80,10 +82,12 @@ function Chat({match, handleSetMessages}) {
         // Append Date
         formData.append("sent", new Date())
 
-        fetch(`http://localhost:3000/api/rooms/${s.roomId}/messages`, {
+        const res = await fetch(`http://localhost:3000/api/rooms/${s.roomId}/messages`, {
             method: "POST",
             body: formData,
         });
+        
+        setImageList([])
     };
 
 
@@ -103,7 +107,11 @@ function Chat({match, handleSetMessages}) {
         }
 
         setImageList([...e.target.files])
+<<<<<<< HEAD
         
+=======
+        setTogglePhotoUpload(true);
+>>>>>>> da86ffe5211a1ed31175016a4ae0b9f92e0854f1
     };
 
 
@@ -112,6 +120,20 @@ function Chat({match, handleSetMessages}) {
         if(!imageId) return; // return here because we are closing the comop
         setImageCommentsId(imageId) // Set id so we know what data we should populate the component with
     }
+
+    // const handleTogglePhotoUpload = (imageId) => {
+    //     setTogglePhotoUpload(); // Show imageComments Component
+    //     if(!imageId) return; // return here because we are closing the comop
+    //     setPhotoUploadID(imageId) // Set id so we know what data we should populate the component with
+    // }
+
+    const closePhotoUpload = () => {
+        setTogglePhotoUpload(false);
+    }
+
+    // const fileClick = (e) => {
+    //     fileRef.current.click()
+    // }
     
     return (
         <div className={styles.chatContainer}>
@@ -123,7 +145,7 @@ function Chat({match, handleSetMessages}) {
                 })}
             </div>
             <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
-            <UploadPhoto handleSubmit={handleSubmit} images={previewImages} />
+            <UploadPhoto inputValue={s.input}  handleSubmit={handleSubmit} handleInput={handleInput} showComponentBool={togglePhotoUpload} closePhotoUpload={closePhotoUpload} images={previewImages} />
             <div className={styles.messageContainer}>
                 <ul>
                     {g.messages.map((e) => {
@@ -158,6 +180,7 @@ function Chat({match, handleSetMessages}) {
                 addFile={addFile}
                 handleSubmit={handleSubmit}
                 handleInput={handleInput}
+                showComponentBool={togglePhotoUpload}
             />
         </div>
     );
