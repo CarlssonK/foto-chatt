@@ -6,7 +6,7 @@ const FollowFunction = ({handleFollow, isFollowing, id}) => {
 
 
     return (
-        <div onClick={() => handleFollow(id, isFollowing ? "unfollow" : "follow")}>
+        <div onClick={() => handleFollow(id, isFollowing ? "unfollow" : "follow")} className="chatlist__star">
             
             {isFollowing ?
                 <button className={styles.starFollow}>

@@ -106,8 +106,8 @@ function Chat({match, handleSetMessages}) {
             setPreviewImages(filesUrl)
         }
 
-        setImageList([...e.target.files])
-        setTogglePhotoUpload(true);
+        // setImageList([...e.target.files])
+        // setTogglePhotoUpload(true);
     };
 
 
@@ -115,7 +115,6 @@ function Chat({match, handleSetMessages}) {
         setToggleImageComments(bool) // Show imageComments Component
         if(!imageId) return; // return here because we are closing the comop
         setImageCommentsId(imageId) // Set id so we know what data we should populate the component with
-
     }
 
     // const handleTogglePhotoUpload = (imageId) => {
