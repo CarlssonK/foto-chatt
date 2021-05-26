@@ -35,30 +35,31 @@ function Messageinput({addFile, handleSubmit, handleInput, showComponentBool }) 
             <button className={styles.btn} onClick={fileClick}>
                 <i className="material-icons">photo_size_select_actual</i>
             </button>
-
-
-            <div className={styles.inputMessage}>
                 <form onSubmit={submit} className={styles.form} ref={formRef}>
-                    <input
-                        className={styles.input}
-                        type="text"
-                        ref={inputRef}
-                        onChange={handleInput}
-                    />
-                    <input
-                        type="file"
-                        ref={fileRef}
-                        onChange={addFile}
-                        accept="image/*,video/*,audio/*"
-                        // capture
-                        multiple
-                        style={{display: "none"}}
-                    />
+                    <div className={styles.inputMessage}>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            placeholder="Skicka ett meddelande.."
+                            ref={inputRef}
+                            onChange={handleInput}
+                        />
+                        <input
+                            type="file"
+                            ref={fileRef}
+                            onChange={addFile}
+                            accept="image/*,video/*,audio/*"
+                            // capture
+                            multiple
+                            style={{display: "none"}}
+                        />
+                        <button className={styles.sendBtn}>
+                            <i className="material-icons">send</i>
+                        </button>
+                    </div>
                 </form>
-            </div>
-            <button className={styles.btn}>
-                <i className="material-icons">send</i>
-            </button>
+            
+          
         </div>
     );
 }
