@@ -1,0 +1,56 @@
+.messageBar {
+    bottom: 0;
+    padding-bottom: 13px;
+    width: 100vw;
+    background: #4b4b4b;
+    display: flex;
+    height: 8vh;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.messageBar form{
+   width: 100%;
+   padding-right: 10px;
+}
+
+.inputMessage {
+    position: relative;
+    display: flex;
+    background: #2b2b2b;
+    border-radius: 30px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.inputMessage input{
+    width: 100% !important;
+    height: 100% !important;
+    text-indent: 10px;
+    color: whitesmoke;
+}
+
+.btns {
+    display: flex;
+    padding-left: 10px;
+    margin-top: 1vh;
+    height: 3vh;
+    background: none;
+    border: none;
+    min-width: 1.6vw;
+    color: whitesmoke;
+    flex-grow: 1;
+}
+
+.sendBtn{
+    padding-right: 10px;
+    margin-left: 10px;
+    background: none;
+    border: none;
+    color: whitesmoke;
+}
+
+.preview{
+    display: block;
+    width: 100px;
+}

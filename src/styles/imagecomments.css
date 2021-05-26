@@ -1,0 +1,143 @@
+.image-comments-outer-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.image-comments-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  background-color: rgba(17, 17, 24, 0.95);
+  color: white;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 2;
+}
+
+.image-comments-inner-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.ig-ul-box {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.ig-exit {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  z-index: 10;
+  border-radius: 10px;
+}
+
+.ig-ul {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+
+.ig-top {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.ig-user-box {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.ig-user-box p {
+  padding-left: 12px;
+}
+
+.ig-img-box {
+  width: 100%;
+}
+.ig-img-box img {
+  max-width: 100%;
+  max-height: 336px;
+}
+
+
+.image-comments-inner-container form {
+  background: rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  border-radius: 0px 0px 10px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.image-comments-inner-container form button {
+  color: white;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding-right: 10px;
+}
+.image-comments-inner-container form input {
+  border-bottom: none!important;
+  box-shadow: none!important;
+}
+
+
+
+.ig-input-box {
+  position: relative;
+  display: flex;
+  background: #2b2b2b;
+  border-radius: 30px;
+  height: 40px;
+  margin: 0 10px 10px 10px;
+  overflow: hidden;
+}
+
+.ig-input-box input {
+  width: 100% !important;
+  height: 100% !important;
+  text-indent: 10px;
+}
+
+
+.ig-controllers-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.ig-controller-icon {
+  margin: 0 8px;
+  font-size: 24px;
+}
+.ig-controller-icon:first-of-type {
+  margin-left: 12px;
+}
+
+.ig-click-catcher {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+
+
