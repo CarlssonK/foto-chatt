@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from  "../styles/Camera.module.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import { useNamedContext } from "react-easier";
 
-const Camera = ({match}) => {
+const Camera = () => {
   let g = useNamedContext("global");
   const videoRef = useRef(null);
   const photoRef = useRef(null);
   const stripRef = useRef(null);
   // const canvasRef = useRef(null);
+
+  const location = useLocation();
 
   const [photoHasBeenTaken, setPhotoHasBeenTaken] = useState(false);
   const [photoUrl, setPhotoUrl] = useState("");
@@ -17,12 +19,11 @@ const Camera = ({match}) => {
 
   useEffect(() => {
     getVideo();
-  }, [videoRef]);
+  }, [videoRef, photoHasBeenTaken]);
 
-  useEffect(() => {
-    console.log(location)
-    console.log(match)
-  }, [])
+  // useEffect(() => {
+  //   console.log()
+  // }, [])
 
   const getVideo = () => {
     navigator.mediaDevices
@@ -64,6 +65,8 @@ const Camera = ({match}) => {
 
     const data = photo.toDataURL("image/jpeg");
 
+    console.log(data)
+
     setPhotoUrl(data)
 
 
@@ -77,7 +80,8 @@ const Camera = ({match}) => {
 
 
   const handleTakePhotoAgain = () => {
-    paintToCanvas();
+    // paintToCanvas();
+    // video.play();
     setPhotoHasBeenTaken(false);
   }
 
@@ -87,16 +91,24 @@ const Camera = ({match}) => {
 
     <div className={styles.container}>
 
-        <video
-          onCanPlay={() => paintToCanvas()}
-          ref={videoRef}
-          className={styles.player}
-        />
+        {
+          photoHasBeenTaken ? (
+            null
+          ) : (
+            <video
+            onCanPlay={() => paintToCanvas()}
+            ref={videoRef}
+            className={styles.player}
+          />
+          )
+        }
+
+
 
         <canvas ref={photoRef} className={styles.photo} />
 
         <div className={styles.photoBooth}>
-          <div ref={stripRef} className={styles.cameraImage} />
+          {/* <div ref={stripRef} className={styles.cameraImage} /> */}
           {
             photoHasBeenTaken ? <img className={styles.cameraImage} src={photoUrl} alt='thumbnail'/> : null
           }
@@ -112,7 +124,9 @@ const Camera = ({match}) => {
               <button onClick={() => handleTakePhotoAgain()}>
                 Ta om bild
               </button>
-              <Link>
+              <Link
+                to={{pathname: location.state.path}}
+              >
                 Använd bild
               </Link>
              </>
