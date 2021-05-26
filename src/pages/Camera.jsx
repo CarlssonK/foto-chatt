@@ -1,5 +1,6 @@
+import { StylesProvider } from "@material-ui/styles";
 import React, { useEffect, useRef } from "react";
-import "../styles/Camera.module.css";
+import styles from "../styles/Camera.module.css";
 
 const Camera = () => {
   const videoRef = useRef(null);
@@ -60,7 +61,7 @@ const Camera = () => {
 
   return (
     
-    <div className="container">
+    <div className={styles.container}>
         <video
           onCanPlay={() => paintToCanvas()}
           ref={videoRef}
@@ -68,14 +69,14 @@ const Camera = () => {
         />
         <canvas
         ref={photoRef}
-        className="photo"
+        className={styles.photo}
          />
         <div className="photo-booth">
           <div 
           ref={stripRef} 
           className="strip" />
         </div>
-        <div className="center">
+        <div className={styles.center}>
         <button className="material-icons">
           <a onClick={() => takePhoto()}>radio_button_unchecked</a>
           </button>
