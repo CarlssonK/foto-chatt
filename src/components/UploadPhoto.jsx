@@ -9,7 +9,6 @@ function UploadPhoto({images, handleSubmit, handleInput, showComponentBool, clos
     const inputRef = useRef(null);
     // const fileRef = useRef(null)
 
-    const selected = tags => console.log(tags)
     
     const submit = (e) => {
         e.preventDefault();
@@ -45,15 +44,15 @@ function UploadPhoto({images, handleSubmit, handleInput, showComponentBool, clos
                                 })
                             }
                         </div>
-                        <form  onSubmit={submit}>
+                        <form>
                             <div className={styles.contentInput}>
                                 <input className={styles.input} onChange={handleInput} defaultValue={inputValue} ref={inputRef} type="text" placeholder="skriv en bildtext.." />
-                            </div>
-                            <hr/>
+                           <TagsInput/> </div>
+                            
                             <div>
-                            <TagsInput/>
+                            
                             </div>
-                            <button className={styles.publishBtn}>publicera</button>
+                            <button onClick={submit} className={styles.publishBtn}>publicera</button>
                         </form>    
                     </div>
                 </div>
