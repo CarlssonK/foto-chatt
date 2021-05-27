@@ -18,6 +18,7 @@ function UploadPhoto({images, handleSubmit, handleInput, showComponentBool, clos
 
 
     useEffect(() => {
+        console.log(showComponentBool)
         if(showComponentBool) inputRef.current.value = inputValue
     }, [showComponentBool])
 
