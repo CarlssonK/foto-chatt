@@ -1,108 +1,80 @@
 import Topbar from "../components/Topbar";
-import styles from "../styles/PhotoFeed.module.css"
-import MyMessageField from "../components/MyMessageField";
-import OtherMessageField from "../components/OtherMessageField";
+import styles from "../styles/PhotoFeed.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from "react";
+import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons'
+import { Fade, Slide } from "react-slideshow-image";
 
 
-function PhotoFeed({images, postId, message, username, sent, openImageComments}) {
+function PhotoFeed({
+  images,
+  postId,
+  message,
+  username,
+  sent,
+  openImageComments,
+}) {
+  const [photoFeed, setPhotoFeed] = useState([]);
+  const [user, setUser] = useState("");
 
-    const [photoFeed, setPhotoFeed] = useState([])
+  const formatDate = (sent) => {
+    const date = new Date(sent);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return `${hours}:${minutes}`;
+  };
 
+  useEffect(() => {
+    fetchAllImages();
+  }, []);
 
-    const formatDate = (sent) => {
-        const date = new Date(sent)
-        const hours = date.getHours()
-        const minutes = date.getMinutes()
-        return `${hours}:${minutes}`
-    }
+  const fetchAllImages = async () => {
+    const res = await fetch("http://localhost:3000/api/getallphotos");
+    const data = await res.json();
+    //setUser(data.author.username)
+    setPhotoFeed(data.filterByPhoto);
+    console.log(data.filterByPhoto);
+  };
 
+  return (
+    <div>
+      <Topbar />
 
-    useEffect(() => {
-        fetchAllImages();
-    }, [])
-
-    const fetchAllImages = async () => {
-        const res = await fetch("http://localhost:3000/api/getallphotos");
-        const data = await res.json();
-        setPhotoFeed(data.filterByPhoto)
-        console.log(data.filterByPhoto)
-    }
-
-
-    /* 
-<li onClick={images.length > 0 ? () => openImageComments(true, postId) : null} className={styles.myMessageField}>
-            <div className={styles.myMessage}>
-                <p className={styles.content}>{message && message}</p>
-                
-                    <div className={styles.myImageBox}>
-                        {
-                            images && images.map(e => {
-                                return <img key={e._id} src={e.url.replace("/upload", "/upload/w_200")} width="200" />
-                            })
-                        }
-
-                        {images.length > 0 ? <a className={styles.myImageLink}>Visa kommentarer</a> : null}
-                    </div>
-            </div>
-            <p className={styles.myName}>
-                {username}
-                <span className={styles.otherName}>
-                    {formatDate(sent)}
-                </span>
-            </p>
-        </li>
-*/
-
-
-
-  
-
-
-    return (
-         <div>
-             <Topbar/>
-
-    <input
-        className="chatlist-input"
-        type="text"
-        placeholder="Search..."
-      />
-      <div className={styles.PhotoContainer}> 
-      
-    
-     </div>
-     <ul>
-         {
-             photoFeed.map(msg => {
-                 return (
-                     <li key={msg._id}>
-                         ONE MESSAGE
-                         {
-                             msg.images.map(img => {
-                                 return <img src={img.url}></img>
-                             })
-                         }
-                         
-                     </li>
-                 )
-             })
-         }
-
-
-    </ul>
-     
-  
-
-    
-        
+      <input className="chatlist-input" type="text" placeholder="Search..." />
+      <div className={styles.PhotoContainer}>
+       
+       
+      <ul>
+        {photoFeed.map((msg) => {
+          return (
+            <li key={msg._id}>
+              
+              <div className="ig-user-box">
+          <p>User</p>
         </div>
-    );
+        <div
+                className="ig-img-box"
+                style={{
+                  display: "grid",
+                  placeItems: "center",
+                  
+                }}
+              >
+                {msg.images.map((img) => {
+                  return <img src={img.url}></img>;
+                })}
+                <div className="ig-controllers-box">
+                <FontAwesomeIcon className="ig-controller-icon" icon={faHeart} />
+                <FontAwesomeIcon className="ig-controller-icon" icon={faComment} />
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+    </div>
+  );
 }
-   
-   
-
-  
-  
 
 export default PhotoFeed;
