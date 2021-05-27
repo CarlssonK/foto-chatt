@@ -5,6 +5,7 @@ import { useNamedContext } from "react-easier";
 import { useHistory } from "react-router-dom"
 import GeoLocation from "../components/GeoLocation";
 
+
 import loginCheck from "../utils/LoginCheck"
 
 
@@ -35,11 +36,49 @@ function Profile() {
         g.messages = [];
         history.push("/login")
     }
+   
+    const uploadedImage = React.useRef(null);
+    const imageUploader = React.useRef(null);
+  
+    const handleImageUpload = e => {
+      const [file] = e.target.files;
+      if (file) {
+        const reader = new FileReader();
+        const { current } = uploadedImage;
+        current.file = file;
+        reader.onload = e => {
+          current.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    };
 
     return (
         <div className={styles.profileContainer}>
             <Topbar chatName={"Profile"} />
             
+         <div className={styles.avatarContainer}>
+             
+            <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                ref={imageUploader}
+                style={{
+                display: "none"
+                }}
+            />
+
+            <div className={styles.avatar}
+                onClick={() => imageUploader.current.click()}>
+            <img className={styles.avatarImg}
+                ref={uploadedImage}
+            />
+
+      </div>
+
+    </div>
+
             <div className={styles.loginDetails}>
                 {g.username}
             </div>
