@@ -1,10 +1,9 @@
 import Topbar from "../components/Topbar";
 import styles from "../styles/PhotoFeed.module.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons'
+import { faHeart, faComment } from "@fortawesome/free-regular-svg-icons";
 import { Fade, Slide } from "react-slideshow-image";
-
 
 function PhotoFeed({
   images,
@@ -15,7 +14,11 @@ function PhotoFeed({
   openImageComments,
 }) {
   const [photoFeed, setPhotoFeed] = useState([]);
-  const [user, setUser] = useState("");
+  const [query, setQuery] = useState("");
+
+  const handleInput = (e) => {
+    setQuery(e.target.value);
+  };
 
   const formatDate = (sent) => {
     const date = new Date(sent);
@@ -40,39 +43,48 @@ function PhotoFeed({
     <div>
       <Topbar />
 
-      <input className="chatlist-input" type="text" placeholder="Search..." />
+      <input
+        className="chatlist-input"
+        type="text"
+        placeholder="Search..."
+        onChange ={handleInput}
+       
+      />
       <div className={styles.PhotoContainer}>
-       
-       
-      <ul>
-        {photoFeed.map((msg) => {
-          return (
-            <li key={msg._id}>
-              
-              <div className="ig-user-box">
-          <p>User</p>
-        </div>
-        <div
-                className="ig-img-box"
-                style={{
-                  display: "grid",
-                  placeItems: "center",
-                  
-                }}
-              >
-                {msg.images.map((img) => {
-                  return <img src={img.url}></img>;
-                })}
-                <div className="ig-controllers-box">
-                <FontAwesomeIcon className="ig-controller-icon" icon={faHeart} />
-                <FontAwesomeIcon className="ig-controller-icon" icon={faComment} />
+        <ul>
+          {photoFeed.map((msg) => {
+            return (
+              <li key={msg._id}>
+                <div className="ig-user-box">
+                  <p>User</p>
                 </div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+                <div
+                  className="ig-img-box"
+                  style={{
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  
+                  {msg.images.reverse().map((img) => {
+                    return <img src={img.url}></img>;
+                  })}
+                  <div className="ig-controllers-box">
+                    <FontAwesomeIcon
+                      className="ig-controller-icon"
+                      icon={faHeart}
+                    />
+                    <FontAwesomeIcon
+                      className="ig-controller-icon"
+                      icon={faComment}
+                    />
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
