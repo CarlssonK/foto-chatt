@@ -106,8 +106,8 @@ function Chat({match, handleSetMessages}) {
             setPreviewImages(filesUrl)
         }
 
-        // setImageList([...e.target.files])
-        // setTogglePhotoUpload(true);
+        setImageList([...e.target.files])
+        setTogglePhotoUpload(true);
     };
 
 
