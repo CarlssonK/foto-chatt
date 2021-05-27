@@ -3,7 +3,7 @@ import { useStates } from "react-easier";
 import styles from "../styles/Messageinput.module.css";
 import { Link, useHistory } from "react-router-dom";
 
-function Messageinput({addFile, handleSubmit, handleInput, showComponentBool }) {
+function Messageinput({addFile, handleSubmit, handleInput, showComponentBool, roomId, roomTitle}) {
     const inputRef = useRef(null);
     const fileRef = useRef(null)
     const formRef = useRef(null)
@@ -24,14 +24,15 @@ function Messageinput({addFile, handleSubmit, handleInput, showComponentBool }) 
 
 
     useEffect(() => {
+        console.log(showComponentBool)
         if(!showComponentBool) {
             formRef.current.reset();
         } 
     }, [showComponentBool])
 
     return (
-        <div className={styles.messageBar}>
-            <Link className={styles.btns} to={{pathname: "/camera", state: {path: location.pathname}}} >
+        <div className={styles.messageBar} style={showComponentBool ? {zIndex: "-1"} : null}>
+            <Link className={styles.btns} to={{pathname: "/camera", state: {path: location.pathname, roomId: roomId, name: roomTitle}}} >
                 <div className="material-icons">camera_alt</div>
             </Link>
 

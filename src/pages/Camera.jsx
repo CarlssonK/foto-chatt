@@ -125,7 +125,7 @@ const Camera = () => {
                 Ta om bild
               </button>
               <Link
-                to={{pathname: location.state.path}}
+                to={{pathname: location.state.path, state: {roomid: location.state.roomId, name: location.state.roomTitle, imageSrc: photoUrl, camera: true}}}
               >
                 Använd bild
               </Link>
