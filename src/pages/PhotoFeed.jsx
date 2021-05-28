@@ -52,7 +52,7 @@ function PhotoFeed({
       />
       <div className={styles.PhotoContainer}>
         <ul>
-          {photoFeed.map((msg) => {
+          {photoFeed.reverse().map((msg) => {
             return (
               <li key={msg._id}>
                 <div className="ig-user-box">
@@ -65,7 +65,6 @@ function PhotoFeed({
                     placeItems: "center",
                   }}
                 >
-                  
                   {msg.images.reverse().map((img) => {
                     return <img src={img.url}></img>;
                   })}
