@@ -92,7 +92,11 @@ function Chat({match, handleSetMessages}) {
 
 
     const handleInput = (e) => {
-        s.input = e.target.value; // Update state when input field changes
+        if (typeof e === "string") {
+            s.input = e; // Update state when input field changes
+        } else {
+            s.input = e.target.value; // Update state when input field changes
+        }
     };
 
     const addFile = (e) => {
@@ -177,6 +181,7 @@ function Chat({match, handleSetMessages}) {
                 handleSubmit={handleSubmit}
                 handleInput={handleInput}
                 showComponentBool={togglePhotoUpload}
+                message={s.input}
             />
         </div>
     );
