@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
-  }
+  require("dotenv").config();
+}
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -21,14 +21,9 @@ const userRoutes = require("./routes/users");
 const roomRoutes = require("./routes/rooms");
 const messageRoutes = require("./routes/messages");
 
-
 const MongoStore = require("connect-mongo");
 
-
-
-
-
-const dbUrl = process.env.DB_URL
+const dbUrl = process.env.DB_URL;
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -41,8 +36,6 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   console.log("Database connected");
 });
-
-
 
 const app = express();
 
@@ -89,9 +82,6 @@ app.use(session(sessionConfig));
 app.use(flash());
 app.use(helmet({ contentSecurityPolicy: false }));
 
-
-
-
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -100,13 +90,18 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
 // Routes
 app.use("/api", userRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/rooms/:id", messageRoutes);
 
+app.use((req, res, next) => {
+  if (req.originalUrl.includes("/assets/")) return;
 
+  res.locals.currentUser = req.user;
+
+  next();
+});
 
 // Other routes
 
@@ -115,17 +110,7 @@ app.use("/api/rooms/:id", messageRoutes);
 // })
 // router.route("/profile").get(isLoggedIn)
 
-require("./SSE-handler")(app)
-
-
-
-app.use((req, res, next) => {
-    if(req.originalUrl.includes("/assets/")) return;
-    res.locals.currentUser = req.user;
-
-    next();
-});
-
+require("./SSE-handler")(app);
 
 // ######################################
 // USE THIS CODE WHEN SERVING STATIC FILE
@@ -134,21 +119,17 @@ app.use((req, res, next) => {
 // // Serve Dist folder
 // app.use(express.static(path.join(__dirname, "..", "dist")));
 
-
 // app.get("*", (req,res) => {
 //     res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
 // })
 
 app.use("/", (err, req, res, next) => {
-    const { statusCode = 500 } = err;
-    if (!err.message) err.message = "Oh No, Something Went Wrong!";
-    console.log("ERROR " + err)
-    res.status(statusCode).json({ error: err });
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = "Oh No, Something Went Wrong!";
+  console.log("ERROR " + err);
+  res.status(statusCode).json({ error: err });
 });
 
-
-
-
 app.listen(process.env.PORT || 8080, () => {
-    console.log(`Server running on 8080`);
+  console.log(`Server running on 8080`);
 });

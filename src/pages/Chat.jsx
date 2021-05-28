@@ -34,7 +34,7 @@ function Chat({match, handleSetMessages}) {
     useEffect(() => {
         !location.state ? fetchRoomId() : s.roomId = location.state.roomid;
 
-        if(location.state.camera) {
+        if(location.state && location.state.camera) {
             // Convert base64 to file object
             setPreviewImages([location.state.imageSrc])
             setImageList([location.state.imageSrc])
@@ -43,7 +43,9 @@ function Chat({match, handleSetMessages}) {
 
 
     useEffect(() => {
-        if(location.state.camera && previewImages.length > 0 && imageList.length > 0) {
+        if(location.state && location.state.camera && previewImages.length > 0 && imageList.length > 0) {
+            console.log("TRUE?")
+            console.log(location.state.imageSrc)
             setTogglePhotoUpload(true)
         } 
     }, [previewImages, imageList])
@@ -218,8 +220,8 @@ function Chat({match, handleSetMessages}) {
                 handleSubmit={handleSubmit}
                 handleInput={handleInput}
                 showComponentBool={togglePhotoUpload}
-                roomId={location.state.roomid}
-                roomTitle={location.state.name}
+                roomId={location.state ? location.state.roomid : ""}
+                roomTitle={location.state ? location.state.name : ""}
             />
         </div>
     );
