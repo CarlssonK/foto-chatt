@@ -64,6 +64,7 @@ function PhotoFeed({
                     placeItems: "center",
                   }}
                 >
+
                   {msg.images.map((img) => {
                     return <img src={img.url}></img>;
                   })}
