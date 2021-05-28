@@ -66,7 +66,7 @@ function PhotoFeed({
                   }}
                 >
                   {msg.images.reverse().map((img) => {
-                    return <img src={img.url}></img>;
+                    return <img key={img._id} src={img.url}></img>;
                   })}
                   <div className="ig-controllers-box">
                     <FontAwesomeIcon
