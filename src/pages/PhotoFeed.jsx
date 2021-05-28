@@ -47,8 +47,7 @@ function PhotoFeed({
         className="chatlist-input"
         type="text"
         placeholder="Search..."
-        onChange ={handleInput}
-       
+        onChange={handleInput}
       />
       <div className={styles.PhotoContainer}>
         <ul>
@@ -56,7 +55,7 @@ function PhotoFeed({
             return (
               <li key={msg._id}>
                 <div className="ig-user-box">
-                  <p>User</p>
+                  <p>{msg.author.username}</p>
                 </div>
                 <div
                   className="ig-img-box"
@@ -65,8 +64,10 @@ function PhotoFeed({
                     placeItems: "center",
                   }}
                 >
+
                   {msg.images.reverse().map((img) => {
                     return <img key={img._id} src={img.url}></img>;
+
                   })}
                   <div className="ig-controllers-box">
                     <FontAwesomeIcon
