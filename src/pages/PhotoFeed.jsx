@@ -16,9 +16,11 @@ function PhotoFeed({
   openImageComments,
 }) {
   const [photoFeed, setPhotoFeed] = useState([]);
+  const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [toggleImageComments, setToggleImageComments] = useState(false);
   const [imageCommentsId, setImageCommentsId] = useState("")
+  
 
   const handleInput = (e) => {
     setQuery(e.target.value);
@@ -49,6 +51,13 @@ function PhotoFeed({
     console.log(data.filterByPhoto);
   };
 
+
+  
+
+  const filteredImg = photoFeed.filter(feed =>{
+    return feed.text.toLowerCase().includes(search.toLowerCase())
+  })
+
   return (
     <div>
       <Topbar />
@@ -57,13 +66,13 @@ function PhotoFeed({
         className="chatlist-input"
         type="text"
         placeholder="Search..."
-        onChange={handleInput}
+        onChange={e => setSearch(e.target.value)}
       />
       <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
       <div className={styles.PhotoContainer}>
         <ul>
 
-          {photoFeed.reverse().map((msg) => {
+          {filteredImg.reverse().map((msg) => {
             return (
               <li key={msg._id}>
                 <div className="ig-user-box">
@@ -91,10 +100,10 @@ function PhotoFeed({
                   </div>
                    
                <div className="ig-controllers-box">
-                     <a></a><FontAwesomeIcon
+                     <a><FontAwesomeIcon
                       className="ig-controller-icon"
                       icon={faHeart} 
-                    /> 
+                    /> </a>
                     <a ><FontAwesomeIcon
                     openImageComments={handleToggleImageComments}
                       className="ig-controller-icon"
