@@ -41,8 +41,20 @@
     margin-left: 12px;
   }
 
-  p{
-      color:white
+  .name{
+      color:white;
+      padding-left: 30px;
+
+  }
+
+  .tags{
+    padding:30px;
+    padding-left:0px;
+    color:white
+  }
+
+  a{
+    padding-left:5px
   }
 
   
