@@ -32,7 +32,7 @@
 
 .btns {
     display: flex;
-    padding-left: 10px;
+    padding-right: 10px;
     margin-top: 1vh;
     height: 3vh;
     background: none;
@@ -50,7 +50,23 @@
     color: whitesmoke;
 }
 
+.emojiBtn{
+    background: none;
+    border: none;
+    color: whitesmoke;
+    padding-left: 10px;
+}
+
 .preview{
     display: block;
     width: 100px;
+}
+
+nav{
+    background-color: black
+}
+
+.emojiForm{
+    max-width: 30px;
+    padding-top: 0.9vh;
 }
