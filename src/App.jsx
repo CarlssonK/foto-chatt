@@ -16,6 +16,8 @@ import { useNamedContext } from "react-easier";
 
 import loginCheck from "./utils/LoginCheck"
 import PhotoFeed from "./pages/PhotoFeed";
+import TagsInput from "./components/TagsInput";
+
 
 let messages = [], usersOnline = [];
 
@@ -100,6 +102,7 @@ function App() {
                     <Route path="/username" component={Username} /> 
                     <Route path="/camera" component={Camera} />
                     <Route path="/photo" component={PhotoFeed}/>
+                    <Route path="/test" component={TagsInput}/>
 
                    
 

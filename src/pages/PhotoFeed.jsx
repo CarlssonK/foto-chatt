@@ -1,108 +1,127 @@
 import Topbar from "../components/Topbar";
-import styles from "../styles/PhotoFeed.module.css"
-import MyMessageField from "../components/MyMessageField";
-import OtherMessageField from "../components/OtherMessageField";
+import styles from "../styles/PhotoFeed.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { faHeart, faComment } from "@fortawesome/free-regular-svg-icons";
+import { Fade, Slide } from "react-slideshow-image";
+import ImageComments from "../components/ImageComments";
 
 
-function PhotoFeed({images, postId, message, username, sent, openImageComments}) {
+function PhotoFeed({
+  images,
+  postId,
+  message,
+  username,
+  sent,
+  openImageComments,
+}) {
+  const [photoFeed, setPhotoFeed] = useState([]);
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [toggleImageComments, setToggleImageComments] = useState(false);
+  const [imageCommentsId, setImageCommentsId] = useState("")
+  
 
-    const [photoFeed, setPhotoFeed] = useState([])
+  const handleInput = (e) => {
+    setQuery(e.target.value);
+  };
 
+  const formatDate = (sent) => {
+    const date = new Date(sent);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return `${hours}:${minutes}`;
+  };
 
-    const formatDate = (sent) => {
-        const date = new Date(sent)
-        const hours = date.getHours()
-        const minutes = date.getMinutes()
-        return `${hours}:${minutes}`
-    }
+  useEffect(() => {
+    fetchAllImages();
+  }, []);
 
+  const handleToggleImageComments = (bool, imageId) => {
+    setToggleImageComments(bool) // Show imageComments Component
+    if(!imageId) return; // return here because we are closing the comop
+    setImageCommentsId(imageId) // Set id so we know what data we should populate the component with
+}
 
-    useEffect(() => {
-        fetchAllImages();
-    }, [])
-
-    const fetchAllImages = async () => {
-        const res = await fetch("http://localhost:3000/api/getallphotos");
-        const data = await res.json();
-        setPhotoFeed(data.filterByPhoto)
-        console.log(data.filterByPhoto)
-    }
-
-
-    /* 
-<li onClick={images.length > 0 ? () => openImageComments(true, postId) : null} className={styles.myMessageField}>
-            <div className={styles.myMessage}>
-                <p className={styles.content}>{message && message}</p>
-                
-                    <div className={styles.myImageBox}>
-                        {
-                            images && images.map(e => {
-                                return <img key={e._id} src={e.url.replace("/upload", "/upload/w_200")} width="200" />
-                            })
-                        }
-
-                        {images.length > 0 ? <a className={styles.myImageLink}>Visa kommentarer</a> : null}
-                    </div>
-            </div>
-            <p className={styles.myName}>
-                {username}
-                <span className={styles.otherName}>
-                    {formatDate(sent)}
-                </span>
-            </p>
-        </li>
-*/
-
+  const fetchAllImages = async () => {
+    const res = await fetch("http://localhost:3000/api/getallphotos");
+    const data = await res.json();
+    //setUser(data.author.username)
+    setPhotoFeed(data.filterByPhoto);
+    console.log(data.filterByPhoto);
+  };
 
 
   
 
+  const filteredImg = photoFeed.filter(feed =>{
+    return feed.text.toLowerCase().includes(search.toLowerCase())
+  })
 
-    return (
-         <div>
-             <Topbar/>
+  return (
+    <div>
+      <Topbar />
 
-    <input
+      <input
         className="chatlist-input"
         type="text"
         placeholder="Search..."
+        onChange={e => setSearch(e.target.value)}
       />
-      <div className={styles.PhotoContainer}> 
-      
-    
-     </div>
-     <ul>
-         {
-             photoFeed.map(msg => {
-                 return (
-                     <li key={msg._id}>
-                         ONE MESSAGE
-                         {
-                             msg.images.map(img => {
-                                 return <img src={img.url}></img>
-                             })
-                         }
-                         
-                     </li>
-                 )
-             })
-         }
+      <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
+      <div className={styles.PhotoContainer}>
+        <ul>
 
+          {filteredImg.reverse().map((msg) => {
+            return (
+              <li key={msg._id}>
+                <div className="ig-user-box">
+                  <p className={styles.name}>{msg.author.username}</p>
+                </div>
+                <div
+                  className="ig-img-box"
+                  style={{
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  
 
-    </ul>
-     
-  
+                  {msg.images.map((img) => {
+                    return <img key={img._id} src={img.url}>
+                     
 
-    
-        
-        </div>
-    );
+                    </img>;
+
+                  })}
+                   <div key={msg._id}>
+                    <p className={styles.tags}>{msg.text}</p>
+                    <p className={styles.tags}>{msg.sent}</p>
+                  </div>
+                   
+               <div className="ig-controllers-box">
+                     <a><FontAwesomeIcon
+                      className="ig-controller-icon"
+                      icon={faHeart} 
+                    /> </a>
+                    <a ><FontAwesomeIcon
+                    openImageComments={handleToggleImageComments}
+                      className="ig-controller-icon"
+                      icon={faComment}
+                    /></a> 
+                    
+                          
+                  </div>
+                </div>
+              </li>
+              
+            );
+
+          })}
+        </ul>
+      </div>
+    </div>
+  );
 }
-   
-   
-
-  
-  
 
 export default PhotoFeed;

@@ -2,13 +2,14 @@ import React, {useEffect, useState, useRef} from 'react'
 import Zoom from '@material-ui/core/Zoom';
 import { faRecycle } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/UploadPhoto.module.css'
+import TagsInput from "../components/TagsInput"
 
 function UploadPhoto({images, handleSubmit, handleInput, showComponentBool, closePhotoUpload, inputValue}) {
 
     const inputRef = useRef(null);
     // const fileRef = useRef(null)
 
-
+    
     const submit = (e) => {
         e.preventDefault();
         inputRef.current.value = ""; // Clear input field
@@ -43,11 +44,15 @@ function UploadPhoto({images, handleSubmit, handleInput, showComponentBool, clos
                                 })
                             }
                         </div>
-                        <form  onSubmit={submit}>
+                        <form>
                             <div className={styles.contentInput}>
                                 <input className={styles.input} onChange={handleInput} defaultValue={inputValue} ref={inputRef} type="text" placeholder="skriv en bildtext.." />
+                           <TagsInput/> </div>
+                            
+                            <div>
+                            
                             </div>
-                            <button className={styles.publishBtn}>publicera</button>
+                            <button onClick={submit} className={styles.publishBtn}>publicera</button>
                         </form>    
                     </div>
                 </div>

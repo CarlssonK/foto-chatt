@@ -178,7 +178,6 @@ function ImageComments({handleToggleImageComments, showComponentBool, imageId}) 
     </div>
     </Zoom>
 
-
     <div onClick={() => handleToggleImageComments(false)} className="ig-click-catcher" style={{display: showComponentBool ? "block" : "none"}}></div>
     </>
   )

@@ -3,11 +3,13 @@ import { useStates } from "react-easier";
 import styles from "../styles/Messageinput.module.css";
 import { Link, useHistory } from "react-router-dom";
 
+
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 import { faDharmachakra } from "@fortawesome/free-solid-svg-icons";
 
 function Messageinput({addFile, handleSubmit, handleInput, showComponentBool, message}) {
+
     const inputRef = useRef(null);
     const fileRef = useRef(null)
     const formRef = useRef(null)
@@ -45,6 +47,7 @@ function Messageinput({addFile, handleSubmit, handleInput, showComponentBool, me
     }
 
     useEffect(() => {
+        console.log(showComponentBool)
         if(!showComponentBool) {
             formRef.current.reset();
         } 
@@ -54,6 +57,7 @@ function Messageinput({addFile, handleSubmit, handleInput, showComponentBool, me
         <div className={styles.messageBar}>
             {emojiPicker}
             <Link className={styles.btns} to={{pathname: "/camera", state: {path: location.pathname}}} >
+
                 <div className="material-icons">camera_alt</div>
             </Link>
             <button className={styles.btns} onClick={fileClick}>

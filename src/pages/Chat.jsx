@@ -33,7 +33,25 @@ function Chat({match, handleSetMessages}) {
     // Fetch roomId
     useEffect(() => {
         !location.state ? fetchRoomId() : s.roomId = location.state.roomid;
+
+        if(location.state && location.state.camera) {
+            // Convert base64 to file object
+            setPreviewImages([location.state.imageSrc])
+            setImageList([location.state.imageSrc])
+        }
     }, []);
+
+
+    useEffect(() => {
+        if(location.state && location.state.camera && previewImages.length > 0 && imageList.length > 0) {
+            console.log("TRUE?")
+            console.log(location.state.imageSrc)
+            setTogglePhotoUpload(true)
+        } 
+    }, [previewImages, imageList])
+
+
+
 
     useEffect(() => {
         if(g.userId !== null && s.roomId !== null) {
@@ -66,17 +84,25 @@ function Chat({match, handleSetMessages}) {
     }
 
     const handleSubmit = async (e) => {
-        console.log()
+        console.log(imageList)
         if (s.input === "" && imageList.length === 0) return;
         const message = s.input;
         s.input = "";
 
         let formData = new FormData();
 
-        // Append images
-        if(imageList) {
-            for(let img of imageList) { formData.append("images", img) }
+        if(typeof imageList[0] === "string") {
+            console.log("STRING")
+            const img = dataURLtoFile(location.state.imageSrc, "image-from-camera-component")
+            formData.append("images", img)
+        } else {
+            // Append images
+            if(imageList) {
+                for(let img of imageList) { formData.append("images", img) }
+            }
         }
+
+
         // Append Text
         formData.append("text", message)
         // Append Date
@@ -89,6 +115,23 @@ function Chat({match, handleSetMessages}) {
         
         setImageList([])
     };
+
+
+
+    function dataURLtoFile(dataurl, filename) {
+ 
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), 
+            n = bstr.length, 
+            u8arr = new Uint8Array(n);
+            
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        
+        return new File([u8arr], filename, {type:mime});
+    }
 
 
     const handleInput = (e) => {
@@ -182,6 +225,8 @@ function Chat({match, handleSetMessages}) {
                 handleInput={handleInput}
                 showComponentBool={togglePhotoUpload}
                 message={s.input}
+
+
             />
         </div>
     );
