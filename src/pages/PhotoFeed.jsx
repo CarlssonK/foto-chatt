@@ -6,7 +6,6 @@ import { faHeart, faComment } from "@fortawesome/free-regular-svg-icons";
 import { Fade, Slide } from "react-slideshow-image";
 import ImageComments from "../components/ImageComments";
 
-
 function PhotoFeed({
   images,
   postId,
@@ -18,7 +17,7 @@ function PhotoFeed({
   const [photoFeed, setPhotoFeed] = useState([]);
   const [query, setQuery] = useState("");
   const [toggleImageComments, setToggleImageComments] = useState(false);
-  const [imageCommentsId, setImageCommentsId] = useState("")
+  const [imageCommentsId, setImageCommentsId] = useState("");
 
   const handleInput = (e) => {
     setQuery(e.target.value);
@@ -36,10 +35,10 @@ function PhotoFeed({
   }, []);
 
   const handleToggleImageComments = (bool, imageId) => {
-    setToggleImageComments(bool) // Show imageComments Component
-    if(!imageId) return; // return here because we are closing the comop
-    setImageCommentsId(imageId) // Set id so we know what data we should populate the component with
-}
+    setToggleImageComments(bool); // Show imageComments Component
+    if (!imageId) return; // return here because we are closing the comop
+    setImageCommentsId(imageId); // Set id so we know what data we should populate the component with
+  };
 
   const fetchAllImages = async () => {
     const res = await fetch("http://localhost:3000/api/getallphotos");
@@ -59,10 +58,13 @@ function PhotoFeed({
         placeholder="Search..."
         onChange={handleInput}
       />
-      <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
+      <ImageComments
+        handleToggleImageComments={handleToggleImageComments}
+        showComponentBool={toggleImageComments}
+        imageId={imageCommentsId}
+      />
       <div className={styles.PhotoContainer}>
         <ul>
-
           {photoFeed.reverse().map((msg) => {
             return (
               <li key={msg._id}>
@@ -76,38 +78,31 @@ function PhotoFeed({
                     placeItems: "center",
                   }}
                 >
-                  
-
                   {msg.images.map((img) => {
-                    return <img key={img._id} src={img.url}>
-                     
-
-                    </img>;
-
+                    return <img key={img._id} src={img.url}></img>;
                   })}
-                   <div key={msg._id}>
+                  <div key={msg._id}>
                     <p className={styles.tags}>{msg.text}</p>
                     <p className={styles.tags}>{msg.sent}</p>
                   </div>
-                   
-               <div className="ig-controllers-box">
-                     <a></a><FontAwesomeIcon
+
+                  <div className="ig-controllers-box">
+                    <a></a>
+                    <FontAwesomeIcon
                       className="ig-controller-icon"
-                      icon={faHeart} 
-                    /> 
-                    <a ><FontAwesomeIcon
-                    openImageComments={handleToggleImageComments}
-                      className="ig-controller-icon"
-                      icon={faComment}
-                    /></a> 
-                    
-                          
+                      icon={faHeart}
+                    />
+                    <a>
+                      <FontAwesomeIcon
+                        openImageComments={handleToggleImageComments}
+                        className="ig-controller-icon"
+                        icon={faComment}
+                      />
+                    </a>
                   </div>
                 </div>
               </li>
-              
             );
-
           })}
         </ul>
       </div>
