@@ -35,6 +35,7 @@ function GeoLocation() {
       navigator.geolocation.getCurrentPosition(onSucces, onError);
     },[]);
 
+    
   
 
     return plats; 

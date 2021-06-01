@@ -32,6 +32,7 @@ function Chat({match, handleSetMessages}) {
 
     // Fetch roomId
     useEffect(() => {
+        
         !location.state ? fetchRoomId() : s.roomId = location.state.roomid;
 
         if(location.state && location.state.camera) {

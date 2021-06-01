@@ -13,6 +13,7 @@ function MyMessageField({images, postId, message, username, sent, openImageComme
 
 
     return (
+        
         <li className={styles.myMessageField}>
             <div onClick={images.length > 0 ? () => openImageComments(true, postId) : null} className={styles.myMessage}>
                 <p className={styles.content}>{message && message}</p>

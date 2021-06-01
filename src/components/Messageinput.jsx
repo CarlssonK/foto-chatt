@@ -63,8 +63,7 @@ function Messageinput({addFile, handleSubmit, handleInput, showComponentBool, ro
                     </div>
                 </form>
             
-          
-        </div>
+           </div>
     );
 }
 
