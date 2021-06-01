@@ -15,6 +15,7 @@ function PhotoFeed({
   openImageComments,
 }) {
   const [photoFeed, setPhotoFeed] = useState([]);
+  const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [toggleImageComments, setToggleImageComments] = useState(false);
   const [imageCommentsId, setImageCommentsId] = useState("");
@@ -48,6 +49,10 @@ function PhotoFeed({
     console.log(data.filterByPhoto);
   };
 
+  const filteredImg = photoFeed.filter((feed) => {
+    return feed.text.toLowerCase().includes(search.toLowerCase());
+  });
+
   return (
     <div>
       <Topbar />
@@ -56,7 +61,7 @@ function PhotoFeed({
         className="chatlist-input"
         type="text"
         placeholder="Search..."
-        onChange={handleInput}
+        onChange={(e) => setSearch(e.target.value)}
       />
       <ImageComments
         handleToggleImageComments={handleToggleImageComments}
