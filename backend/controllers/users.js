@@ -16,6 +16,7 @@ module.exports.getUser = async (req, res) => {
 module.exports.handleFollowRoom = async (req, res) => {
   const user = await User.findById(req.user.id);
   user.followedRooms = [...req.body.followedRooms];
+
   // req.user.followedRooms = [...req.body.followedRooms];
   await user.save();
 

@@ -1,6 +1,5 @@
 // const Comment = require('../models/comment');
 
-
 // module.exports.showComment = async (req, res) => {
 //   const room = await Comment.findById(req.params.id).populate({
 //     path: "messages",
