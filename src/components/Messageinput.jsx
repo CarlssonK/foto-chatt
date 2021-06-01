@@ -3,95 +3,81 @@ import { useStates } from "react-easier";
 import styles from "../styles/Messageinput.module.css";
 import { Link, useHistory } from "react-router-dom";
 
+function Messageinput({
+  addFile,
+  handleSubmit,
+  handleInput,
+  showComponentBool,
+  roomId,
+  roomTitle,
+}) {
+  const inputRef = useRef(null);
+  const fileRef = useRef(null);
+  const formRef = useRef(null);
 
-import "emoji-mart/css/emoji-mart.css";
-import { Picker } from "emoji-mart";
-import { faDharmachakra } from "@fortawesome/free-solid-svg-icons";
+  const submit = (e) => {
+    e.preventDefault(); // Prevent reload
+    inputRef.current.value = ""; // Clear input field
 
-function Messageinput({addFile, handleSubmit, handleInput, showComponentBool, message}) {
+    handleSubmit(e);
 
-    const inputRef = useRef(null);
-    const fileRef = useRef(null)
-    const formRef = useRef(null)
-    const [emojiPickerState, SetEmojiPicker] = useState(false);
-  
-    let emojiPicker;
-    if (emojiPickerState) {
-      emojiPicker = (
-        <Picker
-          title="Pick your emoji…"
-          emoji="point_up"
-          onSelect={emoji => handleInput(emoji.native)}
-          style={{ position: 'absolute', bottom: '8vh', left: '0px' }}
-            theme='dark'
-        />
-      );
+    // fileRef.current.files
+  };
+
+  const fileClick = (e) => {
+    fileRef.current.click();
+  };
+
+  useEffect(() => {
+    console.log(showComponentBool);
+    if (!showComponentBool) {
+      formRef.current.reset();
     }
-  
-    function triggerPicker(e) {
-        e.preventDefault();
-        SetEmojiPicker(!emojiPickerState);
-    }
+  }, [showComponentBool]);
 
-    const submit = (e) => {
-        e.preventDefault(); // Prevent reload
-        inputRef.current.value = ""; // Clear input field
-        console.log(emojiPicker)
-        console.log(emojiPickerState)
-        handleSubmit(e);
-        // fileRef.current.files
-    };
+  return (
+    <div
+      className={styles.messageBar}
+      style={showComponentBool ? { zIndex: "-1" } : null}
+    >
+      <Link
+        className={styles.btns}
+        to={{
+          pathname: "/camera",
+          state: { path: location.pathname, roomId: roomId, name: roomTitle },
+        }}
+      >
+        <div className="material-icons">camera_alt</div>
+      </Link>
 
-    const fileClick = (e) => {
-        fileRef.current.click()
-    }
-
-    useEffect(() => {
-        console.log(showComponentBool)
-        if(!showComponentBool) {
-            formRef.current.reset();
-        } 
-    }, [showComponentBool])
-
-    return (       
-        <div className={styles.messageBar}>
-            {emojiPicker}
-            <Link className={styles.btns} to={{pathname: "/camera", state: {path: location.pathname}}} >
-
-                <div className="material-icons">camera_alt</div>
-            </Link>
-            <button className={styles.btns} onClick={fileClick}>
-                <i className="material-icons">photo_size_select_actual</i>
-            </button>
-            <form onSubmit={submit} className={styles.form} ref={formRef}>
-                <div className={styles.inputMessage}>
-                    <form className={styles.emojiForm} onSubmit={e => { e.preventDefault(); }} > 
-                        <button className={styles.emojiBtn} onClick={triggerPicker} ><i className={"material-icons"}>sentiment_satisfied_alt</i></button>
-                    </form> 
-                    <input
-                        className={styles.input}
-                        type="text"
-                        placeholder="Skicka ett meddelande.."
-                        ref={inputRef}
-                        value={message}
-                        onChange={handleInput}
-                    />
-                    <input
-                        type="file"
-                        ref={fileRef}
-                        onChange={addFile}
-                        accept="image/*,video/*,audio/*"
-                        // capture
-                        multiple
-                        style={{display: "none"}}
-                    />
-                    <button className={styles.sendBtn}>
-                        <i className="material-icons">send</i>
-                    </button>
-                </div>
-            </form>
+      <button className={styles.btns} onClick={fileClick}>
+        <i className="material-icons">photo_size_select_actual</i>
+      </button>
+      <form onSubmit={submit} className={styles.form} ref={formRef}>
+        <div className={styles.inputMessage}>
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Skicka ett meddelande.."
+            ref={inputRef}
+            onChange={handleInput}
+          />
+          <input
+            type="file"
+            ref={fileRef}
+            onChange={addFile}
+            accept="image/*,video/*,audio/*"
+            // capture
+            multiple
+            style={{ display: "none" }}
+          />
+          <button className={styles.sendBtn}>
+            <i className="material-icons">send</i>
+          </button>
         </div>
-    );
+      </form>
+    </div>
+  );
 }
 
 export default Messageinput;

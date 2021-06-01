@@ -6,8 +6,6 @@ const messages = require("../controllers/messages");
 
 router.route("/getallphotos").get(messages.getAllPhotos);
 
-// router.route("/handlefollow").post(messages.handleFollowRoom);
-
 router.route("/user").get(users.getUser);
 
 router.route("/register").post(users.register);
