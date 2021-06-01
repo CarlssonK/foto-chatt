@@ -4,17 +4,15 @@ import styles from "../styles/Profile.module.css"
 import { useNamedContext } from "react-easier";
 import { useHistory } from "react-router-dom"
 import GeoLocation from "../components/GeoLocation";
-
+import { subToNotifications } from '../utils/notification';
 
 import loginCheck from "../utils/LoginCheck"
-
 
 
 function Profile() {
     let g = useNamedContext("global");
     const history = useHistory();
     const plats = GeoLocation();
-
 
     useEffect(() => {
         handleLoginCheck();
@@ -26,7 +24,6 @@ function Profile() {
         const data = await res.json();
         if(data.redirect === "login") return history.push("/login")
     }
-
 
     const handleLogout = async () => {
         await fetch("http://localhost:3000/api/logout");
@@ -51,6 +48,10 @@ function Profile() {
         };
         reader.readAsDataURL(file);
       }
+    };
+
+    const onNotisClick = () => {
+        subToNotifications()
     };
 
     return (
@@ -94,7 +95,9 @@ function Profile() {
             </div>
 
             <div className={styles.bottomContainer}>
-                <div className={styles.settings}>Notifikationer</div>
+                <span onClick={onNotisClick}>
+                    <div className={styles.settings}>Notifikationer</div>
+                </span>
                 <div className={styles.settings}>GPS</div>
                 <div className={styles.settings}>Annat</div>
                 <button onClick={handleLogout}>Logout</button>
