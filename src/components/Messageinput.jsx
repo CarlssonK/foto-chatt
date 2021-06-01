@@ -3,6 +3,10 @@ import { useStates } from "react-easier";
 import styles from "../styles/Messageinput.module.css";
 import { Link, useHistory } from "react-router-dom";
 
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
+import { faDharmachakra } from "@fortawesome/free-solid-svg-icons";
+
 function Messageinput({
   addFile,
   handleSubmit,
@@ -10,16 +14,38 @@ function Messageinput({
   showComponentBool,
   roomId,
   roomTitle,
+  message,
 }) {
   const inputRef = useRef(null);
   const fileRef = useRef(null);
   const formRef = useRef(null);
+  const [emojiPickerState, SetEmojiPicker] = useState(false);
+
+  let emojiPicker;
+  if (emojiPickerState) {
+    emojiPicker = (
+      <Picker
+        title="Pick your emoji…"
+        emoji="point_up"
+        onSelect={(emoji) => handleInput(emoji.native)}
+        style={{ position: "absolute", bottom: "8vh", left: "0px" }}
+        theme="dark"
+      />
+    );
+  }
+
+  function triggerPicker(e) {
+    e.preventDefault();
+    SetEmojiPicker(!emojiPickerState);
+  }
 
   const submit = (e) => {
     e.preventDefault(); // Prevent reload
     inputRef.current.value = ""; // Clear input field
 
     handleSubmit(e);
+
+    SetEmojiPicker(false);
 
     // fileRef.current.files
   };
@@ -40,6 +66,7 @@ function Messageinput({
       className={styles.messageBar}
       style={showComponentBool ? { zIndex: "-1" } : null}
     >
+      {emojiPicker}
       <Link
         className={styles.btns}
         to={{
@@ -53,6 +80,16 @@ function Messageinput({
       <button className={styles.btns} onClick={fileClick}>
         <i className="material-icons">photo_size_select_actual</i>
       </button>
+      <form
+        className={styles.emojiForm}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <button className={styles.emojiBtn} onClick={triggerPicker}>
+          <i className={"material-icons"}>sentiment_satisfied_alt</i>
+        </button>
+      </form>
       <form onSubmit={submit} className={styles.form} ref={formRef}>
         <div className={styles.inputMessage}>
           <input
@@ -61,6 +98,7 @@ function Messageinput({
             placeholder="Skicka ett meddelande.."
             ref={inputRef}
             onChange={handleInput}
+            value={message}
           />
           <input
             type="file"
