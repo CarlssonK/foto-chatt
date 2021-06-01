@@ -32,7 +32,7 @@ function ChatList() {
       return e;
     });
 
-    if (g.followedRooms.length > 0) {
+    if (g.followedRooms && g.followedRooms.length > 0) {
       // Set followed rooms from database that is saved in global context g.followedRooms
       for (let i = 0; i < fixedRooms.length; i++) {
         if (fixedRooms[i].id === g.followedRooms[i].id)
