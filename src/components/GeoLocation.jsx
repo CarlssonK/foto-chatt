@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react'
 
-function GeoLocation() {
+ function GeoLocation() { 
+
+    const [geo, setGeo] = useState("")
     const [plats, setPlats] = useState ({
-        loaded: true, 
-        lat: "", lng: ""});
+        lat: "" ,lng: "", 
+        loaded: false, });
 
 
-    const onSucces = plats => {
+
+     const onSucces = plats => {
         setPlats({
             loaded: true,
             coordinates: {
                 lat: plats.coords.latitude,
                 lng: plats.coords.longitude,
             },
+            
         })
-        console.log(plats)
+
+     fetch (`https://geocode.xyz/${plats.coords.latitude},${plats.coords.longitude}auth=757785921191286686676x117863?geoit=json`)
+        .then(res => res.json())
+        .then(data => setGeo(data.city))
+        
+      
     }
     const onError = error => {
         setPlats({
@@ -23,22 +32,26 @@ function GeoLocation() {
         });
     }
 
-
-
-    useEffect( () => {
+     useEffect( () => {
         if(!("Geolocation" in navigator)){
             onError({
                 code:0,
                 message: "Geolocation off"
             })
+            
         }
+        
       navigator.geolocation.getCurrentPosition(onSucces, onError);
     },[]);
-
-  
-
-    return plats; 
+      
+    
+    return (
+        <div>
+            <p>{geo}</p>
+        </div>
+    )
        
+ 
   
 }
 
