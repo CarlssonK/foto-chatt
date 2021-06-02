@@ -86,3 +86,55 @@ async function fallbackResponses(request) {
   response = key && await cache.match(key);
   return response;
 }
+
+
+self.addEventListener('push', evt => {
+  evt.waitUntil(onPush(evt));
+});
+
+async function onPush(evt) {
+  // get message from pushed notification
+  let data = JSON.parse(evt.data.text());
+
+  // options to display a notification
+  const options = {
+    body: 'Uploaded photo',
+    vibrate: [100, 100],
+    image: data.image,
+    data: {
+      url: data.url
+    },
+    // DON'T SPAM THE USER
+    tag: 'new-photo', // change to sender id, to group messages with senders
+    renotify: false     // don't vibrate every time
+  };
+
+  // display notification
+  self.registration.showNotification(data.title, options);
+}
+
+
+self.addEventListener('notificationclick', evt => {
+  evt.waitUntil(onNotificationClick(evt));
+});
+
+async function onNotificationClick(evt) {
+  // extract url from notification data
+  let { url } = evt.notification.data;
+
+  // get all tabs
+  let tabs = await clients.matchAll();
+  let tab = tabs.find(tab => tab.visibilityState == 'visible');
+
+  // has a tab open
+  if(tab) {
+    tab.navigate(url);
+    tab.focus();
+  }
+  else {
+    clients.openWindow(url);
+  }
+
+  // the notifikation won't close by itself
+  evt.notification.close();
+}

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+// const sendNotification = require('../notifications');
+// const User = require('./user');
 
 
 const ImageSchema = new Schema({
@@ -31,6 +33,13 @@ const MessageSchema = new Schema({
       ref: "Comment"
     }
   ],
-})
+
+  // sendNotification(null, {
+  //   title: username,
+  //   content: 'message',
+  //   url: ''
+  // })
+
+});
 
 module.exports = mongoose.model("Message", MessageSchema);

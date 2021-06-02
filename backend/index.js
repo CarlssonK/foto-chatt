@@ -103,6 +103,26 @@ app.use((req, res, next) => {
   next();
 });
 
+const Subscription = require('./models/subscription')
+
+//To save notifications
+app.post('/api/subscribe', (req, res) => {
+  if(!req.session.user) {
+    return res.status(403).json({
+      error: 'Must be logged in'
+    })
+  }
+  let sub = new Subscription(req.body);
+
+  // sub.userId = req.session.user._id
+
+  // sub.save()
+
+  res.json({
+    success: "Subscribes for notifications"
+  })
+});
+
 // Other routes
 
 // app.use("/profile", (req,res) => {
