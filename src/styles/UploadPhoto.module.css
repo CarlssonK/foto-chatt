@@ -21,8 +21,8 @@
 }
 
 .head{
-    padding-top: 3vh;
-    padding-right: 1vw;
+    padding-top: 1.5vh;
+    padding-right: 1.3vw;
     display: flex;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .heading{ 
-    margin-top: 0;
+    margin-top: 10px;
     text-align: center;
     flex: auto;
     margin-left: auto;
@@ -39,6 +39,7 @@
 }
 
 .btn{ 
+    top: 0;
     background: none;
     border: none;
     width: 4vh;
