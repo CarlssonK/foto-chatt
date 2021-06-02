@@ -34,7 +34,8 @@ function UploadPhoto({images, handleSubmit, handleInput, showComponentBool, clos
                 <div className={styles.outerContainer}>
                     <div className={styles.innerContainer}>
                         <section className={styles.head}>
-                            <h5 className={styles.heading}>Uploaded Photo</h5>
+                            <div className={styles.empty}></div>
+                            <h6 className={styles.heading}>Uploaded Photo</h6>
                             <button className={styles.btn} onClick={closePhotoUpload} ><i className="material-icons">close</i></button>
                         </section>
                         <div className={styles.imageContainer}>
@@ -46,13 +47,9 @@ function UploadPhoto({images, handleSubmit, handleInput, showComponentBool, clos
                         </div>
                         <form>
                             <div className={styles.contentInput}>
-                                <input className={styles.input} onChange={handleInput} defaultValue={inputValue} ref={inputRef} type="text" placeholder="skriv en bildtext.." />
-                           <TagsInput/> </div>
-                            
-                            <div>
-                            
-                            </div>
-                            <button onClick={submit} className={styles.publishBtn}>publicera</button>
+                                <input className={styles.input} onChange={handleInput} defaultValue={inputValue} ref={inputRef} type="text" placeholder="skriv en bildtext.." /> 
+                           </div> 
+                            <button onClick={submit} className={styles.publishBtn}><b>Publicera</b></button>
                         </form>    
                     </div>
                 </div>
