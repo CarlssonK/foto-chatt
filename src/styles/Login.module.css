@@ -1,33 +1,58 @@
-.loginDetails {
-    display: flex;
-    text-align: center;
-    align-self: center;
-    background-color: #2b2b2b;
-    margin-top: 25px;
-    border-radius: 30px;
-    width: 300px;
-    height: 50px;
-    color: white;
-    font-size: 20px;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
 .Container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
 }
 
-h1,
-h2 {
-    color: white;
-    padding-bottom: 25px;
+.img{
+    margin-top: 50px;
 }
 
-input {
-    width: 80%;
+.h1{
+    color: whitesmoke;
+    font-family: Helvetica;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 13.5vh;
+}
+
+.loginDetails{
+    width: 300px;
+    margin-top: 25px;
+    position: relative;
+    display: flex;
+    background: #2b2b2b;
+    border-radius: 30px;
+    height: 50px;
+    margin: 20px 10px 10px 10px;
+    overflow: hidden;
+}
+
+.input{
+    color: whitesmoke;
+    text-indent: 30px; 
+    border-bottom: none!important;  
+    padding: 4px;
+}
+
+.loginBtn{
+    background: linear-gradient(28deg, rgba(117,96,164,1) 22%, rgba(117,157,191,1) 72%, rgba(93,199,175,1) 100%);
+    color: whitesmoke;
+    width: 300px;
+    position: relative;
+    border-radius: 30px;
+    height: 50px;
+    margin: 40px 10px 10px 10px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 18px;
+    border:none
+}
+
+.createAccount{
+    text-align: center;
+    margin-top: 30px;
 }
 
 .error {
@@ -44,7 +69,4 @@ input {
     align-items: center;
     padding-top: -98px;
 }
-/* 
-form{
-    padding-top: 50px;
-} */
+
