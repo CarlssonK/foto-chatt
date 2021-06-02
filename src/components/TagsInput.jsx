@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../styles/TagsInput.module.css"
 
 function TagsInput() {
-  const [tags, setTags] = useState(["sverige"]);
+  const [tags, setTags] = useState([""]);
   const removeTags = indexToRemove => {
       setTags(tags.filter((_, index) => index !== indexToRemove)); 
   }

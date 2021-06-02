@@ -13,7 +13,7 @@ import loginCheck from "../utils/LoginCheck"
 function Profile() {
     let g = useNamedContext("global");
     const history = useHistory();
-    const plats = GeoLocation();
+    const geo = GeoLocation();
 
 
     useEffect(() => {
@@ -89,7 +89,7 @@ function Profile() {
 
             <div className={styles.loginDetails}>
                 {
-                    plats.loaded ? JSON.stringify(plats) : "not ready yet."
+                    <GeoLocation/>
                 }
             </div>
 
