@@ -24,11 +24,11 @@ function Topbar({ chatName }) {
               arrow_back
             </i>
           ) : (
-            ""
+              <div className={styles.head}><img className={styles.img} src="../assets/icons/icon.png" alt="" /><h5 className={styles.beepd}>Beepd</h5></div>
           )}
         </button>
 
-        <h4>{chatName}</h4>
+        <h5>{chatName}</h5>
         {history.location.pathname !== "/profile" ? (
           <button className={styles.btn}>
             <i>
@@ -44,11 +44,12 @@ function Topbar({ chatName }) {
                 className="material-icons">
                 photo_library</a></i>
           </button>
+          
         ) : (
-          <div></div>
+         <div className={styles.empty}></div>
         )}
       </div>
-    </div>
+      </div>
   );
 }
 

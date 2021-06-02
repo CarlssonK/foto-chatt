@@ -1,29 +1,63 @@
 .topbar{
     top:0;
-    height: 8vh;
+    min-height: 8vh;
+    max-height: 8vh;
+    width: 100;
     background: #2B2B2B;
     display: flex;
     justify-content: space-between;
     padding: 3vw;
 }
 
-h4{
-    margin: 0;
+h5{
+    align-self: center;
+    font-size: 3vh;
     color: whitesmoke;
     text-align: center;
     text-transform: uppercase;
+    justify-self: center;
+}
+/* 
+h2{
+    background: white;
+    font: 66px;
+} */
+
+.head{
+    display: flex;
+    margin-top: 1vh;
+}
+
+.img{
+    width: 7vh;
+    height: 7vh;
+    margin-top:-1vh;
+}
+
+.beepd{
+    margin-top: 0;
+    font-family: Helvetica;
+    font-weight: bold;
+    text-transform: lowercase;
+    text-transform: capitalize;
+    text-shadow: rgb(0, 0, 0);
+   
 }
 
 .btn{
+    display: flex;
+    align-items: center;
     background: none;
     border: none;
     width: 4vh;
     color: whitesmoke;
+    margin-right: 30px
 }
 
-a:link{
+a{
     color: whitesmoke;
 }
-a:visited {
-    color: whitesmoke;
-  }
+
+.empty{
+    width: 59px;
+}
