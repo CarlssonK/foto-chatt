@@ -5,9 +5,14 @@ import { useNamedContext } from "react-easier";
 import { useHistory } from "react-router-dom"
 import GeoLocation from "../components/GeoLocation";
 import { subToNotifications } from '../utils/notification';
+import ToggleButton from "../components/ToggleButton";
+import '../styles/ToggleButton.css';
 
 import loginCheck from "../utils/LoginCheck"
 
+
+const Checked = () => <>🟢</>;
+const UnChecked = () => <>🔴</>;
 
 function Profile() {
     let g = useNamedContext("global");
@@ -95,12 +100,16 @@ function Profile() {
             </div>
 
             <div className={styles.bottomContainer}>
-                <span onClick={onNotisClick}>
+            {/* <span onClick={onNotisClick}>
                     <div className={styles.settings}>Notifikationer</div>
-                </span>
+                </span> */}
+                <p>Notifikationer</p>
+        <ToggleButton onClick={onNotisClick} onChange={state => console.log(state)} icons={{checked: <Checked />, unchecked: <UnChecked />}} />
                 <div className={styles.settings}>GPS</div>
                 <div className={styles.settings}>Annat</div>
+                
                 <button onClick={handleLogout}>Logout</button>
+
             </div>
 
         </div>
