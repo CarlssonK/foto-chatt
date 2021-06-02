@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import styles from "../styles/Login.module.css";
+import styles from "../styles/Signup.module.css";
 
 import { useNamedContext } from "react-easier";
 
@@ -54,10 +54,14 @@ export default function Signup() {
 
   return (
     <div className={styles.Container}>
-      <h1>Signup</h1>
+      <section className={styles.head}>
+      <h3 className={styles.h3}>Sign Up</h3>
+        <img className={styles.img}src="../assets/icons/icon.png" alt="" />
+      </section>
       <form onSubmit={handleRegister}>
         <div className={styles.loginDetails}>
           <input
+            className={styles.input}
             onChange={handleUsername}
             type="text"
             name="username"
@@ -68,6 +72,7 @@ export default function Signup() {
         </div>
         <div className={styles.loginDetails}>
           <input
+            className={styles.input}
             onChange={handleEmail}
             type="email"
             name="email"
@@ -77,6 +82,7 @@ export default function Signup() {
         </div>
         <div className={styles.loginDetails}>
           <input
+            className={styles.input}
             onChange={handlePassword}
             type="password"
             name="password"
@@ -86,16 +92,17 @@ export default function Signup() {
         </div>
         <div className={styles.loginDetails}>
           <input
+            className={styles.input}
             onChange={handlePasswordConfirm}
             type="password"
             name="password"
-            placeholder="Re-enter Password"
+            placeholder="Confirm Password"
             required
           />
         </div>
-        <button className={styles.loginDetails}>Sign up</button>
+        <button className={styles.signupBtn}><b>SIGN UP</b></button>
         <Link to="/login">
-          <div className={styles.loginDetails}> Have an account Log In</div>
+          <p className={styles.loginLink}>Already have an account? <b>LogIn</b></p>
         </Link>
       </form>
     </div>
