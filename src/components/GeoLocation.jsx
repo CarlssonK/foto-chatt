@@ -31,6 +31,7 @@ import React, { useEffect, useState } from 'react'
             error, 
         });
     }
+    
 
      useEffect( () => {
         if(!("Geolocation" in navigator)){
@@ -48,6 +49,8 @@ import React, { useEffect, useState } from 'react'
     return (
         <div>
             <p>{geo}</p>
+            <button onClick={()=> navigator.geolocation.getCurrentPosition(onSucces, onError)}>gps</button>
+            
         </div>
     )
        

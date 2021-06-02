@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { faHeart, faComment } from "@fortawesome/free-regular-svg-icons";
 import { Fade, Slide } from "react-slideshow-image";
 import ImageComments from "../components/ImageComments";
+import MyMessageField from "../components/MyMessageField";
 
 
 function PhotoFeed({
@@ -26,13 +27,14 @@ function PhotoFeed({
     setQuery(e.target.value);
   };
 
-  const formatDate = (sent) => {
+  /*const formatDate = (sent) => {
     const date = new Date(sent);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    return `${hours}:${minutes}`;
+    const year =  date.getYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDay();
+    return `${day}: ${month}: ${year}`;
   };
-
+*/
   useEffect(() => {
     fetchAllImages();
   }, []);
@@ -52,7 +54,7 @@ function PhotoFeed({
   };
 
 
-  
+  <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
 
   const filteredImg = photoFeed.filter(feed =>{
     return feed.text.toLowerCase().includes(search.toLowerCase())
@@ -67,7 +69,6 @@ function PhotoFeed({
         placeholder="Search..."
         onChange={e => setSearch(e.target.value)}
       />
-      <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
       <div className={styles.PhotoContainer}>
         <ul>
 
@@ -84,15 +85,18 @@ function PhotoFeed({
                     placeItems: "center",
                   }}
                 >
-                  
+                  <div>
+                  <div>
+                  {msg.images.map((img) => {(
+                    <MyMessageField openImageComments={handleToggleImageComments}/>
+                  )
+                  return <img key={img._id} src={img.url}/>
+                    
+                      
+                      
+                      })}    </div>
+                      </div>
 
-                  {msg.images.map((img) => {
-                    return <img key={img._id} src={img.url}>
-                     
-
-                    </img>;
-
-                  })}
                    <div key={msg._id}>
                     <p className={styles.tags}>{msg.text}</p>
                     <p className={styles.tags}>{msg.sent}</p>
@@ -103,8 +107,7 @@ function PhotoFeed({
                       className="ig-controller-icon"
                       icon={faHeart} 
                     /> </a>
-                    <a ><FontAwesomeIcon
-                    openImageComments={handleToggleImageComments}
+                    <a onClick={() => openImageComments(true, postId) } className={styles.myMessage}><FontAwesomeIcon
                       className="ig-controller-icon"
                       icon={faComment}
                     /></a> 
