@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Link, useHistory} from "react-router-dom"
 import styles from "../styles/Login.module.css"
-
 import { useNamedContext } from "react-easier";
 
 
@@ -46,14 +45,13 @@ export default function login() {
 
   return (
     <div className={styles.Container}>
-      <h1>Log In</h1>
-        
+      <img className={styles.img} src="../assets/icons/icon.png" alt="" />
+      <h1 className={styles.h1}>Beepd</h1>
       <form onSubmit={handleLogin}>
-        <div className={styles.loginDetails}><input onChange={handleUsername} type="text" name="username" placeholder="Username" autoFocus required /></div>
-        <div className={styles.loginDetails}><input onChange={handlePassword} type="password" name="password" placeholder="Password" required /></div>
-        <button className={styles.loginDetails}>Log In</button>
-        <Link to="/signup"><div className={styles.loginDetails}>Creat a new account Sign Up </div></Link>
-      
+        <div className={styles.loginDetails}><input className={styles.input} onChange={handleUsername} type="text" name="username" placeholder="Username" autoFocus required /></div>
+        <div className={styles.loginDetails}><input className={styles.input} onChange={handlePassword} type="password" name="password" placeholder="Password" required /></div>
+        <button className={styles.loginBtn}><b>LOGIN</b></button>
+        <Link to="/signup"><p className={styles.createAccount}>Don't have an account? <b>Sign up</b></p></Link>
       </form>
     </div>
   );

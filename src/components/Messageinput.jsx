@@ -80,18 +80,18 @@ function Messageinput({
       <button className={styles.btns} onClick={fileClick}>
         <i className="material-icons">photo_size_select_actual</i>
       </button>
-      <form
-        className={styles.emojiForm}
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <button className={styles.emojiBtn} onClick={triggerPicker}>
-          <i className={"material-icons"}>sentiment_satisfied_alt</i>
-        </button>
-      </form>
       <form onSubmit={submit} className={styles.form} ref={formRef}>
         <div className={styles.inputMessage}>
+          <form
+          className={styles.emojiForm}
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <button className={styles.emojiBtn} onClick={triggerPicker}>
+            <i className={"material-icons"}>sentiment_satisfied_alt</i>
+          </button>
+        </form>
           <input
             className={styles.input}
             type="text"

@@ -2,19 +2,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
 }
+
+.head{
+    display: flex;
+    margin-left: 20px;
+    height: 28vh;
+    margin-bottom: 7vh;
+}
+
 
 .img{
-    margin-top: 50px;
+    width: 100px;
+    height: 100px;
+    margin-top: 9.5vh;
 }
 
-.h1{
-    color: whitesmoke;
+.h3{
+    color: white;
     font-family: Helvetica;
     font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 13.5vh;
+    margin-top: 13vh;   
 }
 
 .loginDetails{
@@ -30,15 +38,15 @@
 }
 
 .input{
-    color: whitesmoke;
+    color: rgb(255, 255, 255);
     text-indent: 30px; 
-    border-bottom: none!important;  
-    padding: 4px;
+    border-bottom: none!important; 
 }
 
-.loginBtn{
+.signupBtn{
+    color: white;
+    background: rgb(117,96,164);
     background: linear-gradient(28deg, rgba(117,96,164,1) 22%, rgba(117,157,191,1) 72%, rgba(93,199,175,1) 100%);
-    color: whitesmoke;
     width: 300px;
     position: relative;
     border-radius: 30px;
@@ -47,10 +55,10 @@
     overflow: hidden;
     text-align: center;
     font-size: 18px;
-    border:none
+    border: none;
 }
 
-.createAccount{
+.loginLink{
     text-align: center;
     margin-top: 30px;
 }
