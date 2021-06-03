@@ -1,61 +1,76 @@
+.photoList{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
-.ig-user-box {
-    height: 50px;
-    display: flex;
-    align-items: center;
-  }
+.instaBox{
+  padding: 10px;
+  background-color: rgba(42, 42, 54, 0.95);
+  border-radius: 10px;
+  margin: 5% auto;
+  width: 340px;
+  display: flex;
+}
 
-  .ig-user-box p {
-    padding-left: 12px;
-  }
+.img{
+  width: 320px !important;
+  justify-content: center;
+  overflow: hidden;
+}
 
 
-.ig-img-box img {
-    max-width: 100%;
-    max-height: 336px;
-  }
 
-  .ig-controllers-box {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-  }
+.insta{
+  background-color: rgba(42, 42, 54, 0.95);
+  display: flex;
+  width: 100%;
+  margin-left: 0;
+  width: 320px !important;
+  overflow: hidden;
+  padding-top: 10px;
+}
 
-  .ig-controllers-box {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-  }
-  .ig-controller-icon {
-    margin: 0 8px;
-    color: white;
-    font-size: 24px;
-   
-  }
-  .ig-controller-icon:first-of-type {
-    margin-left: 12px;
-  }
+.caption{
+  color: whitesmoke;
+  text-indent: 10px;
+  width: 90%;
+  height: 60px;
+}
 
-  .name{
-      color:white;
-      padding-left: 30px;
 
-  }
+.name{
+  color:white;
+  margin-top: 0;
+}
 
-  .tags{
-    padding:30px;
-    display: flex;
-    align-content: center;
-    color:white
-  }
+.dateStamp{
+  color: rgba(245, 245, 245, 0.781);
+  padding-top: 10px;
+  padding-bottom: 5px;
+  text-transform: initial;
+}
 
-  a{
-    padding-left:5px
-  }
+.inputSearch {
+  position: relative;
+  display: flex;
+  background: #313131;
+  border-radius: 30px;
+  height: 40px;
+  overflow: hidden;
+  width: 90%;
+  margin: 5% 5% 0 5%;
+}
 
-  
+.test{
+  color: rgba(245, 245, 245, 0.733);
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.inputSearch input {
+  width: 100% !important;
+  height: 100% !important;
+  text-indent: 7px;
+  color: whitesmoke;
+}
