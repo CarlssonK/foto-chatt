@@ -22,32 +22,13 @@ function PhotoFeed({
     setQuery(e.target.value);
   };
 
-  /*const formatDate = (sent) => {
+    const formatDate = (sent) => {
     const date = new Date(sent);
     const year =  date.getYear();
     const month = date.getMonth() + 1;
     const day = date.getDay();
     return `${day}: ${month}: ${year}`;
   };
-*/
-
-  // useEffect(() => {
-  //   fetchComments()
-  // }, [toggleImageComments])
-
-
-  // const fetchComments = async () => {
-  //   // if(!toggleImageComments || !imageId) return;
-  //   console.log("imageId")
-  //   const res = await fetch(`http://localhost:3000/api/rooms/${imageId}/show`)
-  //   const data = await res.json()
-  //   console.log(data.message)
-  //   loadData(data.message)
-  // }
-
-
-
-
 
 
   useEffect(() => {
@@ -77,6 +58,7 @@ function PhotoFeed({
   })
   return (
     <div>
+
       <Topbar />
 
       <ImageComments handleToggleImageComments={handleToggleImageComments}
@@ -88,11 +70,13 @@ function PhotoFeed({
         placeholder="Search..."
         onChange={e => setSearch(e.target.value)}
       />
+
       <div className={styles.PhotoContainer}>
-        <ul>
+        <ul className={styles.photoList}>
 
           {filteredImg.reverse().map((msg) => {
             return (
+
               <li key={msg._id}>
                 <div className="ig-user-box">
                   <p className={styles.name}>{msg.author.username}</p>
@@ -139,12 +123,11 @@ function PhotoFeed({
                     /></a> 
                     
                           
+
                   </div>
                 </div>
               </li>
-              
             );
-
           })}
         </ul>
       </div>
