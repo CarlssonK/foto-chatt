@@ -22,12 +22,16 @@ function PhotoFeed({
     setQuery(e.target.value);
   };
 
-    const formatDate = (sent) => {
-    const date = new Date(sent);
-    const year =  date.getYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDay();
-    return `${day}: ${month}: ${year}`;
+    const formatDate = (sent='') => {
+
+
+let newDate = new Date(sent)
+let date = newDate.getDate();
+let month = newDate.getMonth() + 1;
+let year = newDate.getFullYear();
+
+return `${year} : ${month<10?`0${month}`:`${month}`} : ${date}`
+
   };
 
 
@@ -97,7 +101,9 @@ function PhotoFeed({
                       })}    
                     <div className={styles.caption}>
                         <p className={styles.name}><b>{msg.author.username} </b>{msg.text}</p>
-                      {/* <p className={styles.caption}></p> */}
+                    { <p className={styles.caption}></p> } 
+                      
+                      <i className={styles.date}>{formatDate(msg.sent)}</i>
                     </div>
                 </div>    
                 <div className="ig-controllers-box">
