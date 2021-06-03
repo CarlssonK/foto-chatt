@@ -63,13 +63,17 @@ function PhotoFeed({
 
       <ImageComments handleToggleImageComments={handleToggleImageComments}
                  showComponentBool={toggleImageComments} imageId={imageCommentsId} />
-
-      <input
-        className="chatlist-input"
-        type="text"
-        placeholder="Search..."
-        onChange={e => setSearch(e.target.value)}
-      />
+<form className={styles.form}>
+          <div className={styles.inputSearch}>
+          <i className={styles.test}><span className="material-icons">search</span></i>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Search Photo.."
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
+        </form>
 
       <div className={styles.PhotoContainer}>
         <ul className={styles.photoList}>
@@ -77,9 +81,9 @@ function PhotoFeed({
           {filteredImg.reverse().map((msg) => {
             return (
 
-              <li key={msg._id}>
+              <li className={styles.instaBox} key={msg._id}>
                 <div className="ig-user-box">
-                  <p className={styles.name}>{msg.author.username}</p>
+                  
                   
                 </div>
 
@@ -98,18 +102,17 @@ function PhotoFeed({
                     
                   {msg.images.map((img) => {
                   
-                  
-                  return <img key={img._id} src={img.url}/>
-                    
-                      
+                 return <img className={styles.img} key={img._id} src={img.url}/>
                       
                       })}    
-                      
+
 
                                        
-                   key={msg._id}
-                    <p className={styles.tags}>{msg.text}</p>
-                    <p className={styles.tags}>{msg.sent}</p>
+                   
+                   <div className={styles.insta}>
+                        <p className={styles.name}><b>{msg.author.username} </b>{msg.text}</p>
+                      {/* <p className={styles.caption}></p> */}
+                    </div>
                   </div>
                    
                <div className="ig-controllers-box">
