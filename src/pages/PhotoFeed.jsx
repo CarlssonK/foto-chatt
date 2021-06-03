@@ -27,14 +27,14 @@ function PhotoFeed({
     setQuery(e.target.value);
   };
 
-  /*const formatDate = (sent) => {
+    const formatDate = (sent) => {
     const date = new Date(sent);
     const year =  date.getYear();
     const month = date.getMonth() + 1;
     const day = date.getDay();
     return `${day}: ${month}: ${year}`;
   };
-*/
+
   useEffect(() => {
     fetchAllImages();
   }, []);
@@ -61,64 +61,52 @@ function PhotoFeed({
   })
   return (
     <div>
-      <Topbar />
-
-      <input
-        className="chatlist-input"
-        type="text"
-        placeholder="Search..."
-        onChange={e => setSearch(e.target.value)}
-      />
+      <Topbar />       
+        <form className={styles.form}>
+          <div className={styles.inputSearch}>
+          <i className={styles.test}><span className="material-icons">search</span></i>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Search Photo.."
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
+        </form>
       <div className={styles.PhotoContainer}>
-        <ul>
+        <ul className={styles.photoList}>
 
           {filteredImg.reverse().map((msg) => {
             return (
-              <li key={msg._id}>
-                <div className="ig-user-box">
-                  <p className={styles.name}>{msg.author.username}</p>
-                </div>
-                <div
-                  className="ig-img-box"
-                  style={{
-                    display: "grid",
-                    placeItems: "center",
-                  }}
-                >
-                  <div>
-                  <div>
-                  {msg.images.map((img) => {(
-                    <MyMessageField openImageComments={handleToggleImageComments}/>
-                  )
-                  return <img key={img._id} src={img.url}/>
-                    
-                      
-                      
-                      })}    </div>
+              <li className={styles.instaBox} key={msg._id}>
+                <div>
+                    <div>
+                      <div>
+                        {msg.images.map((img) => {(
+                          <MyMessageField openImageComments={handleToggleImageComments}/>
+                        )
+                        return <img className={styles.img} key={img._id} src={img.url}/>  
+                            })}    
                       </div>
-
+                    </div>
+                      <div className="ig-controllers-box">
+                        <a>
+                          <FontAwesomeIcon className="ig-controller-icon" icon={faHeart}/> 
+                        </a>
+                        <a onClick={() => openImageComments(true, postId) } className={styles.myMessage}>
+                          <FontAwesomeIcon className="ig-controller-icon" icon={faComment}/>
+                        </a> 
+                      </div>
                    <div key={msg._id}>
-                    <p className={styles.tags}>{msg.text}</p>
-                    <p className={styles.tags}>{msg.sent}</p>
-                  </div>
-                   
-               <div className="ig-controllers-box">
-                     <a><FontAwesomeIcon
-                      className="ig-controller-icon"
-                      icon={faHeart} 
-                    /> </a>
-                    <a onClick={() => openImageComments(true, postId) } className={styles.myMessage}><FontAwesomeIcon
-                      className="ig-controller-icon"
-                      icon={faComment}
-                    /></a> 
-                    
-                          
+                    <div className={styles.insta}>
+                        <p className={styles.name}><b>{msg.author.username} </b>{msg.text}</p>
+                      {/* <p className={styles.caption}></p> */}
+                    </div>
+                    <p className={styles.dateStamp}>{msg.sent}</p>
                   </div>
                 </div>
               </li>
-              
             );
-
           })}
         </ul>
       </div>
