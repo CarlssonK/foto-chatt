@@ -22,6 +22,8 @@ function Chat({ match, handleSetMessages }) {
   const [toggleImageComments, setToggleImageComments] = useState(false);
   const [togglePhotoUpload, setTogglePhotoUpload] = useState(false);
   const [imageCommentsId, setImageCommentsId] = useState("");
+  const [toggleTextZoom, setToggleTextZoom] = useState(true);
+  const [messageList, setMessageList] = useState([]);
 
   const s = useStates({
     input: "",
@@ -91,6 +93,7 @@ function Chat({ match, handleSetMessages }) {
     const message = s.input;
     s.input = "";
 
+    handleSubmitUI();
     // const hashtags = findHashtags(message);
 
     let formData = new FormData();
@@ -125,6 +128,19 @@ function Chat({ match, handleSetMessages }) {
     );
 
     setImageList([]);
+  };
+
+  const handleSubmitUI = () => {
+    setToggleTextZoom(true);
+    setMessageList((messageList) => [
+      {
+        _id: Math.random(1 * 1000),
+        text: s.input,
+        sent: new Date(),
+        author: { username: g.username },
+      },
+      ...messageList,
+    ]);
   };
 
   function dataURLtoFile(dataurl, filename) {
@@ -223,6 +239,7 @@ function Chat({ match, handleSetMessages }) {
                 userid={e.author.id}
                 sent={e.sent}
                 openImageComments={handleToggleImageComments}
+                toggleTextZoom={toggleTextZoom}
               />
             ) : (
               <OtherMessageField
