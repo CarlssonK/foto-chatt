@@ -1,7 +1,8 @@
-.profileContainer {
+/* .profileContainer {
     display: flex;
     flex-direction: column;
-}
+    margin-top: 500px;
+} */
 
 .loginDetails {
     display: flex;
@@ -15,7 +16,7 @@
     font-size: 15px;
     justify-content: center;
     align-items: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .bottomContainer {
@@ -26,7 +27,7 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 300px;
+    height: 170px;
     background-color: #2B2B2B;
     color: white;
     font-size: 17px;
@@ -42,9 +43,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* margin-top: 35px; */
 }
 
-.avatar {
+/* .avatar {
     margin-top: 40px;
     height: 120px;
     width: 120px;
@@ -56,4 +58,73 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
+} */
+
+.logoutBtn {
+    background: linear-gradient(28deg, rgba(117,96,164,1) 22%, rgba(117,157,191,1) 72%, rgba(93,199,175,1) 100%);
+    color: whitesmoke;
+    width: 300px;
+    position: relative;
+    border-radius: 30px;
+    height: 50px;
+    margin: 40px 10px 40px 10px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 18px;
+    border:none
+}
+
+.profileContainer{
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.userNameLeft {
+    float: left;
+    color: white;
+}
+
+.userName {
+    float: right;
+    color: white;
+}
+.emailLeft {
+    float: left;
+    color: white;
+}
+.email {
+    float: right;
+    color: white;
+}
+.notifications {
+    float: left;
+    color: white;
+}
+.notificationsButton {
+    float: right;
+}
+.geoLocation{
+    float: left;
+    color: white;
+}
+.geoButton {
+    float: right;
+}
+.wrapper {
+    margin: 0 auto;
+    width: 360px;
+    margin-bottom: 30px;
+}
+
+.img{
+    margin-top: 50px;
+}
+
+.h1{
+    color: whitesmoke;
+    font-family: Helvetica;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10.5vh;
 }

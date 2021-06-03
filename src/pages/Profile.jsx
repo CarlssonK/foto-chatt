@@ -39,33 +39,36 @@ function Profile() {
         history.push("/login")
     }
    
-    const uploadedImage = React.useRef(null);
-    const imageUploader = React.useRef(null);
+    // const uploadedImage = React.useRef(null);
+    // const imageUploader = React.useRef(null);
   
-    const handleImageUpload = e => {
-      const [file] = e.target.files;
-      if (file) {
-        const reader = new FileReader();
-        const { current } = uploadedImage;
-        current.file = file;
-        reader.onload = e => {
-          current.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    };
+    // const handleImageUpload = e => {
+    //   const [file] = e.target.files;
+    //   if (file) {
+    //     const reader = new FileReader();
+    //     const { current } = uploadedImage;
+    //     current.file = file;
+    //     reader.onload = e => {
+    //       current.src = e.target.result;
+    //     };
+    //     reader.readAsDataURL(file);
+    //   }
+    // };
 
-    const onNotisClick = () => {
-        subToNotifications()
-    };
+    // const onNotisClick = () => {
+    //     subToNotifications()
+    // };
 
     return (
-        <div className={styles.profileContainer}>
+<div>
             <Topbar chatName={"Profile"} />
-            
+
          <div className={styles.avatarContainer}>
              
-            <input
+         <img className={styles.img} src="../assets/icons/icon.png" alt="" />
+      <h1 className={styles.h1}>Beepd</h1>
+
+            {/* <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
@@ -81,38 +84,54 @@ function Profile() {
                 ref={uploadedImage}
             />
 
-      </div>
+      </div> */}
 
     </div>
+    <div className={styles.profileContainer}>
+            <div className={styles.wrapper}>
+                <div className={styles.userNameLeft}>Username:</div>
+                <div className={styles.userName}>{g.username}</div>
+                </div>
+                <div className={styles.wrapper}>
+                <div className={styles.emailLeft}>Email:</div>
+                <div className={styles.email}>{g.email}</div>
+                </div>
+                {/* <div className={styles.wrapper}>
+                <div className={styles.notifications}>Notifikationer</div>
+        <ToggleButton className={styles.notificationsButton} onClick={onNotisClick} onChange={state => console.log(state)} icons={{checked: <Checked />, unchecked: <UnChecked />}} />
+        </div>
+        <div className={styles.wrapper}>
+            <div className={styles.geoLocation}>Show Geolocation</div>
+            <div className={styles.geoButton}>                {
+                    <GeoLocation/>
+                }
+                </div> */}
+        </div>
 
-            <div className={styles.loginDetails}>
-                {g.username}
-            </div>
-
-            <div className={styles.loginDetails}>
+            {/* <div className={styles.loginDetails}>
                 {g.email}
-            </div>
-
+            </div> */}
+{/* 
             <div className={styles.loginDetails}>
                 {
                     <GeoLocation/>
                 }
-            </div>
+            </div> */}
 
             <div className={styles.bottomContainer}>
             {/* <span onClick={onNotisClick}>
                     <div className={styles.settings}>Notifikationer</div>
                 </span> */}
-                <p>Notifikationer</p>
-        <ToggleButton onClick={onNotisClick} onChange={state => console.log(state)} icons={{checked: <Checked />, unchecked: <UnChecked />}} />
-                <div className={styles.settings}>GPS</div>
-                <div className={styles.settings}>Annat</div>
-                
-                <button onClick={handleLogout}>Logout</button>
+
+                {/* <div className={styles.settings}>GPS</div> */}
+                {/* <div className={styles.settings}>Annat</div> */}
+                <button className={styles.logoutBtn} onClick={handleLogout}><b>LOG OUT</b></button>
+                {/* <button onClick={handleLogout}>Logout</button> */}
 
             </div>
 
         </div>
+
     );
 }
 
