@@ -4,7 +4,8 @@ import FollowFunction from "../components/followFunction";
 import Topbar from "../components/Topbar";
 import { useNamedContext } from "react-easier";
 // Styles
-import "../styles/chatlist.css";
+
+import styles from '../styles/ChatList.module.css'
 
 function ChatList() {
   let g = useNamedContext("global");
@@ -89,25 +90,27 @@ function ChatList() {
   };
 
   return (
-    <div className="chatlist-container">
+    <div className={styles.chatlistContainer}>
       <Topbar />
-
-      <div>
-        <input
-          className="chatlist-input"
-          onChange={handleInput}
-          type="text"
-          placeholder="Search..."
-        />
-      </div>
-      <div className="chatlist-box">
-        <ul className="chatlist">
+      <form className={styles.form}>
+        <div className={styles.inputSearch}>
+          <i className={styles.searchIcon}><span className="material-icons">search</span></i>
+          <input
+            className={styles.chatlistInput}
+            onChange={handleInput}
+            type="text"
+            placeholder="Search"
+          />
+        </div>
+      </form>
+      <div className={styles.chatlistBox}>
+        <ul className={styles.chatlist}>
           {followedRooms.map((room) => {
             if (room.title.toLowerCase().includes(`${query.toLowerCase()}`)) {
               return (
-                <div className="chatlist__item" key={room._id}>
+                <div className={styles.chatlistItem} key={room._id}>
                   <Link
-                    className="chatlist__link"
+                    className={styles.chatlistLink}
                     to={{
                       pathname: `/c/${room.title.toLowerCase()}`,
                       state: { roomid: room._id, name: room.title },
@@ -129,9 +132,9 @@ function ChatList() {
           {unfollowedRooms.map((room) => {
             if (room.title.toLowerCase().includes(`${query.toLowerCase()}`)) {
               return (
-                <div key={room._id} className="chatlist__item">
+                <div key={room._id} className={styles.chatlistItem}>
                   <Link
-                    className="chatlist__link"
+                    className={styles.chatlistLink}
                     to={{
                       pathname: `/c/${room.title.toLowerCase()}`,
                       state: { roomid: room._id, name: room.title },
