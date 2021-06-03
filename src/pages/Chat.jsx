@@ -203,7 +203,7 @@ function Chat({ match, handleSetMessages }) {
   return (
     <div className={styles.chatContainer}>
       <Topbar chatName={location.pathname.substring(3)} />
-      <div>
+      {/* <div>
         <p>users online </p>
         {g.usersOnline.map((e, idx) => {
           return (
@@ -212,7 +212,7 @@ function Chat({ match, handleSetMessages }) {
             </span>
           );
         })}
-      </div>
+      </div> */}
       <ImageComments
         handleToggleImageComments={handleToggleImageComments}
         showComponentBool={toggleImageComments}

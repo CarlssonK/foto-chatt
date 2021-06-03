@@ -3,6 +3,10 @@ import { Link, useHistory } from "react-router-dom";
 import FollowFunction from "../components/followFunction";
 import Topbar from "../components/Topbar";
 import { useNamedContext } from "react-easier";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import NewRoom from "../components/NewRoom";
 // Styles
 
 import styles from "../styles/ChatList.module.css";
@@ -15,6 +19,7 @@ function ChatList() {
   const [followedRooms, setFollowedRooms] = useState([]);
   const [unfollowedRooms, setUnfollowedRooms] = useState([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
+  const [toggleNewRoom, setToggleNewRoom] = useState(false);
 
   const handleInput = (e) => {
     setQuery(e.target.value);
@@ -41,7 +46,6 @@ function ChatList() {
           fixedRooms[i].isFollowing = true;
       }
     }
-
     setShowSkeleton(false);
     setRooms(fixedRooms);
     updateRooms(fixedRooms);
@@ -91,22 +95,55 @@ function ChatList() {
     }
   };
 
+  const handleToggleNewRoom = (bool) => {
+    setToggleNewRoom(bool); // Show imageComments Component
+  };
+
+  const addRoom = (room) => {
+    setRooms((rooms) => [room, ...rooms]);
+  };
+
   return (
     <div className={styles.chatlistContainer}>
       <Topbar />
-      <form className={styles.form}>
-        <div className={styles.inputSearch}>
-          <i className={styles.searchIcon}>
-            <span className="material-icons">search</span>
-          </i>
-          <input
-            className={styles.chatlistInput}
-            onChange={handleInput}
-            type="text"
-            placeholder="Search"
-          />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            color: "white",
+            width: "40px",
+            display: "grid",
+            placeItems: "center",
+          }}
+          onClick={() => setToggleNewRoom(true)}
+        >
+          <FontAwesomeIcon icon={faPlus} style={{ fontSize: "24px" }} />
         </div>
-      </form>
+        <form className={styles.form} style={{ width: "100%" }}>
+          <div className={styles.inputSearch}>
+            <i className={styles.searchIcon}>
+              <span className="material-icons">search</span>
+            </i>
+            <input
+              className={styles.chatlistInput}
+              onChange={handleInput}
+              type="text"
+              placeholder="Search"
+            />
+          </div>
+        </form>
+      </div>
+
+      <NewRoom
+        handleToggleNewRoom={handleToggleNewRoom}
+        toggleComponentBool={toggleNewRoom}
+        addRoom={addRoom}
+      />
 
       <div style={{ display: showSkeleton ? "block" : "none" }}>
         <div className="card-skeleton">
