@@ -15,6 +15,7 @@ function PhotoFeed({}) {
   const [toggleImageComments, setToggleImageComments] = useState(false);
   const [imageCommentsId, setImageCommentsId] = useState("");
   const [likeImage, setLikeImage] = useState(false);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const handleInput = (e) => {
     setQuery(e.target.value);
@@ -43,8 +44,9 @@ function PhotoFeed({}) {
     const res = await fetch("http://localhost:3000/api/getallphotos");
     const data = await res.json();
     //setUser(data.author.username)
+
     setPhotoFeed(data.filterByPhoto);
-    console.log(data.filterByPhoto);
+    setTimeout(() => setShowSkeleton(false), 1000);
   };
 
   const filteredImg = photoFeed.filter((feed) => {
@@ -74,6 +76,19 @@ function PhotoFeed({}) {
       </form>
 
       <div className={styles.PhotoContainer}>
+        <div style={{ display: showSkeleton ? "block" : "none" }}>
+          <div className="card-skeleton-2">
+            <div className="animated-background">
+              <div className="card-skeleton-img"></div>
+            </div>
+          </div>
+          <div className="card-skeleton-2">
+            <div className="animated-background">
+              <div className="card-skeleton-img"></div>
+            </div>
+          </div>
+        </div>
+
         <ul className={styles.photoList}>
           {filteredImg.reverse().map((msg) => {
             return (

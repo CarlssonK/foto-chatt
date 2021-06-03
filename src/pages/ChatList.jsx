@@ -5,7 +5,7 @@ import Topbar from "../components/Topbar";
 import { useNamedContext } from "react-easier";
 // Styles
 
-import styles from '../styles/ChatList.module.css'
+import styles from "../styles/ChatList.module.css";
 
 function ChatList() {
   let g = useNamedContext("global");
@@ -14,6 +14,7 @@ function ChatList() {
   const [rooms, setRooms] = useState([]);
   const [followedRooms, setFollowedRooms] = useState([]);
   const [unfollowedRooms, setUnfollowedRooms] = useState([]);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const handleInput = (e) => {
     setQuery(e.target.value);
@@ -41,6 +42,7 @@ function ChatList() {
       }
     }
 
+    setShowSkeleton(false);
     setRooms(fixedRooms);
     updateRooms(fixedRooms);
   };
@@ -94,7 +96,9 @@ function ChatList() {
       <Topbar />
       <form className={styles.form}>
         <div className={styles.inputSearch}>
-          <i className={styles.searchIcon}><span className="material-icons">search</span></i>
+          <i className={styles.searchIcon}>
+            <span className="material-icons">search</span>
+          </i>
           <input
             className={styles.chatlistInput}
             onChange={handleInput}
@@ -103,6 +107,40 @@ function ChatList() {
           />
         </div>
       </form>
+
+      <div style={{ display: showSkeleton ? "block" : "none" }}>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+        <div className="card-skeleton">
+          <div className="animated-background"></div>
+        </div>
+      </div>
+
       <div className={styles.chatlistBox}>
         <ul className={styles.chatlist}>
           {followedRooms.map((room) => {
