@@ -58,35 +58,28 @@ function PhotoFeed({
   })
   return (
     <div>
-
-      <Topbar />
-
-      <ImageComments handleToggleImageComments={handleToggleImageComments}
-                 showComponentBool={toggleImageComments} imageId={imageCommentsId} />
-<form className={styles.form}>
-          <div className={styles.inputSearch}>
-          <i className={styles.test}><span className="material-icons">search</span></i>
+      <Topbar chatName={"Photos"} />
+      <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
+      <form className={styles.form}>
+        <div className={styles.inputSearch}>
+          <i className={styles.searchIcon}>
+            <span className="material-icons">search</span>
+          </i>
             <input
               className={styles.input}
               type="text"
-              placeholder="Search Photo.."
+              placeholder="Search Photo"
               onChange={e => setSearch(e.target.value)}
             />
-          </div>
-        </form>
-
+        </div>
+      </form>
       <div className={styles.PhotoContainer}>
         <ul className={styles.photoList}>
-
           {filteredImg.reverse().map((msg) => {
             return (
-
-              <li className={styles.instaBox} key={msg._id}>
-                <div className="ig-user-box">
-                  
-                  
+              <li className={styles.photoBox} key={msg._id}>
+                <div className="ig-user-box">  
                 </div>
-
                 <div>
                  </div>
                 <div
@@ -98,24 +91,16 @@ function PhotoFeed({
                     flexDirection: "column"
                   }}
                 >
-                  <div >
-                    
+                <div>   
                   {msg.images.map((img) => {
-                  
-                 return <img className={styles.img} key={img._id} src={img.url}/>
-                      
+                 return <img className={styles.img} key={img._id} src={img.url}/>  
                       })}    
-
-
-                                       
-                   
-                   <div className={styles.insta}>
+                    <div className={styles.caption}>
                         <p className={styles.name}><b>{msg.author.username} </b>{msg.text}</p>
                       {/* <p className={styles.caption}></p> */}
                     </div>
-                  </div>
-                   
-               <div className="ig-controllers-box">
+                </div>    
+                <div className="ig-controllers-box">
                      <a><FontAwesomeIcon
                       className="ig-controller-icon"
                       icon={faHeart} 
@@ -123,12 +108,9 @@ function PhotoFeed({
                     <a onClick={() => handleToggleImageComments(true, msg._id) } className={styles.myMessage}><FontAwesomeIcon
                       className="ig-controller-icon"
                       icon={faComment}
-                    /></a> 
-                    
-                          
-
-                  </div>
+                    /></a>      
                 </div>
+              </div>
               </li>
             );
           })}
