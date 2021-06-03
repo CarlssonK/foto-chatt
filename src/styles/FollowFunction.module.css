@@ -4,6 +4,7 @@
     border: none;
     width: 4vh;
     color: whitesmoke;
+    padding-right: 15px;
 }
 
 .starFollow {
@@ -12,4 +13,6 @@
     border: none;
     width: 4vh;
     color: rgb(255, 201, 83);
+    padding-right: 15px;
 }
+
