@@ -9,12 +9,7 @@ import MyMessageField from "../components/MyMessageField";
 
 
 function PhotoFeed({
-  images,
-  postId,
-  message,
-  username,
-  sent,
-  openImageComments,
+
 }) {
   const [photoFeed, setPhotoFeed] = useState([]);
   const [search, setSearch] = useState("");
@@ -35,11 +30,32 @@ function PhotoFeed({
     return `${day}: ${month}: ${year}`;
   };
 */
+
+  // useEffect(() => {
+  //   fetchComments()
+  // }, [toggleImageComments])
+
+
+  // const fetchComments = async () => {
+  //   // if(!toggleImageComments || !imageId) return;
+  //   console.log("imageId")
+  //   const res = await fetch(`http://localhost:3000/api/rooms/${imageId}/show`)
+  //   const data = await res.json()
+  //   console.log(data.message)
+  //   loadData(data.message)
+  // }
+
+
+
+
+
+
   useEffect(() => {
     fetchAllImages();
   }, []);
 
   const handleToggleImageComments = (bool, imageId) => {
+    console.log(imageId)
     setToggleImageComments(bool) // Show imageComments Component
     if(!imageId) return; // return here because we are closing the comop
     setImageCommentsId(imageId) // Set id so we know what data we should populate the component with
@@ -54,7 +70,7 @@ function PhotoFeed({
   };
 
 
-  <ImageComments handleToggleImageComments={handleToggleImageComments} showComponentBool={toggleImageComments} imageId={imageCommentsId} />
+  
 
   const filteredImg = photoFeed.filter(feed =>{
     return feed.text.toLowerCase().includes(search.toLowerCase())
@@ -62,6 +78,9 @@ function PhotoFeed({
   return (
     <div>
       <Topbar />
+
+      <ImageComments handleToggleImageComments={handleToggleImageComments}
+                 showComponentBool={toggleImageComments} imageId={imageCommentsId} />
 
       <input
         className="chatlist-input"
@@ -77,27 +96,34 @@ function PhotoFeed({
               <li key={msg._id}>
                 <div className="ig-user-box">
                   <p className={styles.name}>{msg.author.username}</p>
+                  
                 </div>
+
+                <div>
+                 </div>
                 <div
                   className="ig-img-box"
                   style={{
                     display: "grid",
                     placeItems: "center",
+                    overflow: "hidden",
+                    flexDirection: "column"
                   }}
                 >
-                  <div>
-                  <div>
-                  {msg.images.map((img) => {(
-                    <MyMessageField openImageComments={handleToggleImageComments}/>
-                  )
+                  <div >
+                    
+                  {msg.images.map((img) => {
+                  
+                  
                   return <img key={img._id} src={img.url}/>
                     
                       
                       
-                      })}    </div>
-                      </div>
+                      })}    
+                      
 
-                   <div key={msg._id}>
+                                       
+                   key={msg._id}
                     <p className={styles.tags}>{msg.text}</p>
                     <p className={styles.tags}>{msg.sent}</p>
                   </div>
@@ -107,7 +133,7 @@ function PhotoFeed({
                       className="ig-controller-icon"
                       icon={faHeart} 
                     /> </a>
-                    <a onClick={() => openImageComments(true, postId) } className={styles.myMessage}><FontAwesomeIcon
+                    <a onClick={() => handleToggleImageComments(true, msg._id) } className={styles.myMessage}><FontAwesomeIcon
                       className="ig-controller-icon"
                       icon={faComment}
                     /></a> 
