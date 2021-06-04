@@ -3,13 +3,14 @@
   top: 0;
   width: 100vw;
   height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .new-room-box {
   position: absolute;
   width: 90%;
   height: 200px;
-  background-color: rgba(22, 22, 22, 0.95);
+  background-color: rgba(17, 17, 24, 0.95);
   color: white;
   top: 50%;
   left: 50%;
@@ -53,6 +54,7 @@
 
 .new-room-input {
   color: white;
+  padding-left: 16px !important;
 }
 
 .new-room-exit {
