@@ -16,7 +16,7 @@ function PhotoFeed({
   const [query, setQuery] = useState("");
   const [toggleImageComments, setToggleImageComments] = useState(false);
   const [imageCommentsId, setImageCommentsId] = useState("")
-  
+
 
   const handleInput = (e) => {
     setQuery(e.target.value);
@@ -30,7 +30,7 @@ let date = newDate.getDate();
 let month = newDate.getMonth() + 1;
 let year = newDate.getFullYear();
 
-return `${year} : ${month<10?`0${month}`:`${month}`} : ${date}`
+return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${date}`}`
 
   };
 
@@ -55,7 +55,7 @@ return `${year} : ${month<10?`0${month}`:`${month}`} : ${date}`
   };
 
 
-  
+
 
   const filteredImg = photoFeed.filter(feed =>{
     return feed.text.toLowerCase().includes(search.toLowerCase())
@@ -82,7 +82,7 @@ return `${year} : ${month<10?`0${month}`:`${month}`} : ${date}`
           {filteredImg.reverse().map((msg) => {
             return (
               <li className={styles.photoBox} key={msg._id}>
-                <div className="ig-user-box">  
+                <div className="ig-user-box">
                 </div>
                 <div>
                  </div>
@@ -95,27 +95,28 @@ return `${year} : ${month<10?`0${month}`:`${month}`} : ${date}`
                     flexDirection: "column"
                   }}
                 >
-                <div>   
+                <div>
                   {msg.images.map((img) => {
-                 return <img className={styles.img} key={img._id} src={img.url}/>  
-                      })}    
-                    <div className={styles.caption}>
-                        <p className={styles.name}><b>{msg.author.username} </b>{msg.text}</p>
-                    { <p className={styles.caption}></p> } 
-                      
-                      <i className={styles.date}>{formatDate(msg.sent)}</i>
-                    </div>
-                </div>    
-                <div className="ig-controllers-box">
+                 return <img className={styles.img} key={img._id} src={img.url}/>
+                      })}
+                      <div className="ig-controllers-box">
                      <a><FontAwesomeIcon
                       className="ig-controller-icon"
-                      icon={faHeart} 
+                      icon={faHeart}
                     /> </a>
                     <a onClick={() => handleToggleImageComments(true, msg._id) } className={styles.myMessage}><FontAwesomeIcon
                       className="ig-controller-icon"
                       icon={faComment}
-                    /></a>      
+                    /></a>
                 </div>
+                    <div className={styles.captionBox}>
+                        <p className={styles.name}><b>{msg.author.username} </b>{msg.text}</p>
+                    {/* { <p className={styles.caption}></p> } */}
+
+                      <i className={styles.date}>{formatDate(msg.sent)}</i>
+                    </div>
+                </div>
+                
               </div>
               </li>
             );
