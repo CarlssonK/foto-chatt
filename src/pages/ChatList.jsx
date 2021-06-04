@@ -100,7 +100,7 @@ function ChatList() {
   };
 
   const addRoom = (room) => {
-    setRooms((rooms) => [room, ...rooms]);
+    fetchRooms();
   };
 
   return (
@@ -180,7 +180,7 @@ function ChatList() {
 
       <div className={styles.chatlistBox}>
         <ul className={styles.chatlist}>
-          {followedRooms.map((room) => {
+          {followedRooms.reverse().map((room) => {
             if (room.title.toLowerCase().includes(`${query.toLowerCase()}`)) {
               return (
                 <div className={styles.chatlistItem} key={room._id}>
@@ -204,7 +204,7 @@ function ChatList() {
             }
           })}
 
-          {unfollowedRooms.map((room) => {
+          {unfollowedRooms.reverse().map((room) => {
             if (room.title.toLowerCase().includes(`${query.toLowerCase()}`)) {
               return (
                 <div key={room._id} className={styles.chatlistItem}>
