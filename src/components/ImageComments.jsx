@@ -2,7 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import "../styles/imagecomments.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTimes,
+  faHeart as solidHeart,
+} from "@fortawesome/free-solid-svg-icons";
 import { faHeart, faComment } from "@fortawesome/free-regular-svg-icons";
 
 import { Fade, Slide } from "react-slideshow-image";
@@ -31,6 +34,7 @@ function ImageComments({
   const [comments, setComments] = useState([]);
   const [toggleTextZoom, setToggleTextZoom] = useState(true);
   const [user, setUser] = useState("");
+  const [likeImage, setLikeImage] = useState(false);
 
   useEffect(() => {
     fetchComments();
@@ -159,10 +163,20 @@ function ImageComments({
                   </div>
                 )}
                 <div className="ig-controllers-box">
-                  <FontAwesomeIcon
-                    className="ig-controller-icon"
-                    icon={faHeart}
-                  />
+                  {likeImage ? (
+                    <FontAwesomeIcon
+                      className="ig-controller-icon"
+                      style={{ color: "red" }}
+                      icon={solidHeart}
+                      onClick={() => setLikeImage((likeImage) => !likeImage)}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      className="ig-controller-icon"
+                      icon={faHeart}
+                      onClick={() => setLikeImage((likeImage) => !likeImage)}
+                    />
+                  )}
                   <FontAwesomeIcon
                     className="ig-controller-icon"
                     icon={faComment}

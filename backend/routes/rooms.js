@@ -5,6 +5,8 @@ const rooms = require("../controllers/rooms");
 
 // Get rooms
 
+router.route("/createroom").post(rooms.createRoom);
+
 router.route("/").get(isLoggedIn, rooms.index);
 
 router.route("/:id").get(isLoggedIn, rooms.showRoom);

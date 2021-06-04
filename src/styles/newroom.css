@@ -1,0 +1,68 @@
+.new-room-container {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.new-room-box {
+  position: absolute;
+  width: 90%;
+  height: 200px;
+  background-color: rgba(22, 22, 22, 0.95);
+  color: white;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  transform: translate(-50%, -60%);
+}
+
+.new-room-btn {
+  /* bottom: 2.5vh; */
+  margin-top: 10px;
+  /* position: fixed; */
+  /* margin-top: 20px; */
+  /* position: absolute; */
+  width: 80%;
+  height: 5vh;
+  margin-left: 10%;
+  background: none;
+  border-radius: 30px;
+  color: whitesmoke;
+  background: linear-gradient(
+    28deg,
+    rgba(117, 96, 164, 1) 22%,
+    rgba(117, 157, 191, 1) 72%,
+    rgba(93, 199, 175, 1) 100%
+  );
+  border: none;
+}
+
+.new-room-input-box {
+  position: relative;
+  display: flex;
+  background: #313131;
+  border-radius: 30px;
+  height: 40px;
+  overflow: hidden;
+  width: 90%;
+  margin: 5%;
+  margin-top: 30px;
+  color: white;
+}
+
+.new-room-input {
+  color: white;
+}
+
+.new-room-exit {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  z-index: 10;
+  border-radius: 10px;
+}
