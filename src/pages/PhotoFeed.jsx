@@ -117,6 +117,24 @@ function PhotoFeed({}) {
                         />
                       );
                     })}
+                    <div className="ig-controllers-box">
+                      <a>
+                        <FontAwesomeIcon
+                          className="ig-controller-icon"
+                          icon={faHeart}
+                          icon={faHeart}
+                        />{" "}
+                      </a>
+                      <a
+                        onClick={() => handleToggleImageComments(true, msg._id)}
+                        className={styles.myMessage}
+                      >
+                        <FontAwesomeIcon
+                          className="ig-controller-icon"
+                          icon={faComment}
+                        />
+                      </a>
+                    </div>
                     <div className={styles.caption}>
                       <p className={styles.name}>
                         <b>{msg.author.username} </b>
@@ -126,23 +144,6 @@ function PhotoFeed({}) {
 
                       <i className={styles.date}>{formatDate(msg.sent)}</i>
                     </div>
-                  </div>
-                  <div className="ig-controllers-box">
-                    <a>
-                      <FontAwesomeIcon
-                        className="ig-controller-icon"
-                        icon={faHeart}
-                      />{" "}
-                    </a>
-                    <a
-                      onClick={() => handleToggleImageComments(true, msg._id)}
-                      className={styles.myMessage}
-                    >
-                      <FontAwesomeIcon
-                        className="ig-controller-icon"
-                        icon={faComment}
-                      />
-                    </a>
                   </div>
                 </div>
               </li>
