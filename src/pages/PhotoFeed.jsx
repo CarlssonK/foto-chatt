@@ -31,7 +31,7 @@ let month = newDate.getMonth() + 1;
 let year = newDate.getFullYear();
 
 return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${date}`}`
-
+    }
 
   useEffect(() => {
     fetchAllImages();
@@ -110,7 +110,20 @@ return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${d
                           src={img.url}
                         />
                       );
-                    })}
+                      
+                    }
+                    )}
+                    <div className="ig-controllers-box">
+                     <a><FontAwesomeIcon
+                      className="ig-controller-icon"
+                      icon={faHeart} 
+                      icon={faHeart}
+                    /> </a>
+                    <a onClick={() => handleToggleImageComments(true, msg._id) } className={styles.myMessage}><FontAwesomeIcon
+                      className="ig-controller-icon"
+                      icon={faComment}
+                    /></a>      
+                </div>
                     <div className={styles.caption}>
                       <p className={styles.name}>
                         <b>{msg.author.username} </b>
@@ -121,23 +134,7 @@ return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${d
                       <i className={styles.date}>{formatDate(msg.sent)}</i>
                     </div>
                   </div>
-                  <div className="ig-controllers-box">
-                    <a>
-                      <FontAwesomeIcon
-                        className="ig-controller-icon"
-                        icon={faHeart}
-                      />{" "}
-                    </a>
-                    <a
-                      onClick={() => handleToggleImageComments(true, msg._id)}
-                      className={styles.myMessage}
-                    >
-                      <FontAwesomeIcon
-                        className="ig-controller-icon"
-                        icon={faComment}
-                      />
-                    </a>
-                  </div>
+                  
                 </div>
 
               </li>
