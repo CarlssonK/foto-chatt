@@ -21,17 +21,16 @@ function PhotoFeed({}) {
     setQuery(e.target.value);
   };
 
+  const formatDate = (sent = "") => {
+    let newDate = new Date(sent);
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
 
-    const formatDate = (sent='') => {
-
-
-let newDate = new Date(sent)
-let date = newDate.getDate();
-let month = newDate.getMonth() + 1;
-let year = newDate.getFullYear();
-
-return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${date}`}`
-
+    return `${year} - ${month < 10 ? `0${month}` : `${month}`} - ${
+      date < 10 ? `0${date}` : `${date}`
+    }`;
+  };
 
   useEffect(() => {
     fetchAllImages();
@@ -50,9 +49,8 @@ return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${d
     //setUser(data.author.username)
 
     setPhotoFeed(data.filterByPhoto);
-    setTimeout(() => setShowSkeleton(false), 1000);
+    setShowSkeleton(false);
   };
-
 
   const filteredImg = photoFeed.filter((feed) => {
     return feed.text.toLowerCase().includes(search.toLowerCase());
@@ -80,16 +78,25 @@ return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${d
         </div>
       </form>
       <div className={styles.PhotoContainer}>
+        <div style={{ display: showSkeleton ? "block" : "none" }}>
+          <div className="card-skeleton-2">
+            <div className="animated-background">
+              <div className="card-skeleton-img"></div>
+            </div>
+          </div>
+          <div className="card-skeleton-2">
+            <div className="animated-background">
+              <div className="card-skeleton-img"></div>
+            </div>
+          </div>
+        </div>
+
         <ul className={styles.photoList}>
           {filteredImg.reverse().map((msg) => {
             return (
               <li className={styles.photoBox} key={msg._id}>
-
-                <div className="ig-user-box">
-                </div>
-                <div>
-                 </div>
-
+                <div className="ig-user-box"></div>
+                <div></div>
 
                 <div
                   className="ig-img-box"
@@ -100,7 +107,6 @@ return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${d
                     flexDirection: "column",
                   }}
                 >
-
                   <div>
                     {msg.images.map((img) => {
                       return (
@@ -139,7 +145,6 @@ return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${d
                     </a>
                   </div>
                 </div>
-
               </li>
             );
           })}

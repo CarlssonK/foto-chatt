@@ -22,7 +22,6 @@ function NewRoom({ handleToggleNewRoom, toggleComponentBool, addRoom }) {
       }),
     });
     const data = await res.json();
-    console.log(data);
     addRoom(data.room);
     handleToggleNewRoom(false);
   };
