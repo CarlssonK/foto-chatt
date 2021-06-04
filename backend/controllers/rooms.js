@@ -23,3 +23,14 @@ module.exports.showRoom = async (req, res) => {
   sseHandler.userJoinRoom(req.user, req.params.id);
   res.json({ room });
 };
+
+module.exports.createRoom = async (req, res) => {
+  const name = req.body.name;
+
+  const room = new Room({
+    title: name,
+  });
+  await room.save();
+
+  res.json({ room });
+};

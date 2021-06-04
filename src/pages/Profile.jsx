@@ -92,10 +92,12 @@ function Profile() {
                 <div className={styles.userNameLeft}>Username:</div>
                 <div className={styles.userName}>{g.username}</div>
                 </div>
+                {/* <hr /> */}
                 <div className={styles.wrapper}>
                 <div className={styles.emailLeft}>Email:</div>
                 <div className={styles.email}>{g.email}</div>
                 </div>
+
                 {/* <div className={styles.wrapper}>
                 <div className={styles.notifications}>Notifikationer</div>
         <ToggleButton className={styles.notificationsButton} onClick={onNotisClick} onChange={state => console.log(state)} icons={{checked: <Checked />, unchecked: <UnChecked />}} />

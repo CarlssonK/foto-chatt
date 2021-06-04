@@ -1,97 +1,104 @@
-.outerContainer{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+.outerContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-.innerContainer{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 600px;
-    height: 70%;
-    background-color: rgba(17, 17, 24, 0.95);
-    color: white;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 2;
+.innerContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 600px;
+  height: 70%;
+  background-color: rgba(17, 17, 24, 0.95);
+  color: white;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 2;
 }
 
-.head{
-    padding-top: 1.5vh;
-    padding-right: 1.3vw;
-    display: flex;
+.head {
+  padding-top: 1.5vh;
+  padding-right: 1.3vw;
+  display: flex;
 }
 
-.empty{
-    width: 20px;
+.empty {
+  width: 20px;
 }
 
-.heading{ 
-    margin-top: 10px;
-    text-align: center;
-    flex: auto;
-    margin-left: auto;
-    font-size: 1.8em;
+.heading {
+  margin-top: 10px;
+  text-align: center;
+  flex: auto;
+  margin-left: auto;
+  font-size: 1.8em;
 }
 
-.btn{ 
-    top: 0;
-    background: none;
-    border: none;
-    width: 4vh;
-    color: whitesmoke;  
+.btn {
+  top: 0;
+  background: none;
+  border: none;
+  width: 4vh;
+  color: whitesmoke;
 }
 
-.imageContainer{
-    display: flex;
+.imageContainer {
+  /* display: flex;
     margin-top: 2vh;
     background-color: #000000; 
     justify-self: center;
-    justify-content: center;
+    justify-content: center; */
+  display: flex;
+  margin-top: 2vh;
+  flex-direction: column;
+  overflow: auto;
+  height: 335px;
 }
 
-.img{
-    max-width: 100%;
-    max-height: 336px;
+.img {
+  width: 100%;
 }
 
-.contentInput{
-    position: relative;
-    display: flex;
-    background: #2b2b2b;
-    border-radius: 30px;
-    height: 40px;
-    margin: 5% 5% 0 5%;
-    overflow: hidden;
-    width: 90%;
-    bottom: 10vh;
-    position: fixed;
-    
+.contentInput {
+  position: relative;
+  display: flex;
+  background: #2b2b2b;
+  border-radius: 30px;
+  height: 40px;
+  margin: 5% 5% 0 5%;
+  overflow: hidden;
+  width: 90%;
+  bottom: 10vh;
+  position: fixed;
 }
 
-.input{
-    color: white;
-    border-bottom: none;
-    text-indent: 10px;
-    margin-bottom: 10px;
+.input {
+  color: white;
+  border-bottom: none;
+  text-indent: 10px;
+  margin-bottom: 10px;
 }
 
-.publishBtn{
-    bottom: 2.5vh;
-    position: fixed;
-    /* margin-top: 20px; */
-    /* position:absolute; */
-    width: 90%;
-    height: 5vh;
-    margin-left: 5%;
-    background: none;
-    border-radius: 30px;
-    color: whitesmoke;  
-    background: linear-gradient(28deg, rgba(117,96,164,1) 22%, rgba(117,157,191,1) 72%, rgba(93,199,175,1) 100%);
-    border: none;
-   
+.publishBtn {
+  bottom: 2.5vh;
+  position: fixed;
+  /* margin-top: 20px; */
+  /* position:absolute; */
+  width: 90%;
+  height: 5vh;
+  margin-left: 5%;
+  background: none;
+  border-radius: 30px;
+  color: whitesmoke;
+  background: linear-gradient(
+    28deg,
+    rgba(117, 96, 164, 1) 22%,
+    rgba(117, 157, 191, 1) 72%,
+    rgba(93, 199, 175, 1) 100%
+  );
+  border: none;
 }
