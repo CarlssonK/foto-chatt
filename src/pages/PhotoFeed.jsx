@@ -13,22 +13,25 @@ function PhotoFeed({}) {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [toggleImageComments, setToggleImageComments] = useState(false);
+
   const [imageCommentsId, setImageCommentsId] = useState("");
   const [likeImage, setLikeImage] = useState(false);
   const [showSkeleton, setShowSkeleton] = useState(true);
-
   const handleInput = (e) => {
     setQuery(e.target.value);
   };
 
-  const formatDate = (sent = "") => {
-    let newDate = new Date(sent);
-    let date = newDate.getDate();
-    let month = newDate.getMonth() + 1;
-    let year = newDate.getFullYear();
 
-    return `${year} : ${month < 10 ? `0${month}` : `${month}`} : ${date}`;
-  };
+    const formatDate = (sent='') => {
+
+
+let newDate = new Date(sent)
+let date = newDate.getDate();
+let month = newDate.getMonth() + 1;
+let year = newDate.getFullYear();
+
+return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${date}`}`
+
 
   useEffect(() => {
     fetchAllImages();
@@ -50,9 +53,11 @@ function PhotoFeed({}) {
     setTimeout(() => setShowSkeleton(false), 1000);
   };
 
+
   const filteredImg = photoFeed.filter((feed) => {
     return feed.text.toLowerCase().includes(search.toLowerCase());
   });
+
   return (
     <div>
       <Topbar chatName={"Photos"} />
@@ -79,8 +84,13 @@ function PhotoFeed({}) {
           {filteredImg.reverse().map((msg) => {
             return (
               <li className={styles.photoBox} key={msg._id}>
-                <div className="ig-user-box"></div>
-                <div></div>
+
+                <div className="ig-user-box">
+                </div>
+                <div>
+                 </div>
+
+
                 <div
                   className="ig-img-box"
                   style={{
@@ -90,6 +100,7 @@ function PhotoFeed({}) {
                     flexDirection: "column",
                   }}
                 >
+
                   <div>
                     {msg.images.map((img) => {
                       return (
@@ -128,6 +139,7 @@ function PhotoFeed({}) {
                     </a>
                   </div>
                 </div>
+
               </li>
             );
           })}
