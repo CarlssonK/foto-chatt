@@ -121,19 +121,22 @@ const Camera = () => {
           {
             photoHasBeenTaken ? (
               <>
-              <button onClick={() => handleTakePhotoAgain()}>
-                Ta om bild
-              </button>
+              <div className="material-icons">
+              <a onClick={() => handleTakePhotoAgain()}>replay
+              </a>
+              </div>
+          <div className="material-icons">
               <Link
                 to={{pathname: location.state.path, state: {roomid: location.state.roomId, name: location.state.roomTitle, imageSrc: photoUrl, camera: true}}}
               >
-                Använd bild
-              </Link>
+                send
+              </Link></div>
              </>
+             
             ) : (
-              <button className="material-icons">
-                <a onClick={() => takePhoto()}>radio_button_unchecked</a>
-              </button>
+              <div className="material-icons">
+                <a onClick={() => takePhoto()}>radio_button_checked</a>
+              </div>
             )
 
           }

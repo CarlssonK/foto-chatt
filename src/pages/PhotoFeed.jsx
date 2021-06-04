@@ -31,7 +31,7 @@ let month = newDate.getMonth() + 1;
 let year = newDate.getFullYear();
 
 return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${date}`}`
-
+    }
 
   useEffect(() => {
     fetchAllImages();
@@ -147,6 +147,6 @@ return `${year} - ${month<10?`0${month}`:`${month}`} - ${date<10?`0${date}`:`${d
       </div>
     </div>
   );
-}
+        }
 
 export default PhotoFeed;
