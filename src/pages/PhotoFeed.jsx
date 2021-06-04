@@ -21,6 +21,7 @@ function PhotoFeed({}) {
     setQuery(e.target.value);
   };
 
+
   const formatDate = (sent = "") => {
     let newDate = new Date(sent);
     let date = newDate.getDate();
@@ -153,6 +154,6 @@ function PhotoFeed({}) {
       </div>
     </div>
   );
-}
+        }
 
 export default PhotoFeed;

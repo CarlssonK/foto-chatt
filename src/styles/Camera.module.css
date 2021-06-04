@@ -19,13 +19,9 @@
     align-items: center;
       }
     
-     .button {
-        margin-top: 20px;
-      width: 60px;
-      height: 60px;
-    }
-   
-
+.send{
+  margin-left: 200px;
+}
 
     .photo {
       display: none;
