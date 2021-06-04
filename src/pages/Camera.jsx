@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from  "../styles/Camera.module.css";
+import styles from "../styles/Camera.module.css";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
 import { useNamedContext } from "react-easier";
+import loginCheck from "../utils/LoginCheck";
 
 const Camera = () => {
   let g = useNamedContext("global");
@@ -11,11 +12,21 @@ const Camera = () => {
   const stripRef = useRef(null);
   // const canvasRef = useRef(null);
 
+  const history = useHistory();
   const location = useLocation();
 
   const [photoHasBeenTaken, setPhotoHasBeenTaken] = useState(false);
   const [photoUrl, setPhotoUrl] = useState("");
 
+  useEffect(() => {
+    handleLoginCheck();
+  }, []);
+
+  const handleLoginCheck = async () => {
+    const res = await loginCheck();
+    const data = await res;
+    if (data.redirect === "login") return history.push("/login");
+  };
 
   useEffect(() => {
     getVideo();
@@ -28,12 +39,12 @@ const Camera = () => {
   const getVideo = () => {
     navigator.mediaDevices
       .getUserMedia({ video: { width: 300 } })
-      .then(stream => {
+      .then((stream) => {
         let video = videoRef.current;
         video.srcObject = stream;
         video.play();
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("error:", err);
       });
   };
@@ -54,10 +65,8 @@ const Camera = () => {
   };
 
   const takePhoto = () => {
-
     setPhotoHasBeenTaken(true);
 
-    
     // button.style.display = 'none';
 
     let photo = photoRef.current;
@@ -65,88 +74,68 @@ const Camera = () => {
 
     const data = photo.toDataURL("image/jpeg");
 
-    console.log(data)
+    console.log(data);
 
-    setPhotoUrl(data)
-
+    setPhotoUrl(data);
 
     // const link = document.createElement("a");
     // link.href = data;
     // link.setAttribute("download", "myWebcam");
     // link.innerHTML = `<img src='${data}' alt='thumbnail'/>`;
     // strip.insertBefore(link, strip.firstChild);
-
   };
-
 
   const handleTakePhotoAgain = () => {
     // paintToCanvas();
     // video.play();
     setPhotoHasBeenTaken(false);
-  }
-
-
+  };
 
   return (
-
     <div className={styles.container}>
+      {photoHasBeenTaken ? null : (
+        <video
+          onCanPlay={() => paintToCanvas()}
+          ref={videoRef}
+          className={styles.player}
+        />
+      )}
 
-        {
-          photoHasBeenTaken ? (
-            null
-          ) : (
-            <video
-            onCanPlay={() => paintToCanvas()}
-            ref={videoRef}
-            className={styles.player}
-          />
-          )
-        }
+      <canvas ref={photoRef} className={styles.photo} />
 
-
-
-        <canvas ref={photoRef} className={styles.photo} />
-
-        <div className={styles.photoBooth}>
-          {/* <div ref={stripRef} className={styles.cameraImage} /> */}
-          {
-            photoHasBeenTaken ? <img className={styles.cameraImage} src={photoUrl} alt='thumbnail'/> : null
-          }
-          
-        </div>
-
-        <div className={styles.center}>
-
-
-          {
-            photoHasBeenTaken ? (
-              <>
-              <button onClick={() => handleTakePhotoAgain()}>
-                Ta om bild
-              </button>
-              <Link
-                to={{pathname: location.state.path, state: {roomid: location.state.roomId, name: location.state.roomTitle, imageSrc: photoUrl, camera: true}}}
-              >
-                Använd bild
-              </Link>
-             </>
-            ) : (
-              <button className="material-icons">
-                <a onClick={() => takePhoto()}>radio_button_unchecked</a>
-              </button>
-            )
-
-          }
-
-
-        
-        </div>
-
+      <div className={styles.photoBooth}>
+        {/* <div ref={stripRef} className={styles.cameraImage} /> */}
+        {photoHasBeenTaken ? (
+          <img className={styles.cameraImage} src={photoUrl} alt="thumbnail" />
+        ) : null}
       </div>
 
-
+      <div className={styles.center}>
+        {photoHasBeenTaken ? (
+          <>
+            <button onClick={() => handleTakePhotoAgain()}>Ta om bild</button>
+            <Link
+              to={{
+                pathname: location.state.path,
+                state: {
+                  roomid: location.state.roomId,
+                  name: location.state.roomTitle,
+                  imageSrc: photoUrl,
+                  camera: true,
+                },
+              }}
+            >
+              Använd bild
+            </Link>
+          </>
+        ) : (
+          <button className="material-icons">
+            <a onClick={() => takePhoto()}>radio_button_unchecked</a>
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 
 export default Camera;
-

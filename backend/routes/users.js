@@ -3,10 +3,11 @@ const router = express.Router();
 const passport = require("passport");
 const users = require("../controllers/users");
 const messages = require("../controllers/messages");
+const { isLoggedIn } = require("../middleware");
 
 router.route("/getallphotos").get(messages.getAllPhotos);
 
-router.route("/user").get(users.getUser);
+router.route("/user").get(isLoggedIn, users.getUser);
 
 router.route("/register").post(users.register);
 

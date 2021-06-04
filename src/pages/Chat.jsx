@@ -9,10 +9,13 @@ import { useNamedContext } from "react-easier";
 import { useLocation } from "react-router-dom";
 import ImageComments from "../components/ImageComments";
 import UploadPhoto from "../components/UploadPhoto";
+import { useHistory } from "react-router-dom";
+import loginCheck from "../utils/LoginCheck";
 
 function Chat({ match, handleSetMessages }) {
   let g = useNamedContext("global");
   const location = useLocation();
+  const history = useHistory();
 
   const previewImage = useRef();
   const [previewImages, setPreviewImages] = useState([]);
@@ -32,6 +35,7 @@ function Chat({ match, handleSetMessages }) {
 
   // Fetch roomId
   useEffect(() => {
+    handleLoginCheck();
     !location.state ? fetchRoomId() : (s.roomId = location.state.roomid);
 
     if (location.state && location.state.camera) {
@@ -40,6 +44,12 @@ function Chat({ match, handleSetMessages }) {
       setImageList([location.state.imageSrc]);
     }
   }, []);
+
+  const handleLoginCheck = async () => {
+    const res = await loginCheck();
+    const data = await res;
+    if (data.redirect === "login") return history.push("/login");
+  };
 
   useEffect(() => {
     if (
