@@ -21,12 +21,13 @@ function PhotoFeed({}) {
     setQuery(e.target.value);
   };
 
-  const formatDate = (sent) => {
-    const date = new Date(sent);
-    const year = date.getYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDay();
-    return `${day}: ${month}: ${year}`;
+  const formatDate = (sent = "") => {
+    let newDate = new Date(sent);
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+
+    return `${year} : ${month < 10 ? `0${month}` : `${month}`} : ${date}`;
   };
 
   useEffect(() => {
@@ -54,8 +55,7 @@ function PhotoFeed({}) {
   });
   return (
     <div>
-      <Topbar />
-
+      <Topbar chatName={"Photos"} />
       <ImageComments
         handleToggleImageComments={handleToggleImageComments}
         showComponentBool={toggleImageComments}
@@ -63,38 +63,23 @@ function PhotoFeed({}) {
       />
       <form className={styles.form}>
         <div className={styles.inputSearch}>
-          <i className={styles.test}>
+          <i className={styles.searchIcon}>
             <span className="material-icons">search</span>
           </i>
           <input
             className={styles.input}
             type="text"
-            placeholder="Search Photo.."
+            placeholder="Search Photo"
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </form>
-
       <div className={styles.PhotoContainer}>
-        <div style={{ display: showSkeleton ? "block" : "none" }}>
-          <div className="card-skeleton-2">
-            <div className="animated-background">
-              <div className="card-skeleton-img"></div>
-            </div>
-          </div>
-          <div className="card-skeleton-2">
-            <div className="animated-background">
-              <div className="card-skeleton-img"></div>
-            </div>
-          </div>
-        </div>
-
         <ul className={styles.photoList}>
           {filteredImg.reverse().map((msg) => {
             return (
-              <li className={styles.instaBox} key={msg._id}>
+              <li className={styles.photoBox} key={msg._id}>
                 <div className="ig-user-box"></div>
-
                 <div></div>
                 <div
                   className="ig-img-box"
@@ -115,36 +100,22 @@ function PhotoFeed({}) {
                         />
                       );
                     })}
-
-                    <div className={styles.insta}>
+                    <div className={styles.caption}>
                       <p className={styles.name}>
                         <b>{msg.author.username} </b>
                         {msg.text}
                       </p>
-                      {/* <p className={styles.caption}></p> */}
+                      {<p className={styles.caption}></p>}
+
+                      <i className={styles.date}>{formatDate(msg.sent)}</i>
                     </div>
                   </div>
-
                   <div className="ig-controllers-box">
                     <a>
-                      {likeImage ? (
-                        <FontAwesomeIcon
-                          className="ig-controller-icon"
-                          style={{ color: "red" }}
-                          icon={solidHeart}
-                          onClick={() =>
-                            setLikeImage((likeImage) => !likeImage)
-                          }
-                        />
-                      ) : (
-                        <FontAwesomeIcon
-                          className="ig-controller-icon"
-                          icon={faHeart}
-                          onClick={() =>
-                            setLikeImage((likeImage) => !likeImage)
-                          }
-                        />
-                      )}
+                      <FontAwesomeIcon
+                        className="ig-controller-icon"
+                        icon={faHeart}
+                      />{" "}
                     </a>
                     <a
                       onClick={() => handleToggleImageComments(true, msg._id)}

@@ -7,11 +7,9 @@
 }
 
 .messageContainer {
-    /* height: 84vh; */
     height: 100%;
     padding-bottom: 12px;
     top: 8vh;
-    /* background: #5d5d5d; */
     background: #161616;
     width: 100;
     display: flex;
@@ -20,23 +18,13 @@
     flex-direction: column;
     justify-content: flex-end;
     overflow: auto;
-    /* background-color: darkgray; */
 }
-/* 
-.main {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    overflow: auto;
-    background-color: darkgray;
-} */
 
 .messageContainer ul {
     display: flex;
     flex-direction: column-reverse;
     overflow: auto;
-}
+} 
 
 .myMessageField {
     max-width: 90%;
@@ -59,7 +47,8 @@
 
 .myMessage {
     border-radius: 30px;
-    background: #1d223b;
+    background: rgb(67,81,142);
+    background: linear-gradient(180deg, rgba(67,81,142,1) 0%, rgba(51,58,91,1) 100%); 
     height: fit-content;
     width: fit-content;
     padding: 12px;
@@ -79,11 +68,12 @@
 
 .otherMessage {
     border-radius: 30px;
-    background: #333333;
+    background: rgb(51,51,51);
+    background: linear-gradient(0deg, rgba(51,51,51,1) 0%, rgba(89,89,89,1) 100%);
     height: fit-content;
     width: fit-content;
     padding: 12px;
-    border: 1px solid whitesmoke;
+    
     margin-right: auto;
     display: flex;
     flex-direction: column;
