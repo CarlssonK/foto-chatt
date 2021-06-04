@@ -113,9 +113,14 @@
 }
 .wrapper {
     margin: 0 auto;
-    width: 360px;
+    width: 345px;
     margin-bottom: 30px;
 }
+
+/* hr {
+    margin-top: -25px;
+    background-color: black;
+} */
 
 .img{
     margin-top: 50px;
